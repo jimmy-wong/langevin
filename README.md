@@ -1,32 +1,19 @@
 ### Source file structure
 
-####src/cubic_spline.c
-
+#### src/cubic_spline.cpp
 calculate the splined value in the gap of the grids.
-
-####src/inertia.c
-
+#### src/inertia.cpp
 calculate the inertia tensor of the compound nuclei.
-
-####src/dissipative.c
-
+#### src/dissipative.cpp
 calculate the dissipative tensor of the compound nuclei.
-
-####src/random.c
-
+#### src/random.cpp
 generate the random force on the nuclei.
-
-####src/shape.c
-
+#### src/shape.cpp
 class shape: calculate the surface normal speed and other shape
 related terms.
-
-####src/store.c
-
+#### src/store.cpp
 store the current PES.
-
-####langevin.c
-
+#### langevin.cpp
 main program
 
 ### Program illustration
