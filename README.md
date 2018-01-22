@@ -1,5 +1,4 @@
 ### Source file structure
-
 #### src/cubic_spline.cpp
 calculate the splined value in the gap of the grids.
 #### src/inertia.cpp
@@ -15,7 +14,6 @@ related terms.
 store the current PES.
 #### langevin.cpp
 main program
-
 ### Program illustration
 
 This program is used to simulate the dynamics of the fission process
