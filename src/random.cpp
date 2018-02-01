@@ -1,5 +1,5 @@
-#include <gsl/gsl_random.h>
+#include <gsl/gsl_rng.h>
 
-double random(){
+double random(double rand){
     return rand;
 }
