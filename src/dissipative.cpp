@@ -10,11 +10,11 @@ double dissipative_wall(shape shape, char label_i, char label_j){
     double z = shape.get_z();
     double s = shape.get_s();
     double x, w;
-    int n = 28;
+    size_t n = 28;
     double result = 0;
-    gsl_integration_glfixed_table *table = NULL;
+    gsl_integration_glfixed_table *table = nullptr;
     table = gsl_integration_glfixed_table_alloc(n);
-    for(int i=0; i<n; i++)
+    for(size_t i=0; i<n; i++)
     {
         gsl_integration_glfixed_point(-1., 1., i, &x, &w, table);
         x = (l + z)/2. + s + (-l + z)/2.;

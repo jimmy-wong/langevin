@@ -6,6 +6,11 @@
 
 using namespace std;
 
+void shape::set_steps(int *steps) {
+    for(int i=0; i<5; i++){
+        _steps[i] = steps[i];
+    }
+}
 int* shape::grid(double * starting_point, double * step_length){
     double shape_para[5]={_para_l,_para_r,_para_z,_para_c,_para_s};
     int lower_limit[5];
@@ -47,15 +52,15 @@ void shape::efficiency() {
             105*l2*pow(z,8) + 35*c*l5*r*pow(z,8) + 175*s*pow(z,9)))/
             (l5*pow((l2 - z2),3)*(9*l6 - 63*l4*z2 - 21*l2*z4 - 245*z6));
 }
-double shape::grid_energy(double * starting_point, double * step_length, double* storation, int* step) {
-    int* location;
-    location = shape::grid(starting_point, step_length);
-    return storation[location[0]+step[0],location[1]+step[1],location[2]+step[2],location[3]+step[3],location[4]+step[4]];
+double shape::grid_energy(double* storation, int* step, int* steps) {
+    int index;
+    index = step[0]*steps[1]*steps[2]*steps[3]*steps[4]+
+            step[1]*steps[2]*steps[3]*steps[4]+
+            step[2]*steps[3]*steps[4]+
+            step[3]*steps[4]+
+            step[4];
+    return storation[index];
 }
-/*double shape::energy_cubic_spline(){
-    double weight ;
-    return weight*
-}*/
 double shape::Rho(double x){
     double result;
     double l = _para_l;
@@ -290,7 +295,7 @@ double shape::RhoDerivative(double x, const char label) {
 }
 double shape::A_Block(double x, const char label){
     double l,r,z,c,s;
-    double result;
+    double result =0 ;
     l = _para_l;
     r = _para_r;
     z = _para_z;
@@ -1255,6 +1260,9 @@ double A_derivative(shape shape, double z_high, double z_low, const char label){
              -1./shape.Rho(z_low)*shape.RhoDerivative(z_low,label);
     return result;
 }
+double A_dderivative(shape shape, double z_high, double z_low, const char label){
+
+}
 double RhoShape(double zeta, void *params) {
     shape* tmp_shape = (shape*) params;
     double result;
@@ -1267,7 +1275,7 @@ double shape::CenterOfMassDerivative(const char side, const char label) {
     double z = _para_z;
     double c = _para_c;
     double s = _para_s;
-    double result;
+    double result = 0;
     switch (side) {
         case 'L':
             switch (label){

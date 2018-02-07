@@ -25,3 +25,6 @@ double inertia(shape shape, double density, const char label_i, const char label
     result = result*M_PI*density;
     return result;
 }
+double inertia_df(shape shape, double density, const char label_i, const char label_j){
+
+}

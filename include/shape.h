@@ -10,14 +10,16 @@ public:
     double get_z(){ return _para_z;}
     double get_c(){ return _para_c;}
     double get_s(){ return _para_s;}
+    int* get_steps(){ return _steps;}
     void set_l(double l){ _para_l = l;}
     void set_r(double r){ _para_r = r;}
     void set_z(double z){ _para_z = z;}
     void set_c(double c){ _para_c = c;}
     void set_s(double s){ _para_s = s;}
+    void set_steps(int steps[5]);
     int* grid(double * starting_point, double * step_length);
     void efficiency();
-    double grid_energy(double * starting_point, double * step_length, double* storation, int* step);
+    double grid_energy(double* storation, int* step, int* steps);
     double Rho(double zeta);
     double RhoDerivative(double zeta, char label);
     double A_Block(double z, char label);
@@ -29,7 +31,9 @@ private:
     double _a0 = 0, _a1 = 0, _a2 = 0, _a3 = 0, _a4 = 0;
     double _density = 0;
     double _average_v = 0;
+    int _steps[5];
 };
 double RhoShape(double zeta, void* params);
 double A_derivative(shape shape, double z_high, double z_low, char label);
+double A_dderivative(shape shape, double z_high, double z_low, char label);
 double A_para(shape shape, double z_high, double z_low, char label);

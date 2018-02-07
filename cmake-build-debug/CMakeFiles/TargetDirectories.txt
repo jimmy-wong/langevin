@@ -1,2 +1,0 @@
-/home/dell/code/langevin/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/dell/code/langevin/cmake-build-debug/CMakeFiles/edit_cache.dir

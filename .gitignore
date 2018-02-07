@@ -1,4 +1,8 @@
-cmake*
+cmake*/*
 test
 build
 .idea*
+doc
+U236.txt
+fort.112
+*/lagrange*
