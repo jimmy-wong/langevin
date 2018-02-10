@@ -1,5 +1,4 @@
 #include "../include/shape.h"
-#include <string>
 #include <gsl/gsl_integration.h>
 #include <gsl/gsl_math.h>
 #include <cmath>
@@ -10,11 +9,11 @@ double inertia(shape shape, double density, const char label_i, const char label
     double l = shape.get_l();
     double s = shape.get_s();
     double x, w;
-    int n = 28;
+    size_t n = 28;
     double result = 0;
     gsl_integration_glfixed_table *table = NULL;
     table = gsl_integration_glfixed_table_alloc(n);
-    for(int i=0; i<n; i++)
+    for(size_t i=0; i<n; i++)
     {
         gsl_integration_glfixed_point(-1., 1., i, &x, &w, table);
         x = l*x + s;

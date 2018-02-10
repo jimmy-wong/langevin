@@ -10,9 +10,12 @@ generate the random force on the nuclei.
 #### src/shape.cpp
 class shape: calculate the surface normal speed and other shape
 related terms.
+A_Block is the function of $$\frac{\partial}{\partial q_l}\int_z^{z_max}\rho(\zeta',q)^2d\zete'$$
 #### src/store.cpp
 store the current PES.
-#### langevin.cpp
+#### src/Ronge_kutta.cpp
+solve the Langevin equation using Ronge-Kutta method.
+#### src/langevin.cpp
 main program
 ### Program illustration
 

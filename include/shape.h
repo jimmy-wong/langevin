@@ -22,7 +22,9 @@ public:
     double grid_energy(double* storation, int* step, int* steps);
     double Rho(double zeta);
     double RhoDerivative(double zeta, char label);
-    double A_Block(double z, char label);
+    double RhoDDerivative(double zeta, char label_i, char label_j);
+    double IntegrateRhoDerivative(double zeta, char label);
+    double IntegrateRhoDDerivative(double zeta, char label_i, char label_j);
     double CenterOfMassDerivative(char side, char label);
     double get_density(){return _density;}
     double get_average_v(){return _average_v;}
