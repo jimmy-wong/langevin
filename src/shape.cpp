@@ -293,1530 +293,1530 @@ double shape::RhoDerivative(double x, const char label) {
     return result;
 }
 double shape::RhoDDerivative(double x, char label_i, char label_j) {
-    double result;
-    double l = _para_l;
-    double r = _para_r;
-    double z = _para_z;
-    double c = _para_c;
-    double s = _para_s;
-    if (label_i=='x'&&label_j=='l'){
-        result = (pow(l,2) - pow(s + x,2))*((-8*l*pow(r,2)*z)/pow(pow(l,2) - pow(z,2),3) -
-                                                (28*pow(s + x - z,3)*(-150*pow(l,9) + 39*c*pow(l,12)*r + 198*pow(l,10)*pow(r,2) - 840*pow(l,7)*s*z - 480*pow(l,7)*pow(z,2) -
-                                                                        132*c*pow(l,10)*r*pow(z,2) + 810*pow(l,8)*pow(r,2)*pow(z,2) + 840*pow(l,5)*s*pow(z,3) + 1620*pow(l,5)*pow(z,4) +
-                                                                        450*c*pow(l,8)*r*pow(z,4) - 2310*pow(l,6)*pow(r,2)*pow(z,4) + 840*pow(l,3)*s*pow(z,5) - 1200*pow(l,3)*pow(z,6) -
-                                                                        532*c*pow(l,6)*r*pow(z,6) + 1750*pow(l,4)*pow(r,2)*pow(z,6) - 840*l*s*pow(z,7) + 210*l*pow(z,8) + 175*c*pow(l,4)*r*pow(z,8)))
-                                                /(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
-                                                (21*pow(s + x - z,2)*(-150*pow(l,9)*s - 600*pow(l,9)*z + 78*c*pow(l,12)*r*z + 792*pow(l,10)*pow(r,2)*z - 1320*pow(l,7)*s*pow(z,2) +
-                                                                        320*pow(l,7)*pow(z,3) - 88*c*pow(l,10)*r*pow(z,3) + 2460*pow(l,5)*s*pow(z,4) + 1440*pow(l,5)*pow(z,5) +
-                                                                        612*c*pow(l,8)*r*pow(z,5) - 2184*pow(l,6)*pow(r,2)*pow(z,5) - 360*pow(l,3)*s*pow(z,6) - 1440*pow(l,3)*pow(z,7) -
-                                                                        952*c*pow(l,6)*r*pow(z,7) + 2800*pow(l,4)*pow(r,2)*pow(z,7) - 630*l*s*pow(z,8) + 280*l*pow(z,9) + 350*c*pow(l,4)*r*pow(z,9)))
-                                                /(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                (28*pow(s + x - z,3)*(54*pow(l,5) - 252*pow(l,3)*pow(z,2) - 42*l*pow(z,4))*
-                                                 (-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
-                                                  12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
-                                                  50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
-                                                  76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
-                                                  35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) +
-                                                (168*pow(s + x - z,3)*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
-                                                                         12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
-                                                                         50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
-                                                                         76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
-                                                                         35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
-                                                (pow(l,4)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                (140*pow(s + x - z,3)*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
-                                                                         12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
-                                                                         50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
-                                                                         76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
-                                                                         35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
-                                                (pow(l,6)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                (21*pow(s + x - z,2)*(54*pow(l,5) - 252*pow(l,3)*pow(z,2) - 42*l*pow(z,4))*
-                                                 (-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
-                                                  40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
-                                                  68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
-                                                  136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
-                                                  70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) +
-                                                (126*pow(s + x - z,2)*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
-                                                                         40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
-                                                                         68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
-                                                                         136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
-                                                                         70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
-                                                (pow(l,4)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                (105*pow(s + x - z,2)*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
-                                                                         40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
-                                                                         68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
-                                                                         136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
-                                                                         70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
-                                                (pow(l,6)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                (2*(s + x - z)*((-16*l*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),3) - (2*l*pow(r,2))/pow(pow(l,2) - pow(z,2),2)))/
-                                                (pow(l,2) - pow(z,2)) - (4*l*(s + x - z)*(c*r + (4*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),2) +
-                                                                                              pow(r,2)/(pow(l,2) - pow(z,2))))/pow(pow(l,2) - pow(z,2),2)) -
-                 2*(s + x)*((-8*l*pow(r,2)*(s + x - z)*z)/pow(pow(l,2) - pow(z,2),3) - (2*l*pow(r,2))/pow(pow(l,2) - pow(z,2),2) -
-                            (7*pow(s + x - z,4)*(-150*pow(l,9) + 39*c*pow(l,12)*r + 198*pow(l,10)*pow(r,2) - 840*pow(l,7)*s*z - 480*pow(l,7)*pow(z,2) -
-                                                   132*c*pow(l,10)*r*pow(z,2) + 810*pow(l,8)*pow(r,2)*pow(z,2) + 840*pow(l,5)*s*pow(z,3) + 1620*pow(l,5)*pow(z,4) +
-                                                   450*c*pow(l,8)*r*pow(z,4) - 2310*pow(l,6)*pow(r,2)*pow(z,4) + 840*pow(l,3)*s*pow(z,5) - 1200*pow(l,3)*pow(z,6) -
-                                                   532*c*pow(l,6)*r*pow(z,6) + 1750*pow(l,4)*pow(r,2)*pow(z,6) - 840*l*s*pow(z,7) + 210*l*pow(z,8) + 175*c*pow(l,4)*r*pow(z,8)))
-                            /(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
-                            (7*pow(s + x - z,3)*(-150*pow(l,9)*s - 600*pow(l,9)*z + 78*c*pow(l,12)*r*z + 792*pow(l,10)*pow(r,2)*z - 1320*pow(l,7)*s*pow(z,2) +
-                                                   320*pow(l,7)*pow(z,3) - 88*c*pow(l,10)*r*pow(z,3) + 2460*pow(l,5)*s*pow(z,4) + 1440*pow(l,5)*pow(z,5) +
-                                                   612*c*pow(l,8)*r*pow(z,5) - 2184*pow(l,6)*pow(r,2)*pow(z,5) - 360*pow(l,3)*s*pow(z,6) - 1440*pow(l,3)*pow(z,7) -
-                                                   952*c*pow(l,6)*r*pow(z,7) + 2800*pow(l,4)*pow(r,2)*pow(z,7) - 630*l*s*pow(z,8) + 280*l*pow(z,9) + 350*c*pow(l,4)*r*pow(z,9)))
-                            /(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                            (7*pow(s + x - z,4)*(54*pow(l,5) - 252*pow(l,3)*pow(z,2) - 42*l*pow(z,4))*
-                             (-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
-                              12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
-                              50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
-                              76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
-                              35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
-                            (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) +
-                            (42*pow(s + x - z,4)*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
-                                                    12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
-                                                    50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
-                                                    76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
-                                                    35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
-                            (pow(l,4)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                            (35*pow(s + x - z,4)*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
-                                                    12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
-                                                    50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
-                                                    76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
-                                                    35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
-                            (pow(l,6)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                            (7*pow(s + x - z,3)*(54*pow(l,5) - 252*pow(l,3)*pow(z,2) - 42*l*pow(z,4))*
-                             (-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
-                              40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
-                              68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
-                              136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
-                              70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
-                            (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) +
-                            (42*pow(s + x - z,3)*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
-                                                    40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
-                                                    68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
-                                                    136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
-                                                    70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
-                            (pow(l,4)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                            (35*pow(s + x - z,3)*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
-                                                    40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
-                                                    68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
-                                                    136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
-                                                    70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
-                            (pow(l,6)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                            (pow(s + x - z,2)*((-16*l*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),3) - (2*l*pow(r,2))/pow(pow(l,2) - pow(z,2),2)))/
-                            (pow(l,2) - pow(z,2)) - (2*l*pow(s + x - z,2)*(c*r + (4*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),2) +
-                                                                                 pow(r,2)/(pow(l,2) - pow(z,2))))/pow(pow(l,2) - pow(z,2),2)) +
-                 2*l*((2*pow(r,2)*z)/pow(pow(l,2) - pow(z,2),2) - (28*pow(s + x - z,3)*
-                                                                           (-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
-                                                                            12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
-                                                                            50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
-                                                                            76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
-                                                                            35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
-                                                                          (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
-                      (21*pow(s + x - z,2)*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
-                                              40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
-                                              68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
-                                              136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
-                                              70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
-                      (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                      (2*(s + x - z)*(c*r + (4*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),2) + pow(r,2)/(pow(l,2) - pow(z,2))))/(pow(l,2) - pow(z,2)));
-    }
-    else if (label_i=='x' && label_j=='r'){
-        result = (pow(l,2) - pow(s + x,2))*((4*r*z)/pow(pow(l,2) - pow(z,2),2) -
-                                                (28*pow(s + x - z,3)*(3*c*pow(l,13) + 36*pow(l,11)*r - 12*c*pow(l,11)*pow(z,2) + 180*pow(l,9)*r*pow(z,2) +
-                                                                        50*c*pow(l,9)*pow(z,4) - 660*pow(l,7)*r*pow(z,4) - 76*c*pow(l,7)*pow(z,6) + 700*pow(l,5)*r*pow(z,6) +
-                                                                        35*c*pow(l,5)*pow(z,8)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
-                                                (21*pow(s + x - z,2)*(6*c*pow(l,13)*z + 144*pow(l,11)*r*z - 8*c*pow(l,11)*pow(z,3) + 68*c*pow(l,9)*pow(z,5) -
-                                                                        624*pow(l,7)*r*pow(z,5) - 136*c*pow(l,7)*pow(z,7) + 1120*pow(l,5)*r*pow(z,7) + 70*c*pow(l,5)*pow(z,9)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                (2*(s + x - z)*(c + (8*r*pow(z,2))/pow(pow(l,2) - pow(z,2),2) + (2*r)/(pow(l,2) - pow(z,2))))/(pow(l,2) - pow(z,2))) -
-                 2*(s + x)*((4*r*(s + x - z)*z)/pow(pow(l,2) - pow(z,2),2) + (2*r)/(pow(l,2) - pow(z,2)) -
-                            (7*pow(s + x - z,4)*(3*c*pow(l,13) + 36*pow(l,11)*r - 12*c*pow(l,11)*pow(z,2) + 180*pow(l,9)*r*pow(z,2) +
-                                                   50*c*pow(l,9)*pow(z,4) - 660*pow(l,7)*r*pow(z,4) - 76*c*pow(l,7)*pow(z,6) + 700*pow(l,5)*r*pow(z,6) +
-                                                   35*c*pow(l,5)*pow(z,8)))/
-                            (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
-                            (7*pow(s + x - z,3)*(6*c*pow(l,13)*z + 144*pow(l,11)*r*z - 8*c*pow(l,11)*pow(z,3) + 68*c*pow(l,9)*pow(z,5) -
-                                                   624*pow(l,7)*r*pow(z,5) - 136*c*pow(l,7)*pow(z,7) + 1120*pow(l,5)*r*pow(z,7) + 70*c*pow(l,5)*pow(z,9)))/
-                            (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                            (pow(s + x - z,2)*(c + (8*r*pow(z,2))/pow(pow(l,2) - pow(z,2),2) + (2*r)/(pow(l,2) - pow(z,2))))/(pow(l,2) - pow(z,2)));
-    }
-    else if (label_i=='x'&& label_j=='z'){
-        result = (pow(l,2) - pow(s + x,2))*((8*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),3) + (2*pow(r,2))/pow(pow(l,2) - pow(z,2),2) -
-                                                (28*pow(s + x - z,3)*(-105*pow(l,8)*s - 120*pow(l,8)*z - 24*c*pow(l,11)*r*z + 180*pow(l,9)*pow(r,2)*z + 420*pow(l,6)*s*pow(z,2) +
-                                                                        1080*pow(l,6)*pow(z,3) + 200*c*pow(l,9)*r*pow(z,3) - 1320*pow(l,7)*pow(r,2)*pow(z,3) + 1050*pow(l,4)*s*pow(z,4) -
-                                                                        1800*pow(l,4)*pow(z,5) - 456*c*pow(l,7)*r*pow(z,5) + 2100*pow(l,5)*pow(r,2)*pow(z,5) - 2940*pow(l,2)*s*pow(z,6) +
-                                                                        840*pow(l,2)*pow(z,7) + 280*c*pow(l,5)*r*pow(z,7) + 1575*s*pow(z,8)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                (28*pow(s + x - z,3)*(-126*pow(l,4)*z - 84*pow(l,2)*pow(z,3) - 1470*pow(z,5))*
-                                                 (-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
-                                                  12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
-                                                  50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
-                                                  76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
-                                                  35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) -
-                                                (168*pow(s + x - z,3)*z*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
-                                                                           12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
-                                                                           50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
-                                                                           76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
-                                                                           35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                (84*pow(s + x - z,2)*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
-                                                                        12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
-                                                                        50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
-                                                                        76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
-                                                                        35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
-                                                (21*pow(s + x - z,2)*(-60*pow(l,10) + 6*c*pow(l,13)*r + 72*pow(l,11)*pow(r,2) - 330*pow(l,8)*s*z + 120*pow(l,8)*pow(z,2) -
-                                                                        24*c*pow(l,11)*r*pow(z,2) + 1640*pow(l,6)*s*pow(z,3) + 1200*pow(l,6)*pow(z,4) + 340*c*pow(l,9)*r*pow(z,4) -
-                                                                        1560*pow(l,7)*pow(r,2)*pow(z,4) - 540*pow(l,4)*s*pow(z,5) - 2520*pow(l,4)*pow(z,6) - 952*c*pow(l,7)*r*pow(z,6) +
-                                                                        3920*pow(l,5)*pow(r,2)*pow(z,6) - 2520*pow(l,2)*s*pow(z,7) + 1260*pow(l,2)*pow(z,8) + 630*c*pow(l,5)*r*pow(z,8) +
-                                                                        1750*s*pow(z,9)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                (21*pow(s + x - z,2)*(-126*pow(l,4)*z - 84*pow(l,2)*pow(z,3) - 1470*pow(z,5))*
-                                                 (-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
-                                                  40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
-                                                  68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
-                                                  136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
-                                                  70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) -
-                                                (126*pow(s + x - z,2)*z*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
-                                                                           40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
-                                                                           68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
-                                                                           136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
-                                                                           70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                (42*(s + x - z)*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
-                                                                 40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
-                                                                 68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
-                                                                 136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
-                                                                 70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                (2*(s + x - z)*((16*pow(r,2)*pow(z,3))/pow(pow(l,2) - pow(z,2),3) + (10*pow(r,2)*z)/pow(pow(l,2) - pow(z,2),2)))/
-                                                (pow(l,2) - pow(z,2)) + (4*(s + x - z)*z*(c*r + (4*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),2) +
-                                                                                              pow(r,2)/(pow(l,2) - pow(z,2))))/pow(pow(l,2) - pow(z,2),2) -
-                                                (2*(c*r + (4*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),2) + pow(r,2)/(pow(l,2) - pow(z,2))))/(pow(l,2) - pow(z,2))) -
-                 2*(s + x)*((8*pow(r,2)*(s + x - z)*pow(z,2))/pow(pow(l,2) - pow(z,2),3) + (2*pow(r,2)*(s + x - z))/pow(pow(l,2) - pow(z,2),2) -
-                            (7*pow(s + x - z,4)*(-105*pow(l,8)*s - 120*pow(l,8)*z - 24*c*pow(l,11)*r*z + 180*pow(l,9)*pow(r,2)*z + 420*pow(l,6)*s*pow(z,2) +
-                                                   1080*pow(l,6)*pow(z,3) + 200*c*pow(l,9)*r*pow(z,3) - 1320*pow(l,7)*pow(r,2)*pow(z,3) + 1050*pow(l,4)*s*pow(z,4) -
-                                                   1800*pow(l,4)*pow(z,5) - 456*c*pow(l,7)*r*pow(z,5) + 2100*pow(l,5)*pow(r,2)*pow(z,5) - 2940*pow(l,2)*s*pow(z,6) +
-                                                   840*pow(l,2)*pow(z,7) + 280*c*pow(l,5)*r*pow(z,7) + 1575*s*pow(z,8)))/
-                            (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                            (7*pow(s + x - z,4)*(-126*pow(l,4)*z - 84*pow(l,2)*pow(z,3) - 1470*pow(z,5))*
-                             (-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
-                              12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
-                              50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
-                              76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
-                              35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
-                            (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) -
-                            (42*pow(s + x - z,4)*z*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
-                                                      12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
-                                                      50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
-                                                      76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
-                                                      35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
-                            (pow(l,5)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                            (28*pow(s + x - z,3)*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
-                                                    12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
-                                                    50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
-                                                    76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
-                                                    35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
-                            (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
-                            (7*pow(s + x - z,3)*(-60*pow(l,10) + 6*c*pow(l,13)*r + 72*pow(l,11)*pow(r,2) - 330*pow(l,8)*s*z + 120*pow(l,8)*pow(z,2) -
-                                                   24*c*pow(l,11)*r*pow(z,2) + 1640*pow(l,6)*s*pow(z,3) + 1200*pow(l,6)*pow(z,4) + 340*c*pow(l,9)*r*pow(z,4) -
-                                                   1560*pow(l,7)*pow(r,2)*pow(z,4) - 540*pow(l,4)*s*pow(z,5) - 2520*pow(l,4)*pow(z,6) - 952*c*pow(l,7)*r*pow(z,6) +
-                                                   3920*pow(l,5)*pow(r,2)*pow(z,6) - 2520*pow(l,2)*s*pow(z,7) + 1260*pow(l,2)*pow(z,8) + 630*c*pow(l,5)*r*pow(z,8) +
-                                                   1750*s*pow(z,9)))/
-                            (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                            (7*pow(s + x - z,3)*(-126*pow(l,4)*z - 84*pow(l,2)*pow(z,3) - 1470*pow(z,5))*
-                             (-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
-                              40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
-                              68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
-                              136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
-                              70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
-                            (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) -
-                            (42*pow(s + x - z,3)*z*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
-                                                      40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
-                                                      68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
-                                                      136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
-                                                      70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
-                            (pow(l,5)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                            (21*pow(s + x - z,2)*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
-                                                    40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
-                                                    68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
-                                                    136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
-                                                    70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
-                            (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                            (pow(s + x - z,2)*((16*pow(r,2)*pow(z,3))/pow(pow(l,2) - pow(z,2),3) + (10*pow(r,2)*z)/pow(pow(l,2) - pow(z,2),2)))/
-                            (pow(l,2) - pow(z,2)) + (2*pow(s + x - z,2)*z*(c*r + (4*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),2) +
-                                                                                 pow(r,2)/(pow(l,2) - pow(z,2))))/pow(pow(l,2) - pow(z,2),2) -
-                            (2*(s + x - z)*(c*r + (4*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),2) + pow(r,2)/(pow(l,2) - pow(z,2))))/(pow(l,2) - pow(z,2)));
-    }
-    else if (label_i=='x'&&label_j=='c'){
-        result = (pow(l,2) - pow(s + x,2))*((2*r*(s + x - z))/(pow(l,2) - pow(z,2)) -
-                                                (28*pow(s + x - z,3)*(3*pow(l,13)*r - 12*pow(l,11)*r*pow(z,2) + 50*pow(l,9)*r*pow(z,4) - 76*pow(l,7)*r*pow(z,6) +
-                                                                        35*pow(l,5)*r*pow(z,8)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
-                                                (21*pow(s + x - z,2)*(6*pow(l,13)*r*z - 8*pow(l,11)*r*pow(z,3) + 68*pow(l,9)*r*pow(z,5) - 136*pow(l,7)*r*pow(z,7) +
-                                                                        70*pow(l,5)*r*pow(z,9)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6)))) -
-                 2*(s + x)*((r*pow(s + x - z,2))/(pow(l,2) - pow(z,2)) -
-                            (7*pow(s + x - z,4)*(3*pow(l,13)*r - 12*pow(l,11)*r*pow(z,2) + 50*pow(l,9)*r*pow(z,4) - 76*pow(l,7)*r*pow(z,6) +
-                                                   35*pow(l,5)*r*pow(z,8)))/
-                            (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
-                            (7*pow(s + x - z,3)*(6*pow(l,13)*r*z - 8*pow(l,11)*r*pow(z,3) + 68*pow(l,9)*r*pow(z,5) - 136*pow(l,7)*r*pow(z,7) +
-                                                   70*pow(l,5)*r*pow(z,9)))/
-                            (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))));
-    }
-    else if (label_i=='x'&& label_j=='s'){
-        result = (pow(l,2) - pow(s + x,2))*((-28*pow(s + x - z,3)*(-105*pow(l,8)*z + 140*pow(l,6)*pow(z,3) + 210*pow(l,4)*pow(z,5) -
-                                                                         420*pow(l,2)*pow(z,7) + 175*pow(z,9)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
-                                                (84*pow(s + x - z,2)*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
-                                                                        12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
-                                                                        50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
-                                                                        76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
-                                                                        35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
-                                                (21*pow(s + x - z,2)*(-15*pow(l,10) - 165*pow(l,8)*pow(z,2) + 410*pow(l,6)*pow(z,4) - 90*pow(l,4)*pow(z,6) -
-                                                                        315*pow(l,2)*pow(z,8) + 175*pow(z,10)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
-                                                (42*(s + x - z)*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
-                                                                 40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
-                                                                 68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
-                                                                 136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
-                                                                 70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                (2*(c*r + (4*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),2) + pow(r,2)/(pow(l,2) - pow(z,2))))/(pow(l,2) - pow(z,2))) -
-                 2*(s + x)*((2*pow(r,2)*z)/pow(pow(l,2) - pow(z,2),2) -
-                            (28*pow(s + x - z,3)*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
-                                                    12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
-                                                    50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
-                                                    76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
-                                                    35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
-                            (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
-                            (21*pow(s + x - z,2)*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
-                                                    40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
-                                                    68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
-                                                    136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
-                                                    70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
-                            (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                            (2*(s + x - z)*(c*r + (4*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),2) + pow(r,2)/(pow(l,2) - pow(z,2))))/(pow(l,2) - pow(z,2)))
-                 - 2*(s + x)*((2*pow(r,2)*z)/pow(pow(l,2) - pow(z,2),2) -
-                              (7*pow(s + x - z,4)*(-105*pow(l,8)*z + 140*pow(l,6)*pow(z,3) + 210*pow(l,4)*pow(z,5) - 420*pow(l,2)*pow(z,7) + 175*pow(z,9)))/
-                              (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
-                              (28*pow(s + x - z,3)*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
-                                                      12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
-                                                      50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
-                                                      76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
-                                                      35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
-                              (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
-                              (7*pow(s + x - z,3)*(-15*pow(l,10) - 165*pow(l,8)*pow(z,2) + 410*pow(l,6)*pow(z,4) - 90*pow(l,4)*pow(z,6) -
-                                                     315*pow(l,2)*pow(z,8) + 175*pow(z,10)))/
-                              (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
-                              (21*pow(s + x - z,2)*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
-                                                      40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
-                                                      68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
-                                                      136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
-                                                      70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
-                              (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                              (2*(s + x - z)*(c*r + (4*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),2) + pow(r,2)/(pow(l,2) - pow(z,2))))/(pow(l,2) - pow(z,2)))
-                 - 2*((2*pow(r,2)*(s + x - z)*z)/pow(pow(l,2) - pow(z,2),2) + pow(r,2)/(pow(l,2) - pow(z,2)) -
-                      (7*pow(s + x - z,4)*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
-                                             12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
-                                             50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
-                                             76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
-                                             35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
-                      (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
-                      (7*pow(s + x - z,3)*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
-                                             40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
-                                             68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
-                                             136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
-                                             70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
-                      (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                      (pow(s + x - z,2)*(c*r + (4*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),2) + pow(r,2)/(pow(l,2) - pow(z,2))))/
-                      (pow(l,2) - pow(z,2)));
-    }
-    else if (label_i=='l'&&label_j=='l'){
-        result = (pow(l,2) - pow(s + x,2))*((48*pow(l,2)*pow(r,2)*(s + x - z)*z)/pow(pow(l,2) - pow(z,2),4) +
-                                                (8*pow(l,2)*pow(r,2))/pow(pow(l,2) - pow(z,2),3) - (8*pow(r,2)*(s + x - z)*z)/pow(pow(l,2) - pow(z,2),3) -
-                                                (2*pow(r,2))/pow(pow(l,2) - pow(z,2),2) - (7*pow(s + x - z,4)*
-                                                                                                   (-1350*pow(l,8) + 468*c*pow(l,11)*r + 1980*pow(l,9)*pow(r,2) - 5880*pow(l,6)*s*z - 3360*pow(l,6)*pow(z,2) -
-                                                                                                    1320*c*pow(l,9)*r*pow(z,2) + 6480*pow(l,7)*pow(r,2)*pow(z,2) + 4200*pow(l,4)*s*pow(z,3) + 8100*pow(l,4)*pow(z,4) +
-                                                                                                    3600*c*pow(l,7)*r*pow(z,4) - 13860*pow(l,5)*pow(r,2)*pow(z,4) + 2520*pow(l,2)*s*pow(z,5) - 3600*pow(l,2)*pow(z,6) -
-                                                                                                    3192*c*pow(l,5)*r*pow(z,6) + 7000*pow(l,3)*pow(r,2)*pow(z,6) - 840*s*pow(z,7) + 210*pow(z,8) + 700*c*pow(l,3)*r*pow(z,8)))/
-                                                                                                  (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                (14*pow(s + x - z,4)*(54*pow(l,5) - 252*pow(l,3)*pow(z,2) - 42*l*pow(z,4))*
-                                                 (-150*pow(l,9) + 39*c*pow(l,12)*r + 198*pow(l,10)*pow(r,2) - 840*pow(l,7)*s*z - 480*pow(l,7)*pow(z,2) -
-                                                  132*c*pow(l,10)*r*pow(z,2) + 810*pow(l,8)*pow(r,2)*pow(z,2) + 840*pow(l,5)*s*pow(z,3) + 1620*pow(l,5)*pow(z,4) +
-                                                  450*c*pow(l,8)*r*pow(z,4) - 2310*pow(l,6)*pow(r,2)*pow(z,4) + 840*pow(l,3)*s*pow(z,5) - 1200*pow(l,3)*pow(z,6) -
-                                                  532*c*pow(l,6)*r*pow(z,6) + 1750*pow(l,4)*pow(r,2)*pow(z,6) - 840*l*s*pow(z,7) + 210*l*pow(z,8) + 175*c*pow(l,4)*r*pow(z,8)))
-                                                /(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) +
-                                                (84*pow(s + x - z,4)*(-150*pow(l,9) + 39*c*pow(l,12)*r + 198*pow(l,10)*pow(r,2) - 840*pow(l,7)*s*z - 480*pow(l,7)*pow(z,2) -
-                                                                        132*c*pow(l,10)*r*pow(z,2) + 810*pow(l,8)*pow(r,2)*pow(z,2) + 840*pow(l,5)*s*pow(z,3) + 1620*pow(l,5)*pow(z,4) +
-                                                                        450*c*pow(l,8)*r*pow(z,4) - 2310*pow(l,6)*pow(r,2)*pow(z,4) + 840*pow(l,3)*s*pow(z,5) - 1200*pow(l,3)*pow(z,6) -
-                                                                        532*c*pow(l,6)*r*pow(z,6) + 1750*pow(l,4)*pow(r,2)*pow(z,6) - 840*l*s*pow(z,7) + 210*l*pow(z,8) + 175*c*pow(l,4)*r*pow(z,8)))
-                                                /(pow(l,4)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                (70*pow(s + x - z,4)*(-150*pow(l,9) + 39*c*pow(l,12)*r + 198*pow(l,10)*pow(r,2) - 840*pow(l,7)*s*z - 480*pow(l,7)*pow(z,2) -
-                                                                        132*c*pow(l,10)*r*pow(z,2) + 810*pow(l,8)*pow(r,2)*pow(z,2) + 840*pow(l,5)*s*pow(z,3) + 1620*pow(l,5)*pow(z,4) +
-                                                                        450*c*pow(l,8)*r*pow(z,4) - 2310*pow(l,6)*pow(r,2)*pow(z,4) + 840*pow(l,3)*s*pow(z,5) - 1200*pow(l,3)*pow(z,6) -
-                                                                        532*c*pow(l,6)*r*pow(z,6) + 1750*pow(l,4)*pow(r,2)*pow(z,6) - 840*l*s*pow(z,7) + 210*l*pow(z,8) + 175*c*pow(l,4)*r*pow(z,8)))
-                                                /(pow(l,6)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
-                                                (7*pow(s + x - z,3)*(-1350*pow(l,8)*s - 5400*pow(l,8)*z + 936*c*pow(l,11)*r*z + 7920*pow(l,9)*pow(r,2)*z -
-                                                                       9240*pow(l,6)*s*pow(z,2) + 2240*pow(l,6)*pow(z,3) - 880*c*pow(l,9)*r*pow(z,3) + 12300*pow(l,4)*s*pow(z,4) +
-                                                                       7200*pow(l,4)*pow(z,5) + 4896*c*pow(l,7)*r*pow(z,5) - 13104*pow(l,5)*pow(r,2)*pow(z,5) - 1080*pow(l,2)*s*pow(z,6) -
-                                                                       4320*pow(l,2)*pow(z,7) - 5712*c*pow(l,5)*r*pow(z,7) + 11200*pow(l,3)*pow(r,2)*pow(z,7) - 630*s*pow(z,8) + 280*pow(z,9) +
-                                                                       1400*c*pow(l,3)*r*pow(z,9)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                (14*pow(s + x - z,3)*(54*pow(l,5) - 252*pow(l,3)*pow(z,2) - 42*l*pow(z,4))*
-                                                 (-150*pow(l,9)*s - 600*pow(l,9)*z + 78*c*pow(l,12)*r*z + 792*pow(l,10)*pow(r,2)*z - 1320*pow(l,7)*s*pow(z,2) +
-                                                  320*pow(l,7)*pow(z,3) - 88*c*pow(l,10)*r*pow(z,3) + 2460*pow(l,5)*s*pow(z,4) + 1440*pow(l,5)*pow(z,5) +
-                                                  612*c*pow(l,8)*r*pow(z,5) - 2184*pow(l,6)*pow(r,2)*pow(z,5) - 360*pow(l,3)*s*pow(z,6) - 1440*pow(l,3)*pow(z,7) -
-                                                  952*c*pow(l,6)*r*pow(z,7) + 2800*pow(l,4)*pow(r,2)*pow(z,7) - 630*l*s*pow(z,8) + 280*l*pow(z,9) + 350*c*pow(l,4)*r*pow(z,9)))
-                                                /(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) +
-                                                (84*pow(s + x - z,3)*(-150*pow(l,9)*s - 600*pow(l,9)*z + 78*c*pow(l,12)*r*z + 792*pow(l,10)*pow(r,2)*z - 1320*pow(l,7)*s*pow(z,2) +
-                                                                        320*pow(l,7)*pow(z,3) - 88*c*pow(l,10)*r*pow(z,3) + 2460*pow(l,5)*s*pow(z,4) + 1440*pow(l,5)*pow(z,5) +
-                                                                        612*c*pow(l,8)*r*pow(z,5) - 2184*pow(l,6)*pow(r,2)*pow(z,5) - 360*pow(l,3)*s*pow(z,6) - 1440*pow(l,3)*pow(z,7) -
-                                                                        952*c*pow(l,6)*r*pow(z,7) + 2800*pow(l,4)*pow(r,2)*pow(z,7) - 630*l*s*pow(z,8) + 280*l*pow(z,9) + 350*c*pow(l,4)*r*pow(z,9)))
-                                                /(pow(l,4)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                (70*pow(s + x - z,3)*(-150*pow(l,9)*s - 600*pow(l,9)*z + 78*c*pow(l,12)*r*z + 792*pow(l,10)*pow(r,2)*z - 1320*pow(l,7)*s*pow(z,2) +
-                                                                        320*pow(l,7)*pow(z,3) - 88*c*pow(l,10)*r*pow(z,3) + 2460*pow(l,5)*s*pow(z,4) + 1440*pow(l,5)*pow(z,5) +
-                                                                        612*c*pow(l,8)*r*pow(z,5) - 2184*pow(l,6)*pow(r,2)*pow(z,5) - 360*pow(l,3)*s*pow(z,6) - 1440*pow(l,3)*pow(z,7) -
-                                                                        952*c*pow(l,6)*r*pow(z,7) + 2800*pow(l,4)*pow(r,2)*pow(z,7) - 630*l*s*pow(z,8) + 280*l*pow(z,9) + 350*c*pow(l,4)*r*pow(z,9)))
-                                                /(pow(l,6)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
-                                                (14*pow(s + x - z,4)*pow(54*pow(l,5) - 252*pow(l,3)*pow(z,2) - 42*l*pow(z,4),2)*
-                                                 (-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
-                                                  12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
-                                                  50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
-                                                  76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
-                                                  35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),3)) +
-                                                (7*pow(s + x - z,4)*(270*pow(l,4) - 756*pow(l,2)*pow(z,2) - 42*pow(z,4))*
-                                                 (-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
-                                                  12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
-                                                  50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
-                                                  76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
-                                                  35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) -
-                                                (84*pow(s + x - z,4)*(54*pow(l,5) - 252*pow(l,3)*pow(z,2) - 42*l*pow(z,4))*
-                                                 (-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
-                                                  12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
-                                                  50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
-                                                  76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
-                                                  35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
-                                                (pow(l,4)*pow(pow(l,2) - pow(z,2),4)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) -
-                                                (70*pow(s + x - z,4)*(54*pow(l,5) - 252*pow(l,3)*pow(z,2) - 42*l*pow(z,4))*
-                                                 (-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
-                                                  12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
-                                                  50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
-                                                  76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
-                                                  35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
-                                                (pow(l,6)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) -
-                                                (336*pow(s + x - z,4)*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
-                                                                         12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
-                                                                         50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
-                                                                         76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
-                                                                         35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
-                                                (pow(l,3)*pow(pow(l,2) - pow(z,2),5)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
-                                                (378*pow(s + x - z,4)*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
-                                                                         12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
-                                                                         50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
-                                                                         76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
-                                                                         35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
-                                                (210*pow(s + x - z,4)*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
-                                                                         12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
-                                                                         50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
-                                                                         76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
-                                                                         35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
-                                                (pow(l,7)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
-                                                (14*pow(s + x - z,3)*pow(54*pow(l,5) - 252*pow(l,3)*pow(z,2) - 42*l*pow(z,4),2)*
-                                                 (-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
-                                                  40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
-                                                  68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
-                                                  136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
-                                                  70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),3)) +
-                                                (7*pow(s + x - z,3)*(270*pow(l,4) - 756*pow(l,2)*pow(z,2) - 42*pow(z,4))*
-                                                 (-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
-                                                  40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
-                                                  68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
-                                                  136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
-                                                  70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) -
-                                                (84*pow(s + x - z,3)*(54*pow(l,5) - 252*pow(l,3)*pow(z,2) - 42*l*pow(z,4))*
-                                                 (-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
-                                                  40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
-                                                  68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
-                                                  136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
-                                                  70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
-                                                (pow(l,4)*pow(pow(l,2) - pow(z,2),4)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) -
-                                                (70*pow(s + x - z,3)*(54*pow(l,5) - 252*pow(l,3)*pow(z,2) - 42*l*pow(z,4))*
-                                                 (-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
-                                                  40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
-                                                  68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
-                                                  136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
-                                                  70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
-                                                (pow(l,6)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) -
-                                                (336*pow(s + x - z,3)*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
-                                                                         40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
-                                                                         68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
-                                                                         136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
-                                                                         70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
-                                                (pow(l,3)*pow(pow(l,2) - pow(z,2),5)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
-                                                (378*pow(s + x - z,3)*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
-                                                                         40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
-                                                                         68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
-                                                                         136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
-                                                                         70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
-                                                (210*pow(s + x - z,3)*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
-                                                                         40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
-                                                                         68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
-                                                                         136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
-                                                                         70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
-                                                (pow(l,7)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                (pow(s + x - z,2)*((96*pow(l,2)*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),4) +
-                                                                     (8*pow(l,2)*pow(r,2))/pow(pow(l,2) - pow(z,2),3) - (16*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),3) -
-                                                                     (2*pow(r,2))/pow(pow(l,2) - pow(z,2),2)))/(pow(l,2) - pow(z,2)) -
-                                                (4*l*pow(s + x - z,2)*((-16*l*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),3) - (2*l*pow(r,2))/pow(pow(l,2) - pow(z,2),2)))/
-                                                pow(pow(l,2) - pow(z,2),2) + (8*pow(l,2)*pow(s + x - z,2)*
-                                                                                    (c*r + (4*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),2) + pow(r,2)/(pow(l,2) - pow(z,2))))/pow(pow(l,2) - pow(z,2),3) -
-                                                (2*pow(s + x - z,2)*(c*r + (4*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),2) + pow(r,2)/(pow(l,2) - pow(z,2))))/
-                                                pow(pow(l,2) - pow(z,2),2)) + 4*l*((-8*l*pow(r,2)*(s + x - z)*z)/pow(pow(l,2) - pow(z,2),3) -
-                                                                                         (2*l*pow(r,2))/pow(pow(l,2) - pow(z,2),2) - (7*pow(s + x - z,4)*
-                                                                                                                                              (-150*pow(l,9) + 39*c*pow(l,12)*r + 198*pow(l,10)*pow(r,2) - 840*pow(l,7)*s*z - 480*pow(l,7)*pow(z,2) -
-                                                                                                                                               132*c*pow(l,10)*r*pow(z,2) + 810*pow(l,8)*pow(r,2)*pow(z,2) + 840*pow(l,5)*s*pow(z,3) + 1620*pow(l,5)*pow(z,4) +
-                                                                                                                                               450*c*pow(l,8)*r*pow(z,4) - 2310*pow(l,6)*pow(r,2)*pow(z,4) + 840*pow(l,3)*s*pow(z,5) - 1200*pow(l,3)*pow(z,6) -
-                                                                                                                                               532*c*pow(l,6)*r*pow(z,6) + 1750*pow(l,4)*pow(r,2)*pow(z,6) - 840*l*s*pow(z,7) + 210*l*pow(z,8) + 175*c*pow(l,4)*r*pow(z,8)))
-                                                                                                                                             /(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
-                                                                                         (7*pow(s + x - z,3)*(-150*pow(l,9)*s - 600*pow(l,9)*z + 78*c*pow(l,12)*r*z + 792*pow(l,10)*pow(r,2)*z - 1320*pow(l,7)*s*pow(z,2) +
-                                                                                                                320*pow(l,7)*pow(z,3) - 88*c*pow(l,10)*r*pow(z,3) + 2460*pow(l,5)*s*pow(z,4) + 1440*pow(l,5)*pow(z,5) +
-                                                                                                                612*c*pow(l,8)*r*pow(z,5) - 2184*pow(l,6)*pow(r,2)*pow(z,5) - 360*pow(l,3)*s*pow(z,6) - 1440*pow(l,3)*pow(z,7) -
-                                                                                                                952*c*pow(l,6)*r*pow(z,7) + 2800*pow(l,4)*pow(r,2)*pow(z,7) - 630*l*s*pow(z,8) + 280*l*pow(z,9) + 350*c*pow(l,4)*r*pow(z,9)))
-                                                                                         /(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                                                         (7*pow(s + x - z,4)*(54*pow(l,5) - 252*pow(l,3)*pow(z,2) - 42*l*pow(z,4))*
-                                                                                          (-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
-                                                                                           12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
-                                                                                           50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
-                                                                                           76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
-                                                                                           35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
-                                                                                         (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) +
-                                                                                         (42*pow(s + x - z,4)*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
-                                                                                                                 12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
-                                                                                                                 50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
-                                                                                                                 76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
-                                                                                                                 35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
-                                                                                         (pow(l,4)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                                                         (35*pow(s + x - z,4)*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
-                                                                                                                 12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
-                                                                                                                 50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
-                                                                                                                 76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
-                                                                                                                 35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
-                                                                                         (pow(l,6)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                                                         (7*pow(s + x - z,3)*(54*pow(l,5) - 252*pow(l,3)*pow(z,2) - 42*l*pow(z,4))*
-                                                                                          (-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
-                                                                                           40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
-                                                                                           68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
-                                                                                           136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
-                                                                                           70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
-                                                                                         (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) +
-                                                                                         (42*pow(s + x - z,3)*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
-                                                                                                                 40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
-                                                                                                                 68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
-                                                                                                                 136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
-                                                                                                                 70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
-                                                                                         (pow(l,4)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                                                         (35*pow(s + x - z,3)*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
-                                                                                                                 40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
-                                                                                                                 68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
-                                                                                                                 136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
-                                                                                                                 70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
-                                                                                         (pow(l,6)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                                                         (pow(s + x - z,2)*((-16*l*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),3) - (2*l*pow(r,2))/pow(pow(l,2) - pow(z,2),2)))/
-                                                                                         (pow(l,2) - pow(z,2)) - (2*l*pow(s + x - z,2)*(c*r + (4*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),2) +
-                                                                                                                                              pow(r,2)/(pow(l,2) - pow(z,2))))/pow(pow(l,2) - pow(z,2),2)) +
-                 2*((2*pow(r,2)*(s + x - z)*z)/pow(pow(l,2) - pow(z,2),2) + pow(r,2)/(pow(l,2) - pow(z,2)) -
-                    (7*pow(s + x - z,4)*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
-                                           12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
-                                           50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
-                                           76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
-                                           35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
-                    (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
-                    (7*pow(s + x - z,3)*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
-                                           40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
-                                           68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
-                                           136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
-                                           70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
-                    (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                    (pow(s + x - z,2)*(c*r + (4*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),2) + pow(r,2)/(pow(l,2) - pow(z,2))))/
-                    (pow(l,2) - pow(z,2)));
-    }
-    else if (label_i=='l'&&label_j=='r'){
-        result = (pow(l,2) - pow(s + x,2))*((-16*l*r*(s + x - z)*z)/pow(pow(l,2) - pow(z,2),3) - (4*l*r)/pow(pow(l,2) - pow(z,2),2) -
-                                                (7*pow(s + x - z,4)*(39*c*pow(l,12) + 396*pow(l,10)*r - 132*c*pow(l,10)*pow(z,2) + 1620*pow(l,8)*r*pow(z,2) +
-                                                                       450*c*pow(l,8)*pow(z,4) - 4620*pow(l,6)*r*pow(z,4) - 532*c*pow(l,6)*pow(z,6) + 3500*pow(l,4)*r*pow(z,6) +
-                                                                       175*c*pow(l,4)*pow(z,8)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                (7*pow(s + x - z,4)*(54*pow(l,5) - 252*pow(l,3)*pow(z,2) - 42*l*pow(z,4))*
-                                                 (3*c*pow(l,13) + 36*pow(l,11)*r - 12*c*pow(l,11)*pow(z,2) + 180*pow(l,9)*r*pow(z,2) + 50*c*pow(l,9)*pow(z,4) -
-                                                  660*pow(l,7)*r*pow(z,4) - 76*c*pow(l,7)*pow(z,6) + 700*pow(l,5)*r*pow(z,6) + 35*c*pow(l,5)*pow(z,8)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) +
-                                                (42*pow(s + x - z,4)*(3*c*pow(l,13) + 36*pow(l,11)*r - 12*c*pow(l,11)*pow(z,2) + 180*pow(l,9)*r*pow(z,2) +
-                                                                        50*c*pow(l,9)*pow(z,4) - 660*pow(l,7)*r*pow(z,4) - 76*c*pow(l,7)*pow(z,6) + 700*pow(l,5)*r*pow(z,6) +
-                                                                        35*c*pow(l,5)*pow(z,8)))/
-                                                (pow(l,4)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                (35*pow(s + x - z,4)*(3*c*pow(l,13) + 36*pow(l,11)*r - 12*c*pow(l,11)*pow(z,2) + 180*pow(l,9)*r*pow(z,2) +
-                                                                        50*c*pow(l,9)*pow(z,4) - 660*pow(l,7)*r*pow(z,4) - 76*c*pow(l,7)*pow(z,6) + 700*pow(l,5)*r*pow(z,6) +
-                                                                        35*c*pow(l,5)*pow(z,8)))/
-                                                (pow(l,6)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
-                                                (7*pow(s + x - z,3)*(78*c*pow(l,12)*z + 1584*pow(l,10)*r*z - 88*c*pow(l,10)*pow(z,3) + 612*c*pow(l,8)*pow(z,5) -
-                                                                       4368*pow(l,6)*r*pow(z,5) - 952*c*pow(l,6)*pow(z,7) + 5600*pow(l,4)*r*pow(z,7) + 350*c*pow(l,4)*pow(z,9)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                (7*pow(s + x - z,3)*(54*pow(l,5) - 252*pow(l,3)*pow(z,2) - 42*l*pow(z,4))*
-                                                 (6*c*pow(l,13)*z + 144*pow(l,11)*r*z - 8*c*pow(l,11)*pow(z,3) + 68*c*pow(l,9)*pow(z,5) - 624*pow(l,7)*r*pow(z,5) -
-                                                  136*c*pow(l,7)*pow(z,7) + 1120*pow(l,5)*r*pow(z,7) + 70*c*pow(l,5)*pow(z,9)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) +
-                                                (42*pow(s + x - z,3)*(6*c*pow(l,13)*z + 144*pow(l,11)*r*z - 8*c*pow(l,11)*pow(z,3) + 68*c*pow(l,9)*pow(z,5) -
-                                                                        624*pow(l,7)*r*pow(z,5) - 136*c*pow(l,7)*pow(z,7) + 1120*pow(l,5)*r*pow(z,7) + 70*c*pow(l,5)*pow(z,9)))/
-                                                (pow(l,4)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                (35*pow(s + x - z,3)*(6*c*pow(l,13)*z + 144*pow(l,11)*r*z - 8*c*pow(l,11)*pow(z,3) + 68*c*pow(l,9)*pow(z,5) -
-                                                                        624*pow(l,7)*r*pow(z,5) - 136*c*pow(l,7)*pow(z,7) + 1120*pow(l,5)*r*pow(z,7) + 70*c*pow(l,5)*pow(z,9)))/
-                                                (pow(l,6)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                (pow(s + x - z,2)*((-32*l*r*pow(z,2))/pow(pow(l,2) - pow(z,2),3) - (4*l*r)/pow(pow(l,2) - pow(z,2),2)))/(pow(l,2) - pow(z,2)) -
-                                                (2*l*pow(s + x - z,2)*(c + (8*r*pow(z,2))/pow(pow(l,2) - pow(z,2),2) + (2*r)/(pow(l,2) - pow(z,2))))/pow(pow(l,2) - pow(z,2),2))
-                 + 2*l*((4*r*(s + x - z)*z)/pow(pow(l,2) - pow(z,2),2) + (2*r)/(pow(l,2) - pow(z,2)) -
-                        (7*pow(s + x - z,4)*(3*c*pow(l,13) + 36*pow(l,11)*r - 12*c*pow(l,11)*pow(z,2) + 180*pow(l,9)*r*pow(z,2) +
-                                               50*c*pow(l,9)*pow(z,4) - 660*pow(l,7)*r*pow(z,4) - 76*c*pow(l,7)*pow(z,6) + 700*pow(l,5)*r*pow(z,6) +
-                                               35*c*pow(l,5)*pow(z,8)))/
-                        (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
-                        (7*pow(s + x - z,3)*(6*c*pow(l,13)*z + 144*pow(l,11)*r*z - 8*c*pow(l,11)*pow(z,3) + 68*c*pow(l,9)*pow(z,5) -
-                                               624*pow(l,7)*r*pow(z,5) - 136*c*pow(l,7)*pow(z,7) + 1120*pow(l,5)*r*pow(z,7) + 70*c*pow(l,5)*pow(z,9)))/
-                        (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                        (pow(s + x - z,2)*(c + (8*r*pow(z,2))/pow(pow(l,2) - pow(z,2),2) + (2*r)/(pow(l,2) - pow(z,2))))/(pow(l,2) - pow(z,2)));
-    }
-    else if(label_i=='l'&&label_j=='z'){
-        result = (pow(l,2) - pow(s + x,2))*((-48*l*pow(r,2)*(s + x - z)*pow(z,2))/pow(pow(l,2) - pow(z,2),4) -
-                                                (8*l*pow(r,2)*(s + x - z))/pow(pow(l,2) - pow(z,2),3) -
-                                                (7*pow(s + x - z,4)*(-840*pow(l,7)*s - 960*pow(l,7)*z - 264*c*pow(l,10)*r*z + 1620*pow(l,8)*pow(r,2)*z + 2520*pow(l,5)*s*pow(z,2) +
-                                                                       6480*pow(l,5)*pow(z,3) + 1800*c*pow(l,8)*r*pow(z,3) - 9240*pow(l,6)*pow(r,2)*pow(z,3) + 4200*pow(l,3)*s*pow(z,4) -
-                                                                       7200*pow(l,3)*pow(z,5) - 3192*c*pow(l,6)*r*pow(z,5) + 10500*pow(l,4)*pow(r,2)*pow(z,5) - 5880*l*s*pow(z,6) +
-                                                                       1680*l*pow(z,7) + 1400*c*pow(l,4)*r*pow(z,7)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                (7*pow(s + x - z,4)*(-126*pow(l,4)*z - 84*pow(l,2)*pow(z,3) - 1470*pow(z,5))*
-                                                 (-150*pow(l,9) + 39*c*pow(l,12)*r + 198*pow(l,10)*pow(r,2) - 840*pow(l,7)*s*z - 480*pow(l,7)*pow(z,2) -
-                                                  132*c*pow(l,10)*r*pow(z,2) + 810*pow(l,8)*pow(r,2)*pow(z,2) + 840*pow(l,5)*s*pow(z,3) + 1620*pow(l,5)*pow(z,4) +
-                                                  450*c*pow(l,8)*r*pow(z,4) - 2310*pow(l,6)*pow(r,2)*pow(z,4) + 840*pow(l,3)*s*pow(z,5) - 1200*pow(l,3)*pow(z,6) -
-                                                  532*c*pow(l,6)*r*pow(z,6) + 1750*pow(l,4)*pow(r,2)*pow(z,6) - 840*l*s*pow(z,7) + 210*l*pow(z,8) + 175*c*pow(l,4)*r*pow(z,8)))
-                                                /(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) -
-                                                (42*pow(s + x - z,4)*z*(-150*pow(l,9) + 39*c*pow(l,12)*r + 198*pow(l,10)*pow(r,2) - 840*pow(l,7)*s*z - 480*pow(l,7)*pow(z,2) -
-                                                                          132*c*pow(l,10)*r*pow(z,2) + 810*pow(l,8)*pow(r,2)*pow(z,2) + 840*pow(l,5)*s*pow(z,3) + 1620*pow(l,5)*pow(z,4) +
-                                                                          450*c*pow(l,8)*r*pow(z,4) - 2310*pow(l,6)*pow(r,2)*pow(z,4) + 840*pow(l,3)*s*pow(z,5) - 1200*pow(l,3)*pow(z,6) -
-                                                                          532*c*pow(l,6)*r*pow(z,6) + 1750*pow(l,4)*pow(r,2)*pow(z,6) - 840*l*s*pow(z,7) + 210*l*pow(z,8) + 175*c*pow(l,4)*r*pow(z,8)))
-                                                /(pow(l,5)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                (28*pow(s + x - z,3)*(-150*pow(l,9) + 39*c*pow(l,12)*r + 198*pow(l,10)*pow(r,2) - 840*pow(l,7)*s*z - 480*pow(l,7)*pow(z,2) -
-                                                                        132*c*pow(l,10)*r*pow(z,2) + 810*pow(l,8)*pow(r,2)*pow(z,2) + 840*pow(l,5)*s*pow(z,3) + 1620*pow(l,5)*pow(z,4) +
-                                                                        450*c*pow(l,8)*r*pow(z,4) - 2310*pow(l,6)*pow(r,2)*pow(z,4) + 840*pow(l,3)*s*pow(z,5) - 1200*pow(l,3)*pow(z,6) -
-                                                                        532*c*pow(l,6)*r*pow(z,6) + 1750*pow(l,4)*pow(r,2)*pow(z,6) - 840*l*s*pow(z,7) + 210*l*pow(z,8) + 175*c*pow(l,4)*r*pow(z,8)))
-                                                /(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
-                                                (7*pow(s + x - z,3)*(-600*pow(l,9) + 78*c*pow(l,12)*r + 792*pow(l,10)*pow(r,2) - 2640*pow(l,7)*s*z + 960*pow(l,7)*pow(z,2) -
-                                                                       264*c*pow(l,10)*r*pow(z,2) + 9840*pow(l,5)*s*pow(z,3) + 7200*pow(l,5)*pow(z,4) + 3060*c*pow(l,8)*r*pow(z,4) -
-                                                                       10920*pow(l,6)*pow(r,2)*pow(z,4) - 2160*pow(l,3)*s*pow(z,5) - 10080*pow(l,3)*pow(z,6) - 6664*c*pow(l,6)*r*pow(z,6) +
-                                                                       19600*pow(l,4)*pow(r,2)*pow(z,6) - 5040*l*s*pow(z,7) + 2520*l*pow(z,8) + 3150*c*pow(l,4)*r*pow(z,8)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                (7*pow(s + x - z,4)*(54*pow(l,5) - 252*pow(l,3)*pow(z,2) - 42*l*pow(z,4))*
-                                                 (-105*pow(l,8)*s - 120*pow(l,8)*z - 24*c*pow(l,11)*r*z + 180*pow(l,9)*pow(r,2)*z + 420*pow(l,6)*s*pow(z,2) +
-                                                  1080*pow(l,6)*pow(z,3) + 200*c*pow(l,9)*r*pow(z,3) - 1320*pow(l,7)*pow(r,2)*pow(z,3) + 1050*pow(l,4)*s*pow(z,4) -
-                                                  1800*pow(l,4)*pow(z,5) - 456*c*pow(l,7)*r*pow(z,5) + 2100*pow(l,5)*pow(r,2)*pow(z,5) - 2940*pow(l,2)*s*pow(z,6) +
-                                                  840*pow(l,2)*pow(z,7) + 280*c*pow(l,5)*r*pow(z,7) + 1575*s*pow(z,8)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) +
-                                                (42*pow(s + x - z,4)*(-105*pow(l,8)*s - 120*pow(l,8)*z - 24*c*pow(l,11)*r*z + 180*pow(l,9)*pow(r,2)*z + 420*pow(l,6)*s*pow(z,2) +
-                                                                        1080*pow(l,6)*pow(z,3) + 200*c*pow(l,9)*r*pow(z,3) - 1320*pow(l,7)*pow(r,2)*pow(z,3) + 1050*pow(l,4)*s*pow(z,4) -
-                                                                        1800*pow(l,4)*pow(z,5) - 456*c*pow(l,7)*r*pow(z,5) + 2100*pow(l,5)*pow(r,2)*pow(z,5) - 2940*pow(l,2)*s*pow(z,6) +
-                                                                        840*pow(l,2)*pow(z,7) + 280*c*pow(l,5)*r*pow(z,7) + 1575*s*pow(z,8)))/
-                                                (pow(l,4)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                (35*pow(s + x - z,4)*(-105*pow(l,8)*s - 120*pow(l,8)*z - 24*c*pow(l,11)*r*z + 180*pow(l,9)*pow(r,2)*z + 420*pow(l,6)*s*pow(z,2) +
-                                                                        1080*pow(l,6)*pow(z,3) + 200*c*pow(l,9)*r*pow(z,3) - 1320*pow(l,7)*pow(r,2)*pow(z,3) + 1050*pow(l,4)*s*pow(z,4) -
-                                                                        1800*pow(l,4)*pow(z,5) - 456*c*pow(l,7)*r*pow(z,5) + 2100*pow(l,5)*pow(r,2)*pow(z,5) - 2940*pow(l,2)*s*pow(z,6) +
-                                                                        840*pow(l,2)*pow(z,7) + 280*c*pow(l,5)*r*pow(z,7) + 1575*s*pow(z,8)))/
-                                                (pow(l,6)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                (7*pow(s + x - z,3)*(-126*pow(l,4)*z - 84*pow(l,2)*pow(z,3) - 1470*pow(z,5))*
-                                                 (-150*pow(l,9)*s - 600*pow(l,9)*z + 78*c*pow(l,12)*r*z + 792*pow(l,10)*pow(r,2)*z - 1320*pow(l,7)*s*pow(z,2) +
-                                                  320*pow(l,7)*pow(z,3) - 88*c*pow(l,10)*r*pow(z,3) + 2460*pow(l,5)*s*pow(z,4) + 1440*pow(l,5)*pow(z,5) +
-                                                  612*c*pow(l,8)*r*pow(z,5) - 2184*pow(l,6)*pow(r,2)*pow(z,5) - 360*pow(l,3)*s*pow(z,6) - 1440*pow(l,3)*pow(z,7) -
-                                                  952*c*pow(l,6)*r*pow(z,7) + 2800*pow(l,4)*pow(r,2)*pow(z,7) - 630*l*s*pow(z,8) + 280*l*pow(z,9) + 350*c*pow(l,4)*r*pow(z,9)))
-                                                /(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) -
-                                                (42*pow(s + x - z,3)*z*(-150*pow(l,9)*s - 600*pow(l,9)*z + 78*c*pow(l,12)*r*z + 792*pow(l,10)*pow(r,2)*z -
-                                                                          1320*pow(l,7)*s*pow(z,2) + 320*pow(l,7)*pow(z,3) - 88*c*pow(l,10)*r*pow(z,3) + 2460*pow(l,5)*s*pow(z,4) +
-                                                                          1440*pow(l,5)*pow(z,5) + 612*c*pow(l,8)*r*pow(z,5) - 2184*pow(l,6)*pow(r,2)*pow(z,5) - 360*pow(l,3)*s*pow(z,6) -
-                                                                          1440*pow(l,3)*pow(z,7) - 952*c*pow(l,6)*r*pow(z,7) + 2800*pow(l,4)*pow(r,2)*pow(z,7) - 630*l*s*pow(z,8) + 280*l*pow(z,9) +
-                                                                          350*c*pow(l,4)*r*pow(z,9)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                (21*pow(s + x - z,2)*(-150*pow(l,9)*s - 600*pow(l,9)*z + 78*c*pow(l,12)*r*z + 792*pow(l,10)*pow(r,2)*z - 1320*pow(l,7)*s*pow(z,2) +
-                                                                        320*pow(l,7)*pow(z,3) - 88*c*pow(l,10)*r*pow(z,3) + 2460*pow(l,5)*s*pow(z,4) + 1440*pow(l,5)*pow(z,5) +
-                                                                        612*c*pow(l,8)*r*pow(z,5) - 2184*pow(l,6)*pow(r,2)*pow(z,5) - 360*pow(l,3)*s*pow(z,6) - 1440*pow(l,3)*pow(z,7) -
-                                                                        952*c*pow(l,6)*r*pow(z,7) + 2800*pow(l,4)*pow(r,2)*pow(z,7) - 630*l*s*pow(z,8) + 280*l*pow(z,9) + 350*c*pow(l,4)*r*pow(z,9)))
-                                                /(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
-                                                (14*pow(s + x - z,4)*(54*pow(l,5) - 252*pow(l,3)*pow(z,2) - 42*l*pow(z,4))*
-                                                 (-126*pow(l,4)*z - 84*pow(l,2)*pow(z,3) - 1470*pow(z,5))*
-                                                 (-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
-                                                  12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
-                                                  50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
-                                                  76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
-                                                  35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),3)) +
-                                                (7*pow(s + x - z,4)*(-504*pow(l,3)*z - 168*l*pow(z,3))*
-                                                 (-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
-                                                  12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
-                                                  50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
-                                                  76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
-                                                  35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) +
-                                                (42*pow(s + x - z,4)*z*(54*pow(l,5) - 252*pow(l,3)*pow(z,2) - 42*l*pow(z,4))*
-                                                 (-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
-                                                  12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
-                                                  50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
-                                                  76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
-                                                  35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),4)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) -
-                                                (28*pow(s + x - z,3)*(54*pow(l,5) - 252*pow(l,3)*pow(z,2) - 42*l*pow(z,4))*
-                                                 (-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
-                                                  12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
-                                                  50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
-                                                  76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
-                                                  35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) -
-                                                (42*pow(s + x - z,4)*(-126*pow(l,4)*z - 84*pow(l,2)*pow(z,3) - 1470*pow(z,5))*
-                                                 (-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
-                                                  12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
-                                                  50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
-                                                  76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
-                                                  35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
-                                                (pow(l,4)*pow(pow(l,2) - pow(z,2),4)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) -
-                                                (35*pow(s + x - z,4)*(-126*pow(l,4)*z - 84*pow(l,2)*pow(z,3) - 1470*pow(z,5))*
-                                                 (-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
-                                                  12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
-                                                  50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
-                                                  76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
-                                                  35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
-                                                (pow(l,6)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) +
-                                                (336*pow(s + x - z,4)*z*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
-                                                                           12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
-                                                                           50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
-                                                                           76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
-                                                                           35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
-                                                (pow(l,4)*pow(pow(l,2) - pow(z,2),5)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
-                                                (168*pow(s + x - z,3)*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
-                                                                         12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
-                                                                         50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
-                                                                         76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
-                                                                         35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
-                                                (pow(l,4)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                (210*pow(s + x - z,4)*z*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
-                                                                           12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
-                                                                           50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
-                                                                           76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
-                                                                           35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
-                                                (pow(l,6)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
-                                                (140*pow(s + x - z,3)*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
-                                                                         12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
-                                                                         50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
-                                                                         76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
-                                                                         35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
-                                                (pow(l,6)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                (7*pow(s + x - z,3)*(54*pow(l,5) - 252*pow(l,3)*pow(z,2) - 42*l*pow(z,4))*
-                                                 (-60*pow(l,10) + 6*c*pow(l,13)*r + 72*pow(l,11)*pow(r,2) - 330*pow(l,8)*s*z + 120*pow(l,8)*pow(z,2) -
-                                                  24*c*pow(l,11)*r*pow(z,2) + 1640*pow(l,6)*s*pow(z,3) + 1200*pow(l,6)*pow(z,4) + 340*c*pow(l,9)*r*pow(z,4) -
-                                                  1560*pow(l,7)*pow(r,2)*pow(z,4) - 540*pow(l,4)*s*pow(z,5) - 2520*pow(l,4)*pow(z,6) - 952*c*pow(l,7)*r*pow(z,6) +
-                                                  3920*pow(l,5)*pow(r,2)*pow(z,6) - 2520*pow(l,2)*s*pow(z,7) + 1260*pow(l,2)*pow(z,8) + 630*c*pow(l,5)*r*pow(z,8) +
-                                                  1750*s*pow(z,9)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) +
-                                                (42*pow(s + x - z,3)*(-60*pow(l,10) + 6*c*pow(l,13)*r + 72*pow(l,11)*pow(r,2) - 330*pow(l,8)*s*z + 120*pow(l,8)*pow(z,2) -
-                                                                        24*c*pow(l,11)*r*pow(z,2) + 1640*pow(l,6)*s*pow(z,3) + 1200*pow(l,6)*pow(z,4) + 340*c*pow(l,9)*r*pow(z,4) -
-                                                                        1560*pow(l,7)*pow(r,2)*pow(z,4) - 540*pow(l,4)*s*pow(z,5) - 2520*pow(l,4)*pow(z,6) - 952*c*pow(l,7)*r*pow(z,6) +
-                                                                        3920*pow(l,5)*pow(r,2)*pow(z,6) - 2520*pow(l,2)*s*pow(z,7) + 1260*pow(l,2)*pow(z,8) + 630*c*pow(l,5)*r*pow(z,8) +
-                                                                        1750*s*pow(z,9)))/
-                                                (pow(l,4)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                (35*pow(s + x - z,3)*(-60*pow(l,10) + 6*c*pow(l,13)*r + 72*pow(l,11)*pow(r,2) - 330*pow(l,8)*s*z + 120*pow(l,8)*pow(z,2) -
-                                                                        24*c*pow(l,11)*r*pow(z,2) + 1640*pow(l,6)*s*pow(z,3) + 1200*pow(l,6)*pow(z,4) + 340*c*pow(l,9)*r*pow(z,4) -
-                                                                        1560*pow(l,7)*pow(r,2)*pow(z,4) - 540*pow(l,4)*s*pow(z,5) - 2520*pow(l,4)*pow(z,6) - 952*c*pow(l,7)*r*pow(z,6) +
-                                                                        3920*pow(l,5)*pow(r,2)*pow(z,6) - 2520*pow(l,2)*s*pow(z,7) + 1260*pow(l,2)*pow(z,8) + 630*c*pow(l,5)*r*pow(z,8) +
-                                                                        1750*s*pow(z,9)))/
-                                                (pow(l,6)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
-                                                (14*pow(s + x - z,3)*(54*pow(l,5) - 252*pow(l,3)*pow(z,2) - 42*l*pow(z,4))*
-                                                 (-126*pow(l,4)*z - 84*pow(l,2)*pow(z,3) - 1470*pow(z,5))*
-                                                 (-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
-                                                  40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
-                                                  68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
-                                                  136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
-                                                  70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),3)) +
-                                                (7*pow(s + x - z,3)*(-504*pow(l,3)*z - 168*l*pow(z,3))*
-                                                 (-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
-                                                  40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
-                                                  68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
-                                                  136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
-                                                  70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) +
-                                                (42*pow(s + x - z,3)*z*(54*pow(l,5) - 252*pow(l,3)*pow(z,2) - 42*l*pow(z,4))*
-                                                 (-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
-                                                  40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
-                                                  68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
-                                                  136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
-                                                  70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),4)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) -
-                                                (21*pow(s + x - z,2)*(54*pow(l,5) - 252*pow(l,3)*pow(z,2) - 42*l*pow(z,4))*
-                                                 (-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
-                                                  40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
-                                                  68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
-                                                  136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
-                                                  70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) -
-                                                (42*pow(s + x - z,3)*(-126*pow(l,4)*z - 84*pow(l,2)*pow(z,3) - 1470*pow(z,5))*
-                                                 (-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
-                                                  40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
-                                                  68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
-                                                  136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
-                                                  70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
-                                                (pow(l,4)*pow(pow(l,2) - pow(z,2),4)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) -
-                                                (35*pow(s + x - z,3)*(-126*pow(l,4)*z - 84*pow(l,2)*pow(z,3) - 1470*pow(z,5))*
-                                                 (-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
-                                                  40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
-                                                  68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
-                                                  136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
-                                                  70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
-                                                (pow(l,6)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) +
-                                                (336*pow(s + x - z,3)*z*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
-                                                                           40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
-                                                                           68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
-                                                                           136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
-                                                                           70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
-                                                (pow(l,4)*pow(pow(l,2) - pow(z,2),5)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
-                                                (126*pow(s + x - z,2)*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
-                                                                         40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
-                                                                         68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
-                                                                         136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
-                                                                         70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
-                                                (pow(l,4)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                (210*pow(s + x - z,3)*z*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
-                                                                           40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
-                                                                           68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
-                                                                           136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
-                                                                           70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
-                                                (pow(l,6)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
-                                                (105*pow(s + x - z,2)*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
-                                                                         40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
-                                                                         68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
-                                                                         136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
-                                                                         70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
-                                                (pow(l,6)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                (pow(s + x - z,2)*((-96*l*pow(r,2)*pow(z,3))/pow(pow(l,2) - pow(z,2),4) - (40*l*pow(r,2)*z)/pow(pow(l,2) - pow(z,2),3)))/
-                                                (pow(l,2) - pow(z,2)) + (2*pow(s + x - z,2)*z*((-16*l*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),3) -
-                                                                                                     (2*l*pow(r,2))/pow(pow(l,2) - pow(z,2),2)))/pow(pow(l,2) - pow(z,2),2) -
-                                                (2*(s + x - z)*((-16*l*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),3) - (2*l*pow(r,2))/pow(pow(l,2) - pow(z,2),2)))/
-                                                (pow(l,2) - pow(z,2)) - (2*l*pow(s + x - z,2)*((16*pow(r,2)*pow(z,3))/pow(pow(l,2) - pow(z,2),3) +
-                                                                                                     (10*pow(r,2)*z)/pow(pow(l,2) - pow(z,2),2)))/pow(pow(l,2) - pow(z,2),2) -
-                                                (8*l*pow(s + x - z,2)*z*(c*r + (4*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),2) + pow(r,2)/(pow(l,2) - pow(z,2))))/
-                                                pow(pow(l,2) - pow(z,2),3) + (4*l*(s + x - z)*(c*r + (4*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),2) +
-                                                                                                     pow(r,2)/(pow(l,2) - pow(z,2))))/pow(pow(l,2) - pow(z,2),2)) +
-                 2*l*((8*pow(r,2)*(s + x - z)*pow(z,2))/pow(pow(l,2) - pow(z,2),3) + (2*pow(r,2)*(s + x - z))/pow(pow(l,2) - pow(z,2),2) -
-                      (7*pow(s + x - z,4)*(-105*pow(l,8)*s - 120*pow(l,8)*z - 24*c*pow(l,11)*r*z + 180*pow(l,9)*pow(r,2)*z + 420*pow(l,6)*s*pow(z,2) +
-                                             1080*pow(l,6)*pow(z,3) + 200*c*pow(l,9)*r*pow(z,3) - 1320*pow(l,7)*pow(r,2)*pow(z,3) + 1050*pow(l,4)*s*pow(z,4) -
-                                             1800*pow(l,4)*pow(z,5) - 456*c*pow(l,7)*r*pow(z,5) + 2100*pow(l,5)*pow(r,2)*pow(z,5) - 2940*pow(l,2)*s*pow(z,6) +
-                                             840*pow(l,2)*pow(z,7) + 280*c*pow(l,5)*r*pow(z,7) + 1575*s*pow(z,8)))/
-                      (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                      (7*pow(s + x - z,4)*(-126*pow(l,4)*z - 84*pow(l,2)*pow(z,3) - 1470*pow(z,5))*
-                       (-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
-                        12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
-                        50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
-                        76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
-                        35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
-                      (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) -
-                      (42*pow(s + x - z,4)*z*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
-                                                12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
-                                                50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
-                                                76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
-                                                35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
-                      (pow(l,5)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                      (28*pow(s + x - z,3)*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
-                                              12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
-                                              50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
-                                              76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
-                                              35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
-                      (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
-                      (7*pow(s + x - z,3)*(-60*pow(l,10) + 6*c*pow(l,13)*r + 72*pow(l,11)*pow(r,2) - 330*pow(l,8)*s*z + 120*pow(l,8)*pow(z,2) -
-                                             24*c*pow(l,11)*r*pow(z,2) + 1640*pow(l,6)*s*pow(z,3) + 1200*pow(l,6)*pow(z,4) + 340*c*pow(l,9)*r*pow(z,4) -
-                                             1560*pow(l,7)*pow(r,2)*pow(z,4) - 540*pow(l,4)*s*pow(z,5) - 2520*pow(l,4)*pow(z,6) - 952*c*pow(l,7)*r*pow(z,6) +
-                                             3920*pow(l,5)*pow(r,2)*pow(z,6) - 2520*pow(l,2)*s*pow(z,7) + 1260*pow(l,2)*pow(z,8) + 630*c*pow(l,5)*r*pow(z,8) +
-                                             1750*s*pow(z,9)))/
-                      (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                      (7*pow(s + x - z,3)*(-126*pow(l,4)*z - 84*pow(l,2)*pow(z,3) - 1470*pow(z,5))*
-                       (-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
-                        40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
-                        68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
-                        136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
-                        70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
-                      (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) -
-                      (42*pow(s + x - z,3)*z*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
-                                                40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
-                                                68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
-                                                136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
-                                                70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
-                      (pow(l,5)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                      (21*pow(s + x - z,2)*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
-                                              40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
-                                              68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
-                                              136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
-                                              70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
-                      (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                      (pow(s + x - z,2)*((16*pow(r,2)*pow(z,3))/pow(pow(l,2) - pow(z,2),3) + (10*pow(r,2)*z)/pow(pow(l,2) - pow(z,2),2)))/
-                      (pow(l,2) - pow(z,2)) + (2*pow(s + x - z,2)*z*(c*r + (4*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),2) +
-                                                                           pow(r,2)/(pow(l,2) - pow(z,2))))/pow(pow(l,2) - pow(z,2),2) -
-                      (2*(s + x - z)*(c*r + (4*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),2) + pow(r,2)/(pow(l,2) - pow(z,2))))/(pow(l,2) - pow(z,2)));
-    }
-    else if (label_i=='l'&&label_j=='c'){
-        result = (pow(l,2) - pow(s + x,2))*((-2*l*r*pow(s + x - z,2))/pow(pow(l,2) - pow(z,2),2) -
-                                                (7*pow(s + x - z,4)*(39*pow(l,12)*r - 132*pow(l,10)*r*pow(z,2) + 450*pow(l,8)*r*pow(z,4) - 532*pow(l,6)*r*pow(z,6) +
-                                                                       175*pow(l,4)*r*pow(z,8)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                (7*pow(s + x - z,4)*(54*pow(l,5) - 252*pow(l,3)*pow(z,2) - 42*l*pow(z,4))*
-                                                 (3*pow(l,13)*r - 12*pow(l,11)*r*pow(z,2) + 50*pow(l,9)*r*pow(z,4) - 76*pow(l,7)*r*pow(z,6) + 35*pow(l,5)*r*pow(z,8)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) +
-                                                (42*pow(s + x - z,4)*(3*pow(l,13)*r - 12*pow(l,11)*r*pow(z,2) + 50*pow(l,9)*r*pow(z,4) - 76*pow(l,7)*r*pow(z,6) +
-                                                                        35*pow(l,5)*r*pow(z,8)))/
-                                                (pow(l,4)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                (35*pow(s + x - z,4)*(3*pow(l,13)*r - 12*pow(l,11)*r*pow(z,2) + 50*pow(l,9)*r*pow(z,4) - 76*pow(l,7)*r*pow(z,6) +
-                                                                        35*pow(l,5)*r*pow(z,8)))/
-                                                (pow(l,6)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
-                                                (7*pow(s + x - z,3)*(78*pow(l,12)*r*z - 88*pow(l,10)*r*pow(z,3) + 612*pow(l,8)*r*pow(z,5) - 952*pow(l,6)*r*pow(z,7) +
-                                                                       350*pow(l,4)*r*pow(z,9)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                (7*pow(s + x - z,3)*(54*pow(l,5) - 252*pow(l,3)*pow(z,2) - 42*l*pow(z,4))*
-                                                 (6*pow(l,13)*r*z - 8*pow(l,11)*r*pow(z,3) + 68*pow(l,9)*r*pow(z,5) - 136*pow(l,7)*r*pow(z,7) + 70*pow(l,5)*r*pow(z,9)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) +
-                                                (42*pow(s + x - z,3)*(6*pow(l,13)*r*z - 8*pow(l,11)*r*pow(z,3) + 68*pow(l,9)*r*pow(z,5) - 136*pow(l,7)*r*pow(z,7) +
-                                                                        70*pow(l,5)*r*pow(z,9)))/
-                                                (pow(l,4)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                (35*pow(s + x - z,3)*(6*pow(l,13)*r*z - 8*pow(l,11)*r*pow(z,3) + 68*pow(l,9)*r*pow(z,5) - 136*pow(l,7)*r*pow(z,7) +
-                                                                        70*pow(l,5)*r*pow(z,9)))/
-                                                (pow(l,6)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6)))) +
-                 2*l*((r*pow(s + x - z,2))/(pow(l,2) - pow(z,2)) - (7*pow(s + x - z,4)*
-                                                                          (3*pow(l,13)*r - 12*pow(l,11)*r*pow(z,2) + 50*pow(l,9)*r*pow(z,4) - 76*pow(l,7)*r*pow(z,6) + 35*pow(l,5)*r*pow(z,8)))/
-                                                                         (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
-                      (7*pow(s + x - z,3)*(6*pow(l,13)*r*z - 8*pow(l,11)*r*pow(z,3) + 68*pow(l,9)*r*pow(z,5) - 136*pow(l,7)*r*pow(z,7) +
-                                             70*pow(l,5)*r*pow(z,9)))/
-                      (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))));
-    }
-    else if (label_i=='l'&&label_j=='s'){
-        result = (pow(l,2) - pow(s + x,2))*((-8*l*pow(r,2)*z)/pow(pow(l,2) - pow(z,2),3) -
-                                                (7*pow(s + x - z,4)*(-840*pow(l,7)*z + 840*pow(l,5)*pow(z,3) + 840*pow(l,3)*pow(z,5) - 840*l*pow(z,7)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
-                                                (7*pow(s + x - z,3)*(-150*pow(l,9) - 1320*pow(l,7)*pow(z,2) + 2460*pow(l,5)*pow(z,4) - 360*pow(l,3)*pow(z,6) - 630*l*pow(z,8)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
-                                                (28*pow(s + x - z,3)*(-150*pow(l,9) + 39*c*pow(l,12)*r + 198*pow(l,10)*pow(r,2) - 840*pow(l,7)*s*z - 480*pow(l,7)*pow(z,2) -
-                                                                        132*c*pow(l,10)*r*pow(z,2) + 810*pow(l,8)*pow(r,2)*pow(z,2) + 840*pow(l,5)*s*pow(z,3) + 1620*pow(l,5)*pow(z,4) +
-                                                                        450*c*pow(l,8)*r*pow(z,4) - 2310*pow(l,6)*pow(r,2)*pow(z,4) + 840*pow(l,3)*s*pow(z,5) - 1200*pow(l,3)*pow(z,6) -
-                                                                        532*c*pow(l,6)*r*pow(z,6) + 1750*pow(l,4)*pow(r,2)*pow(z,6) - 840*l*s*pow(z,7) + 210*l*pow(z,8) + 175*c*pow(l,4)*r*pow(z,8)))
-                                                /(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                (7*pow(s + x - z,4)*(54*pow(l,5) - 252*pow(l,3)*pow(z,2) - 42*l*pow(z,4))*
-                                                 (-105*pow(l,8)*z + 140*pow(l,6)*pow(z,3) + 210*pow(l,4)*pow(z,5) - 420*pow(l,2)*pow(z,7) + 175*pow(z,9)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) +
-                                                (42*pow(s + x - z,4)*(-105*pow(l,8)*z + 140*pow(l,6)*pow(z,3) + 210*pow(l,4)*pow(z,5) - 420*pow(l,2)*pow(z,7) + 175*pow(z,9)))/
-                                                (pow(l,4)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                (35*pow(s + x - z,4)*(-105*pow(l,8)*z + 140*pow(l,6)*pow(z,3) + 210*pow(l,4)*pow(z,5) - 420*pow(l,2)*pow(z,7) + 175*pow(z,9)))/
-                                                (pow(l,6)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
-                                                (21*pow(s + x - z,2)*(-150*pow(l,9)*s - 600*pow(l,9)*z + 78*c*pow(l,12)*r*z + 792*pow(l,10)*pow(r,2)*z - 1320*pow(l,7)*s*pow(z,2) +
-                                                                        320*pow(l,7)*pow(z,3) - 88*c*pow(l,10)*r*pow(z,3) + 2460*pow(l,5)*s*pow(z,4) + 1440*pow(l,5)*pow(z,5) +
-                                                                        612*c*pow(l,8)*r*pow(z,5) - 2184*pow(l,6)*pow(r,2)*pow(z,5) - 360*pow(l,3)*s*pow(z,6) - 1440*pow(l,3)*pow(z,7) -
-                                                                        952*c*pow(l,6)*r*pow(z,7) + 2800*pow(l,4)*pow(r,2)*pow(z,7) - 630*l*s*pow(z,8) + 280*l*pow(z,9) + 350*c*pow(l,4)*r*pow(z,9)))
-                                                /(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                (28*pow(s + x - z,3)*(54*pow(l,5) - 252*pow(l,3)*pow(z,2) - 42*l*pow(z,4))*
-                                                 (-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
-                                                  12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
-                                                  50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
-                                                  76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
-                                                  35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) +
-                                                (168*pow(s + x - z,3)*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
-                                                                         12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
-                                                                         50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
-                                                                         76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
-                                                                         35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
-                                                (pow(l,4)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                (140*pow(s + x - z,3)*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
-                                                                         12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
-                                                                         50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
-                                                                         76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
-                                                                         35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
-                                                (pow(l,6)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                (7*pow(s + x - z,3)*(54*pow(l,5) - 252*pow(l,3)*pow(z,2) - 42*l*pow(z,4))*
-                                                 (-15*pow(l,10) - 165*pow(l,8)*pow(z,2) + 410*pow(l,6)*pow(z,4) - 90*pow(l,4)*pow(z,6) - 315*pow(l,2)*pow(z,8) +
-                                                  175*pow(z,10)))/(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*
-                                                                     pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) +
-                                                (42*pow(s + x - z,3)*(-15*pow(l,10) - 165*pow(l,8)*pow(z,2) + 410*pow(l,6)*pow(z,4) - 90*pow(l,4)*pow(z,6) -
-                                                                        315*pow(l,2)*pow(z,8) + 175*pow(z,10)))/
-                                                (pow(l,4)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                (35*pow(s + x - z,3)*(-15*pow(l,10) - 165*pow(l,8)*pow(z,2) + 410*pow(l,6)*pow(z,4) - 90*pow(l,4)*pow(z,6) -
-                                                                        315*pow(l,2)*pow(z,8) + 175*pow(z,10)))/
-                                                (pow(l,6)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                (21*pow(s + x - z,2)*(54*pow(l,5) - 252*pow(l,3)*pow(z,2) - 42*l*pow(z,4))*
-                                                 (-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
-                                                  40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
-                                                  68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
-                                                  136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
-                                                  70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) +
-                                                (126*pow(s + x - z,2)*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
-                                                                         40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
-                                                                         68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
-                                                                         136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
-                                                                         70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
-                                                (pow(l,4)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                (105*pow(s + x - z,2)*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
-                                                                         40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
-                                                                         68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
-                                                                         136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
-                                                                         70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
-                                                (pow(l,6)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                (2*(s + x - z)*((-16*l*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),3) - (2*l*pow(r,2))/pow(pow(l,2) - pow(z,2),2)))/
-                                                (pow(l,2) - pow(z,2)) - (4*l*(s + x - z)*(c*r + (4*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),2) +
-                                                                                              pow(r,2)/(pow(l,2) - pow(z,2))))/pow(pow(l,2) - pow(z,2),2)) -
-                 2*(s + x)*((-8*l*pow(r,2)*(s + x - z)*z)/pow(pow(l,2) - pow(z,2),3) - (2*l*pow(r,2))/pow(pow(l,2) - pow(z,2),2) -
-                            (7*pow(s + x - z,4)*(-150*pow(l,9) + 39*c*pow(l,12)*r + 198*pow(l,10)*pow(r,2) - 840*pow(l,7)*s*z - 480*pow(l,7)*pow(z,2) -
-                                                   132*c*pow(l,10)*r*pow(z,2) + 810*pow(l,8)*pow(r,2)*pow(z,2) + 840*pow(l,5)*s*pow(z,3) + 1620*pow(l,5)*pow(z,4) +
-                                                   450*c*pow(l,8)*r*pow(z,4) - 2310*pow(l,6)*pow(r,2)*pow(z,4) + 840*pow(l,3)*s*pow(z,5) - 1200*pow(l,3)*pow(z,6) -
-                                                   532*c*pow(l,6)*r*pow(z,6) + 1750*pow(l,4)*pow(r,2)*pow(z,6) - 840*l*s*pow(z,7) + 210*l*pow(z,8) + 175*c*pow(l,4)*r*pow(z,8)))
-                            /(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
-                            (7*pow(s + x - z,3)*(-150*pow(l,9)*s - 600*pow(l,9)*z + 78*c*pow(l,12)*r*z + 792*pow(l,10)*pow(r,2)*z - 1320*pow(l,7)*s*pow(z,2) +
-                                                   320*pow(l,7)*pow(z,3) - 88*c*pow(l,10)*r*pow(z,3) + 2460*pow(l,5)*s*pow(z,4) + 1440*pow(l,5)*pow(z,5) +
-                                                   612*c*pow(l,8)*r*pow(z,5) - 2184*pow(l,6)*pow(r,2)*pow(z,5) - 360*pow(l,3)*s*pow(z,6) - 1440*pow(l,3)*pow(z,7) -
-                                                   952*c*pow(l,6)*r*pow(z,7) + 2800*pow(l,4)*pow(r,2)*pow(z,7) - 630*l*s*pow(z,8) + 280*l*pow(z,9) + 350*c*pow(l,4)*r*pow(z,9)))
-                            /(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                            (7*pow(s + x - z,4)*(54*pow(l,5) - 252*pow(l,3)*pow(z,2) - 42*l*pow(z,4))*
-                             (-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
-                              12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
-                              50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
-                              76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
-                              35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
-                            (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) +
-                            (42*pow(s + x - z,4)*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
-                                                    12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
-                                                    50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
-                                                    76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
-                                                    35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
-                            (pow(l,4)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                            (35*pow(s + x - z,4)*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
-                                                    12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
-                                                    50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
-                                                    76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
-                                                    35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
-                            (pow(l,6)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                            (7*pow(s + x - z,3)*(54*pow(l,5) - 252*pow(l,3)*pow(z,2) - 42*l*pow(z,4))*
-                             (-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
-                              40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
-                              68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
-                              136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
-                              70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
-                            (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) +
-                            (42*pow(s + x - z,3)*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
-                                                    40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
-                                                    68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
-                                                    136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
-                                                    70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
-                            (pow(l,4)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                            (35*pow(s + x - z,3)*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
-                                                    40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
-                                                    68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
-                                                    136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
-                                                    70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
-                            (pow(l,6)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                            (pow(s + x - z,2)*((-16*l*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),3) - (2*l*pow(r,2))/pow(pow(l,2) - pow(z,2),2)))/
-                            (pow(l,2) - pow(z,2)) - (2*l*pow(s + x - z,2)*(c*r + (4*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),2) +
-                                                                                 pow(r,2)/(pow(l,2) - pow(z,2))))/pow(pow(l,2) - pow(z,2),2)) +
-                 2*l*((2*pow(r,2)*z)/pow(pow(l,2) - pow(z,2),2) - (7*pow(s + x - z,4)*
-                                                                           (-105*pow(l,8)*z + 140*pow(l,6)*pow(z,3) + 210*pow(l,4)*pow(z,5) - 420*pow(l,2)*pow(z,7) + 175*pow(z,9)))/
-                                                                          (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
-                      (28*pow(s + x - z,3)*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
-                                              12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
-                                              50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
-                                              76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
-                                              35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
-                      (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
-                      (7*pow(s + x - z,3)*(-15*pow(l,10) - 165*pow(l,8)*pow(z,2) + 410*pow(l,6)*pow(z,4) - 90*pow(l,4)*pow(z,6) -
-                                             315*pow(l,2)*pow(z,8) + 175*pow(z,10)))/
-                      (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
-                      (21*pow(s + x - z,2)*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
-                                              40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
-                                              68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
-                                              136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
-                                              70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
-                      (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                      (2*(s + x - z)*(c*r + (4*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),2) + pow(r,2)/(pow(l,2) - pow(z,2))))/(pow(l,2) - pow(z,2)));
-    }
-    else if (label_i=='r'&&label_j=='r'){
-        result = (pow(l,2) - pow(s + x,2))*((4*(s + x - z)*z)/pow(pow(l,2) - pow(z,2),2) + 2/(pow(l,2) - pow(z,2)) -
-                                                (7*pow(s + x - z,4)*(36*pow(l,11) + 180*pow(l,9)*pow(z,2) - 660*pow(l,7)*pow(z,4) + 700*pow(l,5)*pow(z,6)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
-                                                (7*pow(s + x - z,3)*(144*pow(l,11)*z - 624*pow(l,7)*pow(z,5) + 1120*pow(l,5)*pow(z,7)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                (pow(s + x - z,2)*((8*pow(z,2))/pow(pow(l,2) - pow(z,2),2) + 2/(pow(l,2) - pow(z,2))))/(pow(l,2) - pow(z,2)));
-    }
-    else if(label_i=='r'&&label_j=='z'){
-        result = (pow(l,2) - pow(s + x,2))*((16*r*(s + x - z)*pow(z,2))/pow(pow(l,2) - pow(z,2),3) + (4*r*(s + x - z))/pow(pow(l,2) - pow(z,2),2) -
-                                                (7*pow(s + x - z,4)*(-24*c*pow(l,11)*z + 360*pow(l,9)*r*z + 200*c*pow(l,9)*pow(z,3) - 2640*pow(l,7)*r*pow(z,3) -
-                                                                       456*c*pow(l,7)*pow(z,5) + 4200*pow(l,5)*r*pow(z,5) + 280*c*pow(l,5)*pow(z,7)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                (7*pow(s + x - z,4)*(-126*pow(l,4)*z - 84*pow(l,2)*pow(z,3) - 1470*pow(z,5))*
-                                                 (3*c*pow(l,13) + 36*pow(l,11)*r - 12*c*pow(l,11)*pow(z,2) + 180*pow(l,9)*r*pow(z,2) + 50*c*pow(l,9)*pow(z,4) -
-                                                  660*pow(l,7)*r*pow(z,4) - 76*c*pow(l,7)*pow(z,6) + 700*pow(l,5)*r*pow(z,6) + 35*c*pow(l,5)*pow(z,8)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) -
-                                                (42*pow(s + x - z,4)*z*(3*c*pow(l,13) + 36*pow(l,11)*r - 12*c*pow(l,11)*pow(z,2) + 180*pow(l,9)*r*pow(z,2) +
-                                                                          50*c*pow(l,9)*pow(z,4) - 660*pow(l,7)*r*pow(z,4) - 76*c*pow(l,7)*pow(z,6) + 700*pow(l,5)*r*pow(z,6) + 35*c*pow(l,5)*pow(z,8)
-                                                ))/(pow(l,5)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                (28*pow(s + x - z,3)*(3*c*pow(l,13) + 36*pow(l,11)*r - 12*c*pow(l,11)*pow(z,2) + 180*pow(l,9)*r*pow(z,2) +
-                                                                        50*c*pow(l,9)*pow(z,4) - 660*pow(l,7)*r*pow(z,4) - 76*c*pow(l,7)*pow(z,6) + 700*pow(l,5)*r*pow(z,6) + 35*c*pow(l,5)*pow(z,8)
-                                                ))/(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
-                                                (7*pow(s + x - z,3)*(6*c*pow(l,13) + 144*pow(l,11)*r - 24*c*pow(l,11)*pow(z,2) + 340*c*pow(l,9)*pow(z,4) -
-                                                                       3120*pow(l,7)*r*pow(z,4) - 952*c*pow(l,7)*pow(z,6) + 7840*pow(l,5)*r*pow(z,6) + 630*c*pow(l,5)*pow(z,8)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                (7*pow(s + x - z,3)*(-126*pow(l,4)*z - 84*pow(l,2)*pow(z,3) - 1470*pow(z,5))*
-                                                 (6*c*pow(l,13)*z + 144*pow(l,11)*r*z - 8*c*pow(l,11)*pow(z,3) + 68*c*pow(l,9)*pow(z,5) - 624*pow(l,7)*r*pow(z,5) -
-                                                  136*c*pow(l,7)*pow(z,7) + 1120*pow(l,5)*r*pow(z,7) + 70*c*pow(l,5)*pow(z,9)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) -
-                                                (42*pow(s + x - z,3)*z*(6*c*pow(l,13)*z + 144*pow(l,11)*r*z - 8*c*pow(l,11)*pow(z,3) + 68*c*pow(l,9)*pow(z,5) -
-                                                                          624*pow(l,7)*r*pow(z,5) - 136*c*pow(l,7)*pow(z,7) + 1120*pow(l,5)*r*pow(z,7) + 70*c*pow(l,5)*pow(z,9)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                (21*pow(s + x - z,2)*(6*c*pow(l,13)*z + 144*pow(l,11)*r*z - 8*c*pow(l,11)*pow(z,3) + 68*c*pow(l,9)*pow(z,5) -
-                                                                        624*pow(l,7)*r*pow(z,5) - 136*c*pow(l,7)*pow(z,7) + 1120*pow(l,5)*r*pow(z,7) + 70*c*pow(l,5)*pow(z,9)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                (pow(s + x - z,2)*((32*r*pow(z,3))/pow(pow(l,2) - pow(z,2),3) + (20*r*z)/pow(pow(l,2) - pow(z,2),2)))/(pow(l,2) - pow(z,2)) +
-                                                (2*pow(s + x - z,2)*z*(c + (8*r*pow(z,2))/pow(pow(l,2) - pow(z,2),2) + (2*r)/(pow(l,2) - pow(z,2))))/
-                                                pow(pow(l,2) - pow(z,2),2) - (2*(s + x - z)*(c + (8*r*pow(z,2))/pow(pow(l,2) - pow(z,2),2) + (2*r)/(pow(l,2) - pow(z,2))))/
-                                                                                   (pow(l,2) - pow(z,2)));
-    }
-    else if (label_i=='r'&&label_j=='c'){
-        result = (pow(l,2) - pow(s + x,2))*(pow(s + x - z,2)/(pow(l,2) - pow(z,2)) -
-                                                (7*pow(s + x - z,4)*(3*pow(l,13) - 12*pow(l,11)*pow(z,2) + 50*pow(l,9)*pow(z,4) - 76*pow(l,7)*pow(z,6) + 35*pow(l,5)*pow(z,8)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
-                                                (7*pow(s + x - z,3)*(6*pow(l,13)*z - 8*pow(l,11)*pow(z,3) + 68*pow(l,9)*pow(z,5) - 136*pow(l,7)*pow(z,7) +
-                                                                       70*pow(l,5)*pow(z,9)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))));
-    }
-    else if (label_i=='r'&&label_j=='s'){
-        result = (pow(l,2) - pow(s + x,2))*((4*r*z)/pow(pow(l,2) - pow(z,2),2) -
-                                                (28*pow(s + x - z,3)*(3*c*pow(l,13) + 36*pow(l,11)*r - 12*c*pow(l,11)*pow(z,2) + 180*pow(l,9)*r*pow(z,2) +
-                                                                        50*c*pow(l,9)*pow(z,4) - 660*pow(l,7)*r*pow(z,4) - 76*c*pow(l,7)*pow(z,6) + 700*pow(l,5)*r*pow(z,6) +
-                                                                        35*c*pow(l,5)*pow(z,8)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
-                                                (21*pow(s + x - z,2)*(6*c*pow(l,13)*z + 144*pow(l,11)*r*z - 8*c*pow(l,11)*pow(z,3) + 68*c*pow(l,9)*pow(z,5) -
-                                                                        624*pow(l,7)*r*pow(z,5) - 136*c*pow(l,7)*pow(z,7) + 1120*pow(l,5)*r*pow(z,7) + 70*c*pow(l,5)*pow(z,9)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                (2*(s + x - z)*(c + (8*r*pow(z,2))/pow(pow(l,2) - pow(z,2),2) + (2*r)/(pow(l,2) - pow(z,2))))/(pow(l,2) - pow(z,2))) -
-                 2*(s + x)*((4*r*(s + x - z)*z)/pow(pow(l,2) - pow(z,2),2) + (2*r)/(pow(l,2) - pow(z,2)) -
-                            (7*pow(s + x - z,4)*(3*c*pow(l,13) + 36*pow(l,11)*r - 12*c*pow(l,11)*pow(z,2) + 180*pow(l,9)*r*pow(z,2) +
-                                                   50*c*pow(l,9)*pow(z,4) - 660*pow(l,7)*r*pow(z,4) - 76*c*pow(l,7)*pow(z,6) + 700*pow(l,5)*r*pow(z,6) +
-                                                   35*c*pow(l,5)*pow(z,8)))/
-                            (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
-                            (7*pow(s + x - z,3)*(6*c*pow(l,13)*z + 144*pow(l,11)*r*z - 8*c*pow(l,11)*pow(z,3) + 68*c*pow(l,9)*pow(z,5) -
-                                                   624*pow(l,7)*r*pow(z,5) - 136*c*pow(l,7)*pow(z,7) + 1120*pow(l,5)*r*pow(z,7) + 70*c*pow(l,5)*pow(z,9)))/
-                            (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                            (pow(s + x - z,2)*(c + (8*r*pow(z,2))/pow(pow(l,2) - pow(z,2),2) + (2*r)/(pow(l,2) - pow(z,2))))/(pow(l,2) - pow(z,2)));
-    }
-    else if (label_i=='z'&&label_j=='z'){
-        result = (pow(l,2) - pow(s + x,2))*((48*pow(r,2)*(s + x - z)*pow(z,3))/pow(pow(l,2) - pow(z,2),4) +
-                                                (24*pow(r,2)*(s + x - z)*z)/pow(pow(l,2) - pow(z,2),3) - (8*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),3) -
-                                                (2*pow(r,2))/pow(pow(l,2) - pow(z,2),2) - (7*pow(s + x - z,4)*
-                                                                                                   (-120*pow(l,8) - 24*c*pow(l,11)*r + 180*pow(l,9)*pow(r,2) + 840*pow(l,6)*s*z + 3240*pow(l,6)*pow(z,2) +
-                                                                                                    600*c*pow(l,9)*r*pow(z,2) - 3960*pow(l,7)*pow(r,2)*pow(z,2) + 4200*pow(l,4)*s*pow(z,3) - 9000*pow(l,4)*pow(z,4) -
-                                                                                                    2280*c*pow(l,7)*r*pow(z,4) + 10500*pow(l,5)*pow(r,2)*pow(z,4) - 17640*pow(l,2)*s*pow(z,5) + 5880*pow(l,2)*pow(z,6) +
-                                                                                                    1960*c*pow(l,5)*r*pow(z,6) + 12600*s*pow(z,7)))/
-                                                                                                  (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                (14*pow(s + x - z,4)*(-126*pow(l,4)*z - 84*pow(l,2)*pow(z,3) - 1470*pow(z,5))*
-                                                 (-105*pow(l,8)*s - 120*pow(l,8)*z - 24*c*pow(l,11)*r*z + 180*pow(l,9)*pow(r,2)*z + 420*pow(l,6)*s*pow(z,2) +
-                                                  1080*pow(l,6)*pow(z,3) + 200*c*pow(l,9)*r*pow(z,3) - 1320*pow(l,7)*pow(r,2)*pow(z,3) + 1050*pow(l,4)*s*pow(z,4) -
-                                                  1800*pow(l,4)*pow(z,5) - 456*c*pow(l,7)*r*pow(z,5) + 2100*pow(l,5)*pow(r,2)*pow(z,5) - 2940*pow(l,2)*s*pow(z,6) +
-                                                  840*pow(l,2)*pow(z,7) + 280*c*pow(l,5)*r*pow(z,7) + 1575*s*pow(z,8)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) -
-                                                (84*pow(s + x - z,4)*z*(-105*pow(l,8)*s - 120*pow(l,8)*z - 24*c*pow(l,11)*r*z + 180*pow(l,9)*pow(r,2)*z + 420*pow(l,6)*s*pow(z,2) +
-                                                                          1080*pow(l,6)*pow(z,3) + 200*c*pow(l,9)*r*pow(z,3) - 1320*pow(l,7)*pow(r,2)*pow(z,3) + 1050*pow(l,4)*s*pow(z,4) -
-                                                                          1800*pow(l,4)*pow(z,5) - 456*c*pow(l,7)*r*pow(z,5) + 2100*pow(l,5)*pow(r,2)*pow(z,5) - 2940*pow(l,2)*s*pow(z,6) +
-                                                                          840*pow(l,2)*pow(z,7) + 280*c*pow(l,5)*r*pow(z,7) + 1575*s*pow(z,8)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                (56*pow(s + x - z,3)*(-105*pow(l,8)*s - 120*pow(l,8)*z - 24*c*pow(l,11)*r*z + 180*pow(l,9)*pow(r,2)*z + 420*pow(l,6)*s*pow(z,2) +
-                                                                        1080*pow(l,6)*pow(z,3) + 200*c*pow(l,9)*r*pow(z,3) - 1320*pow(l,7)*pow(r,2)*pow(z,3) + 1050*pow(l,4)*s*pow(z,4) -
-                                                                        1800*pow(l,4)*pow(z,5) - 456*c*pow(l,7)*r*pow(z,5) + 2100*pow(l,5)*pow(r,2)*pow(z,5) - 2940*pow(l,2)*s*pow(z,6) +
-                                                                        840*pow(l,2)*pow(z,7) + 280*c*pow(l,5)*r*pow(z,7) + 1575*s*pow(z,8)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
-                                                (7*pow(s + x - z,3)*(-330*pow(l,8)*s + 240*pow(l,8)*z - 48*c*pow(l,11)*r*z + 4920*pow(l,6)*s*pow(z,2) + 4800*pow(l,6)*pow(z,3) +
-                                                                       1360*c*pow(l,9)*r*pow(z,3) - 6240*pow(l,7)*pow(r,2)*pow(z,3) - 2700*pow(l,4)*s*pow(z,4) - 15120*pow(l,4)*pow(z,5) -
-                                                                       5712*c*pow(l,7)*r*pow(z,5) + 23520*pow(l,5)*pow(r,2)*pow(z,5) - 17640*pow(l,2)*s*pow(z,6) + 10080*pow(l,2)*pow(z,7) +
-                                                                       5040*c*pow(l,5)*r*pow(z,7) + 15750*s*pow(z,8)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
-                                                (14*pow(s + x - z,4)*pow(-126*pow(l,4)*z - 84*pow(l,2)*pow(z,3) - 1470*pow(z,5),2)*
-                                                 (-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
-                                                  12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
-                                                  50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
-                                                  76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
-                                                  35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),3)) +
-                                                (7*pow(s + x - z,4)*(-126*pow(l,4) - 252*pow(l,2)*pow(z,2) - 7350*pow(z,4))*
-                                                 (-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
-                                                  12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
-                                                  50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
-                                                  76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
-                                                  35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) +
-                                                (84*pow(s + x - z,4)*z*(-126*pow(l,4)*z - 84*pow(l,2)*pow(z,3) - 1470*pow(z,5))*
-                                                 (-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
-                                                  12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
-                                                  50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
-                                                  76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
-                                                  35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),4)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) -
-                                                (56*pow(s + x - z,3)*(-126*pow(l,4)*z - 84*pow(l,2)*pow(z,3) - 1470*pow(z,5))*
-                                                 (-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
-                                                  12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
-                                                  50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
-                                                  76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
-                                                  35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) -
-                                                (336*pow(s + x - z,4)*pow(z,2)*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z -
-                                                                                    60*pow(l,8)*pow(z,2) - 12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) +
-                                                                                    270*pow(l,6)*pow(z,4) + 50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) -
-                                                                                    300*pow(l,4)*pow(z,6) - 76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) +
-                                                                                    105*pow(l,2)*pow(z,8) + 35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),5)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
-                                                (42*pow(s + x - z,4)*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
-                                                                        12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
-                                                                        50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
-                                                                        76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
-                                                                        35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                (336*pow(s + x - z,3)*z*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
-                                                                           12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
-                                                                           50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
-                                                                           76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
-                                                                           35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
-                                                (84*pow(s + x - z,2)*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
-                                                                        12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
-                                                                        50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
-                                                                        76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
-                                                                        35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                (14*pow(s + x - z,3)*(-126*pow(l,4)*z - 84*pow(l,2)*pow(z,3) - 1470*pow(z,5))*
-                                                 (-60*pow(l,10) + 6*c*pow(l,13)*r + 72*pow(l,11)*pow(r,2) - 330*pow(l,8)*s*z + 120*pow(l,8)*pow(z,2) -
-                                                  24*c*pow(l,11)*r*pow(z,2) + 1640*pow(l,6)*s*pow(z,3) + 1200*pow(l,6)*pow(z,4) + 340*c*pow(l,9)*r*pow(z,4) -
-                                                  1560*pow(l,7)*pow(r,2)*pow(z,4) - 540*pow(l,4)*s*pow(z,5) - 2520*pow(l,4)*pow(z,6) - 952*c*pow(l,7)*r*pow(z,6) +
-                                                  3920*pow(l,5)*pow(r,2)*pow(z,6) - 2520*pow(l,2)*s*pow(z,7) + 1260*pow(l,2)*pow(z,8) + 630*c*pow(l,5)*r*pow(z,8) +
-                                                  1750*s*pow(z,9)))/(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*
-                                                                       pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) -
-                                                (84*pow(s + x - z,3)*z*(-60*pow(l,10) + 6*c*pow(l,13)*r + 72*pow(l,11)*pow(r,2) - 330*pow(l,8)*s*z + 120*pow(l,8)*pow(z,2) -
-                                                                          24*c*pow(l,11)*r*pow(z,2) + 1640*pow(l,6)*s*pow(z,3) + 1200*pow(l,6)*pow(z,4) + 340*c*pow(l,9)*r*pow(z,4) -
-                                                                          1560*pow(l,7)*pow(r,2)*pow(z,4) - 540*pow(l,4)*s*pow(z,5) - 2520*pow(l,4)*pow(z,6) - 952*c*pow(l,7)*r*pow(z,6) +
-                                                                          3920*pow(l,5)*pow(r,2)*pow(z,6) - 2520*pow(l,2)*s*pow(z,7) + 1260*pow(l,2)*pow(z,8) + 630*c*pow(l,5)*r*pow(z,8) +
-                                                                          1750*s*pow(z,9)))/(pow(l,5)*pow(pow(l,2) - pow(z,2),4)*
-                                                                                               (9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                (42*pow(s + x - z,2)*(-60*pow(l,10) + 6*c*pow(l,13)*r + 72*pow(l,11)*pow(r,2) - 330*pow(l,8)*s*z + 120*pow(l,8)*pow(z,2) -
-                                                                        24*c*pow(l,11)*r*pow(z,2) + 1640*pow(l,6)*s*pow(z,3) + 1200*pow(l,6)*pow(z,4) + 340*c*pow(l,9)*r*pow(z,4) -
-                                                                        1560*pow(l,7)*pow(r,2)*pow(z,4) - 540*pow(l,4)*s*pow(z,5) - 2520*pow(l,4)*pow(z,6) - 952*c*pow(l,7)*r*pow(z,6) +
-                                                                        3920*pow(l,5)*pow(r,2)*pow(z,6) - 2520*pow(l,2)*s*pow(z,7) + 1260*pow(l,2)*pow(z,8) + 630*c*pow(l,5)*r*pow(z,8) +
-                                                                        1750*s*pow(z,9)))/(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*
-                                                                                             (9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
-                                                (14*pow(s + x - z,3)*pow(-126*pow(l,4)*z - 84*pow(l,2)*pow(z,3) - 1470*pow(z,5),2)*
-                                                 (-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
-                                                  40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
-                                                  68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
-                                                  136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
-                                                  70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),3)) +
-                                                (7*pow(s + x - z,3)*(-126*pow(l,4) - 252*pow(l,2)*pow(z,2) - 7350*pow(z,4))*
-                                                 (-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
-                                                  40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
-                                                  68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
-                                                  136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
-                                                  70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) +
-                                                (84*pow(s + x - z,3)*z*(-126*pow(l,4)*z - 84*pow(l,2)*pow(z,3) - 1470*pow(z,5))*
-                                                 (-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
-                                                  40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
-                                                  68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
-                                                  136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
-                                                  70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),4)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) -
-                                                (42*pow(s + x - z,2)*(-126*pow(l,4)*z - 84*pow(l,2)*pow(z,3) - 1470*pow(z,5))*
-                                                 (-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
-                                                  40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
-                                                  68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
-                                                  136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
-                                                  70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) -
-                                                (336*pow(s + x - z,3)*pow(z,2)*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z -
-                                                                                    165*pow(l,8)*s*pow(z,2) + 40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) +
-                                                                                    240*pow(l,6)*pow(z,5) + 68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) -
-                                                                                    360*pow(l,4)*pow(z,7) - 136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) +
-                                                                                    140*pow(l,2)*pow(z,9) + 70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),5)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
-                                                (42*pow(s + x - z,3)*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
-                                                                        40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
-                                                                        68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
-                                                                        136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
-                                                                        70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                (252*pow(s + x - z,2)*z*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
-                                                                           40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
-                                                                           68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
-                                                                           136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
-                                                                           70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
-                                                (42*(s + x - z)*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
-                                                                 40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
-                                                                 68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
-                                                                 136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
-                                                                 70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                (pow(s + x - z,2)*((96*pow(r,2)*pow(z,4))/pow(pow(l,2) - pow(z,2),4) + (88*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),3) +
-                                                                     (10*pow(r,2))/pow(pow(l,2) - pow(z,2),2)))/(pow(l,2) - pow(z,2)) +
-                                                (4*pow(s + x - z,2)*z*((16*pow(r,2)*pow(z,3))/pow(pow(l,2) - pow(z,2),3) + (10*pow(r,2)*z)/pow(pow(l,2) - pow(z,2),2)))/
-                                                pow(pow(l,2) - pow(z,2),2) - (4*(s + x - z)*((16*pow(r,2)*pow(z,3))/pow(pow(l,2) - pow(z,2),3) +
-                                                                                                   (10*pow(r,2)*z)/pow(pow(l,2) - pow(z,2),2)))/(pow(l,2) - pow(z,2)) +
-                                                (8*pow(s + x - z,2)*pow(z,2)*(c*r + (4*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),2) + pow(r,2)/(pow(l,2) - pow(z,2))))/
-                                                pow(pow(l,2) - pow(z,2),3) + (2*pow(s + x - z,2)*
-                                                                                    (c*r + (4*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),2) + pow(r,2)/(pow(l,2) - pow(z,2))))/pow(pow(l,2) - pow(z,2),2) -
-                                                (8*(s + x - z)*z*(c*r + (4*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),2) + pow(r,2)/(pow(l,2) - pow(z,2))))/
-                                                pow(pow(l,2) - pow(z,2),2) + (2*(c*r + (4*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),2) + pow(r,2)/(pow(l,2) - pow(z,2))))/
-                                                                                   (pow(l,2) - pow(z,2)));
-    }
-    else if (label_i=='z'&&label_j=='c'){
-        result = (pow(l,2) - pow(s + x,2))*((2*r*pow(s + x - z,2)*z)/pow(pow(l,2) - pow(z,2),2) - (2*r*(s + x - z))/(pow(l,2) - pow(z,2)) -
-                                                (7*pow(s + x - z,4)*(-24*pow(l,11)*r*z + 200*pow(l,9)*r*pow(z,3) - 456*pow(l,7)*r*pow(z,5) + 280*pow(l,5)*r*pow(z,7)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                (7*pow(s + x - z,4)*(-126*pow(l,4)*z - 84*pow(l,2)*pow(z,3) - 1470*pow(z,5))*
-                                                 (3*pow(l,13)*r - 12*pow(l,11)*r*pow(z,2) + 50*pow(l,9)*r*pow(z,4) - 76*pow(l,7)*r*pow(z,6) + 35*pow(l,5)*r*pow(z,8)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) -
-                                                (42*pow(s + x - z,4)*z*(3*pow(l,13)*r - 12*pow(l,11)*r*pow(z,2) + 50*pow(l,9)*r*pow(z,4) - 76*pow(l,7)*r*pow(z,6) +
-                                                                          35*pow(l,5)*r*pow(z,8)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                (28*pow(s + x - z,3)*(3*pow(l,13)*r - 12*pow(l,11)*r*pow(z,2) + 50*pow(l,9)*r*pow(z,4) - 76*pow(l,7)*r*pow(z,6) +
-                                                                        35*pow(l,5)*r*pow(z,8)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
-                                                (7*pow(s + x - z,3)*(6*pow(l,13)*r - 24*pow(l,11)*r*pow(z,2) + 340*pow(l,9)*r*pow(z,4) - 952*pow(l,7)*r*pow(z,6) +
-                                                                       630*pow(l,5)*r*pow(z,8)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                (7*pow(s + x - z,3)*(-126*pow(l,4)*z - 84*pow(l,2)*pow(z,3) - 1470*pow(z,5))*
-                                                 (6*pow(l,13)*r*z - 8*pow(l,11)*r*pow(z,3) + 68*pow(l,9)*r*pow(z,5) - 136*pow(l,7)*r*pow(z,7) + 70*pow(l,5)*r*pow(z,9)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) -
-                                                (42*pow(s + x - z,3)*z*(6*pow(l,13)*r*z - 8*pow(l,11)*r*pow(z,3) + 68*pow(l,9)*r*pow(z,5) - 136*pow(l,7)*r*pow(z,7) +
-                                                                          70*pow(l,5)*r*pow(z,9)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                (21*pow(s + x - z,2)*(6*pow(l,13)*r*z - 8*pow(l,11)*r*pow(z,3) + 68*pow(l,9)*r*pow(z,5) - 136*pow(l,7)*r*pow(z,7) +
-                                                                        70*pow(l,5)*r*pow(z,9)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))));
-    }
-    else if (label_i=='z'&&label_j=='s'){
-        result = (pow(l,2) - pow(s + x,2))*((8*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),3) + (2*pow(r,2))/pow(pow(l,2) - pow(z,2),2) -
-                                                (7*pow(s + x - z,4)*(-105*pow(l,8) + 420*pow(l,6)*pow(z,2) + 1050*pow(l,4)*pow(z,4) - 2940*pow(l,2)*pow(z,6) + 1575*pow(z,8)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
-                                                (28*pow(s + x - z,3)*(-105*pow(l,8)*s - 120*pow(l,8)*z - 24*c*pow(l,11)*r*z + 180*pow(l,9)*pow(r,2)*z + 420*pow(l,6)*s*pow(z,2) +
-                                                                        1080*pow(l,6)*pow(z,3) + 200*c*pow(l,9)*r*pow(z,3) - 1320*pow(l,7)*pow(r,2)*pow(z,3) + 1050*pow(l,4)*s*pow(z,4) -
-                                                                        1800*pow(l,4)*pow(z,5) - 456*c*pow(l,7)*r*pow(z,5) + 2100*pow(l,5)*pow(r,2)*pow(z,5) - 2940*pow(l,2)*s*pow(z,6) +
-                                                                        840*pow(l,2)*pow(z,7) + 280*c*pow(l,5)*r*pow(z,7) + 1575*s*pow(z,8)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                (7*pow(s + x - z,4)*(-126*pow(l,4)*z - 84*pow(l,2)*pow(z,3) - 1470*pow(z,5))*
-                                                 (-105*pow(l,8)*z + 140*pow(l,6)*pow(z,3) + 210*pow(l,4)*pow(z,5) - 420*pow(l,2)*pow(z,7) + 175*pow(z,9)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) -
-                                                (42*pow(s + x - z,4)*z*(-105*pow(l,8)*z + 140*pow(l,6)*pow(z,3) + 210*pow(l,4)*pow(z,5) - 420*pow(l,2)*pow(z,7) + 175*pow(z,9)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                (28*pow(s + x - z,3)*(-105*pow(l,8)*z + 140*pow(l,6)*pow(z,3) + 210*pow(l,4)*pow(z,5) - 420*pow(l,2)*pow(z,7) + 175*pow(z,9)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
-                                                (7*pow(s + x - z,3)*(-330*pow(l,8)*z + 1640*pow(l,6)*pow(z,3) - 540*pow(l,4)*pow(z,5) - 2520*pow(l,2)*pow(z,7) + 1750*pow(z,9)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                (28*pow(s + x - z,3)*(-126*pow(l,4)*z - 84*pow(l,2)*pow(z,3) - 1470*pow(z,5))*
-                                                 (-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
-                                                  12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
-                                                  50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
-                                                  76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
-                                                  35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) -
-                                                (168*pow(s + x - z,3)*z*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
-                                                                           12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
-                                                                           50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
-                                                                           76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
-                                                                           35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                (84*pow(s + x - z,2)*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
-                                                                        12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
-                                                                        50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
-                                                                        76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
-                                                                        35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
-                                                (21*pow(s + x - z,2)*(-60*pow(l,10) + 6*c*pow(l,13)*r + 72*pow(l,11)*pow(r,2) - 330*pow(l,8)*s*z + 120*pow(l,8)*pow(z,2) -
-                                                                        24*c*pow(l,11)*r*pow(z,2) + 1640*pow(l,6)*s*pow(z,3) + 1200*pow(l,6)*pow(z,4) + 340*c*pow(l,9)*r*pow(z,4) -
-                                                                        1560*pow(l,7)*pow(r,2)*pow(z,4) - 540*pow(l,4)*s*pow(z,5) - 2520*pow(l,4)*pow(z,6) - 952*c*pow(l,7)*r*pow(z,6) +
-                                                                        3920*pow(l,5)*pow(r,2)*pow(z,6) - 2520*pow(l,2)*s*pow(z,7) + 1260*pow(l,2)*pow(z,8) + 630*c*pow(l,5)*r*pow(z,8) +
-                                                                        1750*s*pow(z,9)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                (7*pow(s + x - z,3)*(-126*pow(l,4)*z - 84*pow(l,2)*pow(z,3) - 1470*pow(z,5))*
-                                                 (-15*pow(l,10) - 165*pow(l,8)*pow(z,2) + 410*pow(l,6)*pow(z,4) - 90*pow(l,4)*pow(z,6) - 315*pow(l,2)*pow(z,8) +
-                                                  175*pow(z,10)))/(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*
-                                                                     pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) -
-                                                (42*pow(s + x - z,3)*z*(-15*pow(l,10) - 165*pow(l,8)*pow(z,2) + 410*pow(l,6)*pow(z,4) - 90*pow(l,4)*pow(z,6) -
-                                                                          315*pow(l,2)*pow(z,8) + 175*pow(z,10)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                (21*pow(s + x - z,2)*(-15*pow(l,10) - 165*pow(l,8)*pow(z,2) + 410*pow(l,6)*pow(z,4) - 90*pow(l,4)*pow(z,6) -
-                                                                        315*pow(l,2)*pow(z,8) + 175*pow(z,10)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                (21*pow(s + x - z,2)*(-126*pow(l,4)*z - 84*pow(l,2)*pow(z,3) - 1470*pow(z,5))*
-                                                 (-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
-                                                  40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
-                                                  68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
-                                                  136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
-                                                  70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) -
-                                                (126*pow(s + x - z,2)*z*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
-                                                                           40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
-                                                                           68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
-                                                                           136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
-                                                                           70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                (42*(s + x - z)*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
-                                                                 40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
-                                                                 68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
-                                                                 136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
-                                                                 70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                (2*(s + x - z)*((16*pow(r,2)*pow(z,3))/pow(pow(l,2) - pow(z,2),3) + (10*pow(r,2)*z)/pow(pow(l,2) - pow(z,2),2)))/
-                                                (pow(l,2) - pow(z,2)) + (4*(s + x - z)*z*(c*r + (4*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),2) +
-                                                                                              pow(r,2)/(pow(l,2) - pow(z,2))))/pow(pow(l,2) - pow(z,2),2) -
-                                                (2*(c*r + (4*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),2) + pow(r,2)/(pow(l,2) - pow(z,2))))/(pow(l,2) - pow(z,2))) -
-                 2*(s + x)*((8*pow(r,2)*(s + x - z)*pow(z,2))/pow(pow(l,2) - pow(z,2),3) + (2*pow(r,2)*(s + x - z))/pow(pow(l,2) - pow(z,2),2) -
-                            (7*pow(s + x - z,4)*(-105*pow(l,8)*s - 120*pow(l,8)*z - 24*c*pow(l,11)*r*z + 180*pow(l,9)*pow(r,2)*z + 420*pow(l,6)*s*pow(z,2) +
-                                                   1080*pow(l,6)*pow(z,3) + 200*c*pow(l,9)*r*pow(z,3) - 1320*pow(l,7)*pow(r,2)*pow(z,3) + 1050*pow(l,4)*s*pow(z,4) -
-                                                   1800*pow(l,4)*pow(z,5) - 456*c*pow(l,7)*r*pow(z,5) + 2100*pow(l,5)*pow(r,2)*pow(z,5) - 2940*pow(l,2)*s*pow(z,6) +
-                                                   840*pow(l,2)*pow(z,7) + 280*c*pow(l,5)*r*pow(z,7) + 1575*s*pow(z,8)))/
-                            (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                            (7*pow(s + x - z,4)*(-126*pow(l,4)*z - 84*pow(l,2)*pow(z,3) - 1470*pow(z,5))*
-                             (-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
-                              12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
-                              50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
-                              76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
-                              35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
-                            (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) -
-                            (42*pow(s + x - z,4)*z*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
-                                                      12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
-                                                      50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
-                                                      76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
-                                                      35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
-                            (pow(l,5)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                            (28*pow(s + x - z,3)*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
-                                                    12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
-                                                    50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
-                                                    76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
-                                                    35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
-                            (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
-                            (7*pow(s + x - z,3)*(-60*pow(l,10) + 6*c*pow(l,13)*r + 72*pow(l,11)*pow(r,2) - 330*pow(l,8)*s*z + 120*pow(l,8)*pow(z,2) -
-                                                   24*c*pow(l,11)*r*pow(z,2) + 1640*pow(l,6)*s*pow(z,3) + 1200*pow(l,6)*pow(z,4) + 340*c*pow(l,9)*r*pow(z,4) -
-                                                   1560*pow(l,7)*pow(r,2)*pow(z,4) - 540*pow(l,4)*s*pow(z,5) - 2520*pow(l,4)*pow(z,6) - 952*c*pow(l,7)*r*pow(z,6) +
-                                                   3920*pow(l,5)*pow(r,2)*pow(z,6) - 2520*pow(l,2)*s*pow(z,7) + 1260*pow(l,2)*pow(z,8) + 630*c*pow(l,5)*r*pow(z,8) +
-                                                   1750*s*pow(z,9)))/
-                            (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                            (7*pow(s + x - z,3)*(-126*pow(l,4)*z - 84*pow(l,2)*pow(z,3) - 1470*pow(z,5))*
-                             (-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
-                              40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
-                              68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
-                              136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
-                              70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
-                            (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) -
-                            (42*pow(s + x - z,3)*z*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
-                                                      40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
-                                                      68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
-                                                      136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
-                                                      70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
-                            (pow(l,5)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                            (21*pow(s + x - z,2)*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
-                                                    40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
-                                                    68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
-                                                    136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
-                                                    70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
-                            (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                            (pow(s + x - z,2)*((16*pow(r,2)*pow(z,3))/pow(pow(l,2) - pow(z,2),3) + (10*pow(r,2)*z)/pow(pow(l,2) - pow(z,2),2)))/
-                            (pow(l,2) - pow(z,2)) + (2*pow(s + x - z,2)*z*(c*r + (4*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),2) +
-                                                                                 pow(r,2)/(pow(l,2) - pow(z,2))))/pow(pow(l,2) - pow(z,2),2) -
-                            (2*(s + x - z)*(c*r + (4*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),2) + pow(r,2)/(pow(l,2) - pow(z,2))))/(pow(l,2) - pow(z,2)));
-    }
-    else if (label_i=='c'&&label_j=='c'){
-        result = 0.;
-    }
-    else if (label_i=='c'&&label_j=='s'){
-        result = (pow(l,2) - pow(s + x,2))*((2*r*(s + x - z))/(pow(l,2) - pow(z,2)) -
-                                                (28*pow(s + x - z,3)*(3*pow(l,13)*r - 12*pow(l,11)*r*pow(z,2) + 50*pow(l,9)*r*pow(z,4) - 76*pow(l,7)*r*pow(z,6) +
-                                                                        35*pow(l,5)*r*pow(z,8)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
-                                                (21*pow(s + x - z,2)*(6*pow(l,13)*r*z - 8*pow(l,11)*r*pow(z,3) + 68*pow(l,9)*r*pow(z,5) - 136*pow(l,7)*r*pow(z,7) +
-                                                                        70*pow(l,5)*r*pow(z,9)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6)))) -
-                 2*(s + x)*((r*pow(s + x - z,2))/(pow(l,2) - pow(z,2)) -
-                            (7*pow(s + x - z,4)*(3*pow(l,13)*r - 12*pow(l,11)*r*pow(z,2) + 50*pow(l,9)*r*pow(z,4) - 76*pow(l,7)*r*pow(z,6) +
-                                                   35*pow(l,5)*r*pow(z,8)))/
-                            (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
-                            (7*pow(s + x - z,3)*(6*pow(l,13)*r*z - 8*pow(l,11)*r*pow(z,3) + 68*pow(l,9)*r*pow(z,5) - 136*pow(l,7)*r*pow(z,7) +
-                                                   70*pow(l,5)*r*pow(z,9)))/
-                            (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))));
-    }
-    else{
-        result = (pow(l,2) - pow(s + x,2))*((-56*pow(s + x - z,3)*(-105*pow(l,8)*z + 140*pow(l,6)*pow(z,3) + 210*pow(l,4)*pow(z,5) -
-                                                                         420*pow(l,2)*pow(z,7) + 175*pow(z,9)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
-                                                (84*pow(s + x - z,2)*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
-                                                                        12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
-                                                                        50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
-                                                                        76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
-                                                                        35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
-                                                (42*pow(s + x - z,2)*(-15*pow(l,10) - 165*pow(l,8)*pow(z,2) + 410*pow(l,6)*pow(z,4) - 90*pow(l,4)*pow(z,6) -
-                                                                        315*pow(l,2)*pow(z,8) + 175*pow(z,10)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
-                                                (42*(s + x - z)*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
-                                                                 40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
-                                                                 68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
-                                                                 136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
-                                                                 70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
-                                                (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                                                (2*(c*r + (4*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),2) + pow(r,2)/(pow(l,2) - pow(z,2))))/(pow(l,2) - pow(z,2))) -
-                 4*(s + x)*((2*pow(r,2)*z)/pow(pow(l,2) - pow(z,2),2) -
-                            (7*pow(s + x - z,4)*(-105*pow(l,8)*z + 140*pow(l,6)*pow(z,3) + 210*pow(l,4)*pow(z,5) - 420*pow(l,2)*pow(z,7) + 175*pow(z,9)))/
-                            (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
-                            (28*pow(s + x - z,3)*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
-                                                    12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
-                                                    50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
-                                                    76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
-                                                    35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
-                            (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
-                            (7*pow(s + x - z,3)*(-15*pow(l,10) - 165*pow(l,8)*pow(z,2) + 410*pow(l,6)*pow(z,4) - 90*pow(l,4)*pow(z,6) -
-                                                   315*pow(l,2)*pow(z,8) + 175*pow(z,10)))/
-                            (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
-                            (21*pow(s + x - z,2)*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
-                                                    40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
-                                                    68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
-                                                    136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
-                                                    70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
-                            (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                            (2*(s + x - z)*(c*r + (4*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),2) + pow(r,2)/(pow(l,2) - pow(z,2))))/(pow(l,2) - pow(z,2)))
-                 - 2*((2*pow(r,2)*(s + x - z)*z)/pow(pow(l,2) - pow(z,2),2) + pow(r,2)/(pow(l,2) - pow(z,2)) -
-                      (7*pow(s + x - z,4)*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
-                                             12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
-                                             50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
-                                             76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
-                                             35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
-                      (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
-                      (7*pow(s + x - z,3)*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
-                                             40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
-                                             68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
-                                             136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
-                                             70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
-                      (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
-                      (pow(s + x - z,2)*(c*r + (4*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),2) + pow(r,2)/(pow(l,2) - pow(z,2))))/
-                      (pow(l,2) - pow(z,2)));
-    }
-    return result;
-    }
+  double result;
+  double l = _para_l;
+  double r = _para_r;
+  double z = _para_z;
+  double c = _para_c;
+  double s = _para_s;
+  if (label_i=='x'&&label_j=='l'){
+    result = (pow(l,2) - pow(s + x,2))*((-8*l*pow(r,2)*z)/pow(pow(l,2) - pow(z,2),3) -
+					(28*pow(s + x - z,3)*(-150*pow(l,9) + 39*c*pow(l,12)*r + 198*pow(l,10)*pow(r,2) - 840*pow(l,7)*s*z - 480*pow(l,7)*pow(z,2) -
+							      132*c*pow(l,10)*r*pow(z,2) + 810*pow(l,8)*pow(r,2)*pow(z,2) + 840*pow(l,5)*s*pow(z,3) + 1620*pow(l,5)*pow(z,4) +
+							      450*c*pow(l,8)*r*pow(z,4) - 2310*pow(l,6)*pow(r,2)*pow(z,4) + 840*pow(l,3)*s*pow(z,5) - 1200*pow(l,3)*pow(z,6) -
+							      532*c*pow(l,6)*r*pow(z,6) + 1750*pow(l,4)*pow(r,2)*pow(z,6) - 840*l*s*pow(z,7) + 210*l*pow(z,8) + 175*c*pow(l,4)*r*pow(z,8)))
+					/(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
+					(21*pow(s + x - z,2)*(-150*pow(l,9)*s - 600*pow(l,9)*z + 78*c*pow(l,12)*r*z + 792*pow(l,10)*pow(r,2)*z - 1320*pow(l,7)*s*pow(z,2) +
+							      320*pow(l,7)*pow(z,3) - 88*c*pow(l,10)*r*pow(z,3) + 2460*pow(l,5)*s*pow(z,4) + 1440*pow(l,5)*pow(z,5) +
+							      612*c*pow(l,8)*r*pow(z,5) - 2184*pow(l,6)*pow(r,2)*pow(z,5) - 360*pow(l,3)*s*pow(z,6) - 1440*pow(l,3)*pow(z,7) -
+							      952*c*pow(l,6)*r*pow(z,7) + 2800*pow(l,4)*pow(r,2)*pow(z,7) - 630*l*s*pow(z,8) + 280*l*pow(z,9) + 350*c*pow(l,4)*r*pow(z,9)))
+					/(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+					(28*pow(s + x - z,3)*(54*pow(l,5) - 252*pow(l,3)*pow(z,2) - 42*l*pow(z,4))*
+					 (-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
+					  12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
+					  50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
+					  76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
+					  35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) +
+					(168*pow(s + x - z,3)*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
+							       12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
+							       50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
+							       76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
+							       35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
+					(pow(l,4)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+					(140*pow(s + x - z,3)*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
+							       12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
+							       50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
+							       76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
+							       35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
+					(pow(l,6)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+					(21*pow(s + x - z,2)*(54*pow(l,5) - 252*pow(l,3)*pow(z,2) - 42*l*pow(z,4))*
+					 (-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
+					  40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
+					  68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
+					  136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
+					  70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) +
+					(126*pow(s + x - z,2)*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
+							       40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
+							       68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
+							       136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
+							       70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
+					(pow(l,4)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+					(105*pow(s + x - z,2)*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
+							       40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
+							       68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
+							       136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
+							       70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
+					(pow(l,6)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+					(2*(s + x - z)*((-16*l*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),3) - (2*l*pow(r,2))/pow(pow(l,2) - pow(z,2),2)))/
+					(pow(l,2) - pow(z,2)) - (4*l*(s + x - z)*(c*r + (4*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),2) +
+										  pow(r,2)/(pow(l,2) - pow(z,2))))/pow(pow(l,2) - pow(z,2),2)) -
+      2*(s + x)*((-8*l*pow(r,2)*(s + x - z)*z)/pow(pow(l,2) - pow(z,2),3) - (2*l*pow(r,2))/pow(pow(l,2) - pow(z,2),2) -
+		 (7*pow(s + x - z,4)*(-150*pow(l,9) + 39*c*pow(l,12)*r + 198*pow(l,10)*pow(r,2) - 840*pow(l,7)*s*z - 480*pow(l,7)*pow(z,2) -
+				      132*c*pow(l,10)*r*pow(z,2) + 810*pow(l,8)*pow(r,2)*pow(z,2) + 840*pow(l,5)*s*pow(z,3) + 1620*pow(l,5)*pow(z,4) +
+				      450*c*pow(l,8)*r*pow(z,4) - 2310*pow(l,6)*pow(r,2)*pow(z,4) + 840*pow(l,3)*s*pow(z,5) - 1200*pow(l,3)*pow(z,6) -
+				      532*c*pow(l,6)*r*pow(z,6) + 1750*pow(l,4)*pow(r,2)*pow(z,6) - 840*l*s*pow(z,7) + 210*l*pow(z,8) + 175*c*pow(l,4)*r*pow(z,8)))
+		 /(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
+		 (7*pow(s + x - z,3)*(-150*pow(l,9)*s - 600*pow(l,9)*z + 78*c*pow(l,12)*r*z + 792*pow(l,10)*pow(r,2)*z - 1320*pow(l,7)*s*pow(z,2) +
+				      320*pow(l,7)*pow(z,3) - 88*c*pow(l,10)*r*pow(z,3) + 2460*pow(l,5)*s*pow(z,4) + 1440*pow(l,5)*pow(z,5) +
+				      612*c*pow(l,8)*r*pow(z,5) - 2184*pow(l,6)*pow(r,2)*pow(z,5) - 360*pow(l,3)*s*pow(z,6) - 1440*pow(l,3)*pow(z,7) -
+				      952*c*pow(l,6)*r*pow(z,7) + 2800*pow(l,4)*pow(r,2)*pow(z,7) - 630*l*s*pow(z,8) + 280*l*pow(z,9) + 350*c*pow(l,4)*r*pow(z,9)))
+		 /(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+		 (7*pow(s + x - z,4)*(54*pow(l,5) - 252*pow(l,3)*pow(z,2) - 42*l*pow(z,4))*
+		  (-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
+		   12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
+		   50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
+		   76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
+		   35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
+		 (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) +
+		 (42*pow(s + x - z,4)*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
+				       12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
+				       50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
+				       76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
+				       35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
+		 (pow(l,4)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+		 (35*pow(s + x - z,4)*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
+				       12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
+				       50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
+				       76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
+				       35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
+		 (pow(l,6)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+		 (7*pow(s + x - z,3)*(54*pow(l,5) - 252*pow(l,3)*pow(z,2) - 42*l*pow(z,4))*
+		  (-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
+		   40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
+		   68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
+		   136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
+		   70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
+		 (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) +
+		 (42*pow(s + x - z,3)*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
+				       40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
+				       68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
+				       136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
+				       70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
+		 (pow(l,4)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+		 (35*pow(s + x - z,3)*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
+				       40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
+				       68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
+				       136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
+				       70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
+		 (pow(l,6)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+		 (pow(s + x - z,2)*((-16*l*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),3) - (2*l*pow(r,2))/pow(pow(l,2) - pow(z,2),2)))/
+		 (pow(l,2) - pow(z,2)) - (2*l*pow(s + x - z,2)*(c*r + (4*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),2) +
+								pow(r,2)/(pow(l,2) - pow(z,2))))/pow(pow(l,2) - pow(z,2),2)) +
+      2*l*((2*pow(r,2)*z)/pow(pow(l,2) - pow(z,2),2) - (28*pow(s + x - z,3)*
+							(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
+							 12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
+							 50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
+							 76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
+							 35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
+	   (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
+	   (21*pow(s + x - z,2)*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
+				 40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
+				 68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
+				 136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
+				 70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
+	   (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+	   (2*(s + x - z)*(c*r + (4*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),2) + pow(r,2)/(pow(l,2) - pow(z,2))))/(pow(l,2) - pow(z,2)));
+  }
+  else if (label_i=='x' && label_j=='r'){
+    result = (pow(l,2) - pow(s + x,2))*((4*r*z)/pow(pow(l,2) - pow(z,2),2) -
+					(28*pow(s + x - z,3)*(3*c*pow(l,13) + 36*pow(l,11)*r - 12*c*pow(l,11)*pow(z,2) + 180*pow(l,9)*r*pow(z,2) +
+							      50*c*pow(l,9)*pow(z,4) - 660*pow(l,7)*r*pow(z,4) - 76*c*pow(l,7)*pow(z,6) + 700*pow(l,5)*r*pow(z,6) +
+							      35*c*pow(l,5)*pow(z,8)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
+					(21*pow(s + x - z,2)*(6*c*pow(l,13)*z + 144*pow(l,11)*r*z - 8*c*pow(l,11)*pow(z,3) + 68*c*pow(l,9)*pow(z,5) -
+							      624*pow(l,7)*r*pow(z,5) - 136*c*pow(l,7)*pow(z,7) + 1120*pow(l,5)*r*pow(z,7) + 70*c*pow(l,5)*pow(z,9)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+					(2*(s + x - z)*(c + (8*r*pow(z,2))/pow(pow(l,2) - pow(z,2),2) + (2*r)/(pow(l,2) - pow(z,2))))/(pow(l,2) - pow(z,2))) -
+      2*(s + x)*((4*r*(s + x - z)*z)/pow(pow(l,2) - pow(z,2),2) + (2*r)/(pow(l,2) - pow(z,2)) -
+		 (7*pow(s + x - z,4)*(3*c*pow(l,13) + 36*pow(l,11)*r - 12*c*pow(l,11)*pow(z,2) + 180*pow(l,9)*r*pow(z,2) +
+				      50*c*pow(l,9)*pow(z,4) - 660*pow(l,7)*r*pow(z,4) - 76*c*pow(l,7)*pow(z,6) + 700*pow(l,5)*r*pow(z,6) +
+				      35*c*pow(l,5)*pow(z,8)))/
+		 (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
+		 (7*pow(s + x - z,3)*(6*c*pow(l,13)*z + 144*pow(l,11)*r*z - 8*c*pow(l,11)*pow(z,3) + 68*c*pow(l,9)*pow(z,5) -
+				      624*pow(l,7)*r*pow(z,5) - 136*c*pow(l,7)*pow(z,7) + 1120*pow(l,5)*r*pow(z,7) + 70*c*pow(l,5)*pow(z,9)))/
+		 (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+		 (pow(s + x - z,2)*(c + (8*r*pow(z,2))/pow(pow(l,2) - pow(z,2),2) + (2*r)/(pow(l,2) - pow(z,2))))/(pow(l,2) - pow(z,2)));
+  }
+  else if (label_i=='x'&& label_j=='z'){
+    result = (pow(l,2) - pow(s + x,2))*((8*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),3) + (2*pow(r,2))/pow(pow(l,2) - pow(z,2),2) -
+					(28*pow(s + x - z,3)*(-105*pow(l,8)*s - 120*pow(l,8)*z - 24*c*pow(l,11)*r*z + 180*pow(l,9)*pow(r,2)*z + 420*pow(l,6)*s*pow(z,2) +
+							      1080*pow(l,6)*pow(z,3) + 200*c*pow(l,9)*r*pow(z,3) - 1320*pow(l,7)*pow(r,2)*pow(z,3) + 1050*pow(l,4)*s*pow(z,4) -
+							      1800*pow(l,4)*pow(z,5) - 456*c*pow(l,7)*r*pow(z,5) + 2100*pow(l,5)*pow(r,2)*pow(z,5) - 2940*pow(l,2)*s*pow(z,6) +
+							      840*pow(l,2)*pow(z,7) + 280*c*pow(l,5)*r*pow(z,7) + 1575*s*pow(z,8)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+					(28*pow(s + x - z,3)*(-126*pow(l,4)*z - 84*pow(l,2)*pow(z,3) - 1470*pow(z,5))*
+					 (-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
+					  12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
+					  50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
+					  76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
+					  35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) -
+					(168*pow(s + x - z,3)*z*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
+								 12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
+								 50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
+								 76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
+								 35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+					(84*pow(s + x - z,2)*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
+							      12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
+							      50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
+							      76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
+							      35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
+					(21*pow(s + x - z,2)*(-60*pow(l,10) + 6*c*pow(l,13)*r + 72*pow(l,11)*pow(r,2) - 330*pow(l,8)*s*z + 120*pow(l,8)*pow(z,2) -
+							      24*c*pow(l,11)*r*pow(z,2) + 1640*pow(l,6)*s*pow(z,3) + 1200*pow(l,6)*pow(z,4) + 340*c*pow(l,9)*r*pow(z,4) -
+							      1560*pow(l,7)*pow(r,2)*pow(z,4) - 540*pow(l,4)*s*pow(z,5) - 2520*pow(l,4)*pow(z,6) - 952*c*pow(l,7)*r*pow(z,6) +
+							      3920*pow(l,5)*pow(r,2)*pow(z,6) - 2520*pow(l,2)*s*pow(z,7) + 1260*pow(l,2)*pow(z,8) + 630*c*pow(l,5)*r*pow(z,8) +
+							      1750*s*pow(z,9)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+					(21*pow(s + x - z,2)*(-126*pow(l,4)*z - 84*pow(l,2)*pow(z,3) - 1470*pow(z,5))*
+					 (-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
+					  40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
+					  68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
+					  136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
+					  70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) -
+					(126*pow(s + x - z,2)*z*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
+								 40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
+								 68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
+								 136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
+								 70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+					(42*(s + x - z)*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
+							 40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
+							 68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
+							 136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
+							 70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+					(2*(s + x - z)*((16*pow(r,2)*pow(z,3))/pow(pow(l,2) - pow(z,2),3) + (10*pow(r,2)*z)/pow(pow(l,2) - pow(z,2),2)))/
+					(pow(l,2) - pow(z,2)) + (4*(s + x - z)*z*(c*r + (4*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),2) +
+										  pow(r,2)/(pow(l,2) - pow(z,2))))/pow(pow(l,2) - pow(z,2),2) -
+					(2*(c*r + (4*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),2) + pow(r,2)/(pow(l,2) - pow(z,2))))/(pow(l,2) - pow(z,2))) -
+      2*(s + x)*((8*pow(r,2)*(s + x - z)*pow(z,2))/pow(pow(l,2) - pow(z,2),3) + (2*pow(r,2)*(s + x - z))/pow(pow(l,2) - pow(z,2),2) -
+		 (7*pow(s + x - z,4)*(-105*pow(l,8)*s - 120*pow(l,8)*z - 24*c*pow(l,11)*r*z + 180*pow(l,9)*pow(r,2)*z + 420*pow(l,6)*s*pow(z,2) +
+				      1080*pow(l,6)*pow(z,3) + 200*c*pow(l,9)*r*pow(z,3) - 1320*pow(l,7)*pow(r,2)*pow(z,3) + 1050*pow(l,4)*s*pow(z,4) -
+				      1800*pow(l,4)*pow(z,5) - 456*c*pow(l,7)*r*pow(z,5) + 2100*pow(l,5)*pow(r,2)*pow(z,5) - 2940*pow(l,2)*s*pow(z,6) +
+				      840*pow(l,2)*pow(z,7) + 280*c*pow(l,5)*r*pow(z,7) + 1575*s*pow(z,8)))/
+		 (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+		 (7*pow(s + x - z,4)*(-126*pow(l,4)*z - 84*pow(l,2)*pow(z,3) - 1470*pow(z,5))*
+		  (-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
+		   12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
+		   50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
+		   76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
+		   35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
+		 (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) -
+		 (42*pow(s + x - z,4)*z*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
+					 12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
+					 50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
+					 76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
+					 35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
+		 (pow(l,5)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+		 (28*pow(s + x - z,3)*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
+				       12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
+				       50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
+				       76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
+				       35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
+		 (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
+		 (7*pow(s + x - z,3)*(-60*pow(l,10) + 6*c*pow(l,13)*r + 72*pow(l,11)*pow(r,2) - 330*pow(l,8)*s*z + 120*pow(l,8)*pow(z,2) -
+				      24*c*pow(l,11)*r*pow(z,2) + 1640*pow(l,6)*s*pow(z,3) + 1200*pow(l,6)*pow(z,4) + 340*c*pow(l,9)*r*pow(z,4) -
+				      1560*pow(l,7)*pow(r,2)*pow(z,4) - 540*pow(l,4)*s*pow(z,5) - 2520*pow(l,4)*pow(z,6) - 952*c*pow(l,7)*r*pow(z,6) +
+				      3920*pow(l,5)*pow(r,2)*pow(z,6) - 2520*pow(l,2)*s*pow(z,7) + 1260*pow(l,2)*pow(z,8) + 630*c*pow(l,5)*r*pow(z,8) +
+				      1750*s*pow(z,9)))/
+		 (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+		 (7*pow(s + x - z,3)*(-126*pow(l,4)*z - 84*pow(l,2)*pow(z,3) - 1470*pow(z,5))*
+		  (-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
+		   40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
+		   68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
+		   136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
+		   70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
+		 (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) -
+		 (42*pow(s + x - z,3)*z*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
+					 40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
+					 68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
+					 136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
+					 70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
+		 (pow(l,5)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+		 (21*pow(s + x - z,2)*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
+				       40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
+				       68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
+				       136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
+				       70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
+		 (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+		 (pow(s + x - z,2)*((16*pow(r,2)*pow(z,3))/pow(pow(l,2) - pow(z,2),3) + (10*pow(r,2)*z)/pow(pow(l,2) - pow(z,2),2)))/
+		 (pow(l,2) - pow(z,2)) + (2*pow(s + x - z,2)*z*(c*r + (4*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),2) +
+								pow(r,2)/(pow(l,2) - pow(z,2))))/pow(pow(l,2) - pow(z,2),2) -
+		 (2*(s + x - z)*(c*r + (4*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),2) + pow(r,2)/(pow(l,2) - pow(z,2))))/(pow(l,2) - pow(z,2)));
+  }
+  else if (label_i=='x'&&label_j=='c'){
+    result = (pow(l,2) - pow(s + x,2))*((2*r*(s + x - z))/(pow(l,2) - pow(z,2)) -
+					(28*pow(s + x - z,3)*(3*pow(l,13)*r - 12*pow(l,11)*r*pow(z,2) + 50*pow(l,9)*r*pow(z,4) - 76*pow(l,7)*r*pow(z,6) +
+							      35*pow(l,5)*r*pow(z,8)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
+					(21*pow(s + x - z,2)*(6*pow(l,13)*r*z - 8*pow(l,11)*r*pow(z,3) + 68*pow(l,9)*r*pow(z,5) - 136*pow(l,7)*r*pow(z,7) +
+							      70*pow(l,5)*r*pow(z,9)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6)))) -
+      2*(s + x)*((r*pow(s + x - z,2))/(pow(l,2) - pow(z,2)) -
+		 (7*pow(s + x - z,4)*(3*pow(l,13)*r - 12*pow(l,11)*r*pow(z,2) + 50*pow(l,9)*r*pow(z,4) - 76*pow(l,7)*r*pow(z,6) +
+				      35*pow(l,5)*r*pow(z,8)))/
+		 (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
+		 (7*pow(s + x - z,3)*(6*pow(l,13)*r*z - 8*pow(l,11)*r*pow(z,3) + 68*pow(l,9)*r*pow(z,5) - 136*pow(l,7)*r*pow(z,7) +
+				      70*pow(l,5)*r*pow(z,9)))/
+		 (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))));
+  }
+  else if (label_i=='x'&& label_j=='s'){
+    result = (pow(l,2) - pow(s + x,2))*((-28*pow(s + x - z,3)*(-105*pow(l,8)*z + 140*pow(l,6)*pow(z,3) + 210*pow(l,4)*pow(z,5) -
+							       420*pow(l,2)*pow(z,7) + 175*pow(z,9)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
+					(84*pow(s + x - z,2)*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
+							      12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
+							      50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
+							      76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
+							      35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
+					(21*pow(s + x - z,2)*(-15*pow(l,10) - 165*pow(l,8)*pow(z,2) + 410*pow(l,6)*pow(z,4) - 90*pow(l,4)*pow(z,6) -
+							      315*pow(l,2)*pow(z,8) + 175*pow(z,10)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
+					(42*(s + x - z)*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
+							 40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
+							 68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
+							 136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
+							 70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+					(2*(c*r + (4*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),2) + pow(r,2)/(pow(l,2) - pow(z,2))))/(pow(l,2) - pow(z,2))) -
+      2*(s + x)*((2*pow(r,2)*z)/pow(pow(l,2) - pow(z,2),2) -
+		 (28*pow(s + x - z,3)*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
+				       12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
+				       50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
+				       76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
+				       35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
+		 (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
+		 (21*pow(s + x - z,2)*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
+				       40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
+				       68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
+				       136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
+				       70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
+		 (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+		 (2*(s + x - z)*(c*r + (4*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),2) + pow(r,2)/(pow(l,2) - pow(z,2))))/(pow(l,2) - pow(z,2)))
+      - 2*(s + x)*((2*pow(r,2)*z)/pow(pow(l,2) - pow(z,2),2) -
+		   (7*pow(s + x - z,4)*(-105*pow(l,8)*z + 140*pow(l,6)*pow(z,3) + 210*pow(l,4)*pow(z,5) - 420*pow(l,2)*pow(z,7) + 175*pow(z,9)))/
+		   (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
+		   (28*pow(s + x - z,3)*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
+					 12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
+					 50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
+					 76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
+					 35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
+		   (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
+		   (7*pow(s + x - z,3)*(-15*pow(l,10) - 165*pow(l,8)*pow(z,2) + 410*pow(l,6)*pow(z,4) - 90*pow(l,4)*pow(z,6) -
+					315*pow(l,2)*pow(z,8) + 175*pow(z,10)))/
+		   (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
+		   (21*pow(s + x - z,2)*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
+					 40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
+					 68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
+					 136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
+					 70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
+		   (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+		   (2*(s + x - z)*(c*r + (4*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),2) + pow(r,2)/(pow(l,2) - pow(z,2))))/(pow(l,2) - pow(z,2)))
+      - 2*((2*pow(r,2)*(s + x - z)*z)/pow(pow(l,2) - pow(z,2),2) + pow(r,2)/(pow(l,2) - pow(z,2)) -
+	   (7*pow(s + x - z,4)*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
+				12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
+				50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
+				76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
+				35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
+	   (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
+	   (7*pow(s + x - z,3)*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
+				40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
+				68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
+				136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
+				70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
+	   (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+	   (pow(s + x - z,2)*(c*r + (4*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),2) + pow(r,2)/(pow(l,2) - pow(z,2))))/
+	   (pow(l,2) - pow(z,2)));
+  }
+  else if (label_i=='l'&&label_j=='l'){
+    result = (pow(l,2) - pow(s + x,2))*((48*pow(l,2)*pow(r,2)*(s + x - z)*z)/pow(pow(l,2) - pow(z,2),4) +
+					(8*pow(l,2)*pow(r,2))/pow(pow(l,2) - pow(z,2),3) - (8*pow(r,2)*(s + x - z)*z)/pow(pow(l,2) - pow(z,2),3) -
+					(2*pow(r,2))/pow(pow(l,2) - pow(z,2),2) - (7*pow(s + x - z,4)*
+										   (-1350*pow(l,8) + 468*c*pow(l,11)*r + 1980*pow(l,9)*pow(r,2) - 5880*pow(l,6)*s*z - 3360*pow(l,6)*pow(z,2) -
+										    1320*c*pow(l,9)*r*pow(z,2) + 6480*pow(l,7)*pow(r,2)*pow(z,2) + 4200*pow(l,4)*s*pow(z,3) + 8100*pow(l,4)*pow(z,4) +
+										    3600*c*pow(l,7)*r*pow(z,4) - 13860*pow(l,5)*pow(r,2)*pow(z,4) + 2520*pow(l,2)*s*pow(z,5) - 3600*pow(l,2)*pow(z,6) -
+										    3192*c*pow(l,5)*r*pow(z,6) + 7000*pow(l,3)*pow(r,2)*pow(z,6) - 840*s*pow(z,7) + 210*pow(z,8) + 700*c*pow(l,3)*r*pow(z,8)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+					(14*pow(s + x - z,4)*(54*pow(l,5) - 252*pow(l,3)*pow(z,2) - 42*l*pow(z,4))*
+					 (-150*pow(l,9) + 39*c*pow(l,12)*r + 198*pow(l,10)*pow(r,2) - 840*pow(l,7)*s*z - 480*pow(l,7)*pow(z,2) -
+					  132*c*pow(l,10)*r*pow(z,2) + 810*pow(l,8)*pow(r,2)*pow(z,2) + 840*pow(l,5)*s*pow(z,3) + 1620*pow(l,5)*pow(z,4) +
+					  450*c*pow(l,8)*r*pow(z,4) - 2310*pow(l,6)*pow(r,2)*pow(z,4) + 840*pow(l,3)*s*pow(z,5) - 1200*pow(l,3)*pow(z,6) -
+					  532*c*pow(l,6)*r*pow(z,6) + 1750*pow(l,4)*pow(r,2)*pow(z,6) - 840*l*s*pow(z,7) + 210*l*pow(z,8) + 175*c*pow(l,4)*r*pow(z,8)))
+					/(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) +
+					(84*pow(s + x - z,4)*(-150*pow(l,9) + 39*c*pow(l,12)*r + 198*pow(l,10)*pow(r,2) - 840*pow(l,7)*s*z - 480*pow(l,7)*pow(z,2) -
+							      132*c*pow(l,10)*r*pow(z,2) + 810*pow(l,8)*pow(r,2)*pow(z,2) + 840*pow(l,5)*s*pow(z,3) + 1620*pow(l,5)*pow(z,4) +
+							      450*c*pow(l,8)*r*pow(z,4) - 2310*pow(l,6)*pow(r,2)*pow(z,4) + 840*pow(l,3)*s*pow(z,5) - 1200*pow(l,3)*pow(z,6) -
+							      532*c*pow(l,6)*r*pow(z,6) + 1750*pow(l,4)*pow(r,2)*pow(z,6) - 840*l*s*pow(z,7) + 210*l*pow(z,8) + 175*c*pow(l,4)*r*pow(z,8)))
+					/(pow(l,4)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+					(70*pow(s + x - z,4)*(-150*pow(l,9) + 39*c*pow(l,12)*r + 198*pow(l,10)*pow(r,2) - 840*pow(l,7)*s*z - 480*pow(l,7)*pow(z,2) -
+							      132*c*pow(l,10)*r*pow(z,2) + 810*pow(l,8)*pow(r,2)*pow(z,2) + 840*pow(l,5)*s*pow(z,3) + 1620*pow(l,5)*pow(z,4) +
+							      450*c*pow(l,8)*r*pow(z,4) - 2310*pow(l,6)*pow(r,2)*pow(z,4) + 840*pow(l,3)*s*pow(z,5) - 1200*pow(l,3)*pow(z,6) -
+							      532*c*pow(l,6)*r*pow(z,6) + 1750*pow(l,4)*pow(r,2)*pow(z,6) - 840*l*s*pow(z,7) + 210*l*pow(z,8) + 175*c*pow(l,4)*r*pow(z,8)))
+					/(pow(l,6)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
+					(7*pow(s + x - z,3)*(-1350*pow(l,8)*s - 5400*pow(l,8)*z + 936*c*pow(l,11)*r*z + 7920*pow(l,9)*pow(r,2)*z -
+							     9240*pow(l,6)*s*pow(z,2) + 2240*pow(l,6)*pow(z,3) - 880*c*pow(l,9)*r*pow(z,3) + 12300*pow(l,4)*s*pow(z,4) +
+							     7200*pow(l,4)*pow(z,5) + 4896*c*pow(l,7)*r*pow(z,5) - 13104*pow(l,5)*pow(r,2)*pow(z,5) - 1080*pow(l,2)*s*pow(z,6) -
+							     4320*pow(l,2)*pow(z,7) - 5712*c*pow(l,5)*r*pow(z,7) + 11200*pow(l,3)*pow(r,2)*pow(z,7) - 630*s*pow(z,8) + 280*pow(z,9) +
+							     1400*c*pow(l,3)*r*pow(z,9)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+					(14*pow(s + x - z,3)*(54*pow(l,5) - 252*pow(l,3)*pow(z,2) - 42*l*pow(z,4))*
+					 (-150*pow(l,9)*s - 600*pow(l,9)*z + 78*c*pow(l,12)*r*z + 792*pow(l,10)*pow(r,2)*z - 1320*pow(l,7)*s*pow(z,2) +
+					  320*pow(l,7)*pow(z,3) - 88*c*pow(l,10)*r*pow(z,3) + 2460*pow(l,5)*s*pow(z,4) + 1440*pow(l,5)*pow(z,5) +
+					  612*c*pow(l,8)*r*pow(z,5) - 2184*pow(l,6)*pow(r,2)*pow(z,5) - 360*pow(l,3)*s*pow(z,6) - 1440*pow(l,3)*pow(z,7) -
+					  952*c*pow(l,6)*r*pow(z,7) + 2800*pow(l,4)*pow(r,2)*pow(z,7) - 630*l*s*pow(z,8) + 280*l*pow(z,9) + 350*c*pow(l,4)*r*pow(z,9)))
+					/(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) +
+					(84*pow(s + x - z,3)*(-150*pow(l,9)*s - 600*pow(l,9)*z + 78*c*pow(l,12)*r*z + 792*pow(l,10)*pow(r,2)*z - 1320*pow(l,7)*s*pow(z,2) +
+							      320*pow(l,7)*pow(z,3) - 88*c*pow(l,10)*r*pow(z,3) + 2460*pow(l,5)*s*pow(z,4) + 1440*pow(l,5)*pow(z,5) +
+							      612*c*pow(l,8)*r*pow(z,5) - 2184*pow(l,6)*pow(r,2)*pow(z,5) - 360*pow(l,3)*s*pow(z,6) - 1440*pow(l,3)*pow(z,7) -
+							      952*c*pow(l,6)*r*pow(z,7) + 2800*pow(l,4)*pow(r,2)*pow(z,7) - 630*l*s*pow(z,8) + 280*l*pow(z,9) + 350*c*pow(l,4)*r*pow(z,9)))
+					/(pow(l,4)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+					(70*pow(s + x - z,3)*(-150*pow(l,9)*s - 600*pow(l,9)*z + 78*c*pow(l,12)*r*z + 792*pow(l,10)*pow(r,2)*z - 1320*pow(l,7)*s*pow(z,2) +
+							      320*pow(l,7)*pow(z,3) - 88*c*pow(l,10)*r*pow(z,3) + 2460*pow(l,5)*s*pow(z,4) + 1440*pow(l,5)*pow(z,5) +
+							      612*c*pow(l,8)*r*pow(z,5) - 2184*pow(l,6)*pow(r,2)*pow(z,5) - 360*pow(l,3)*s*pow(z,6) - 1440*pow(l,3)*pow(z,7) -
+							      952*c*pow(l,6)*r*pow(z,7) + 2800*pow(l,4)*pow(r,2)*pow(z,7) - 630*l*s*pow(z,8) + 280*l*pow(z,9) + 350*c*pow(l,4)*r*pow(z,9)))
+					/(pow(l,6)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
+					(14*pow(s + x - z,4)*pow(54*pow(l,5) - 252*pow(l,3)*pow(z,2) - 42*l*pow(z,4),2)*
+					 (-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
+					  12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
+					  50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
+					  76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
+					  35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),3)) +
+					(7*pow(s + x - z,4)*(270*pow(l,4) - 756*pow(l,2)*pow(z,2) - 42*pow(z,4))*
+					 (-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
+					  12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
+					  50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
+					  76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
+					  35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) -
+					(84*pow(s + x - z,4)*(54*pow(l,5) - 252*pow(l,3)*pow(z,2) - 42*l*pow(z,4))*
+					 (-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
+					  12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
+					  50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
+					  76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
+					  35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
+					(pow(l,4)*pow(pow(l,2) - pow(z,2),4)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) -
+					(70*pow(s + x - z,4)*(54*pow(l,5) - 252*pow(l,3)*pow(z,2) - 42*l*pow(z,4))*
+					 (-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
+					  12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
+					  50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
+					  76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
+					  35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
+					(pow(l,6)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) -
+					(336*pow(s + x - z,4)*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
+							       12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
+							       50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
+							       76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
+							       35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
+					(pow(l,3)*pow(pow(l,2) - pow(z,2),5)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
+					(378*pow(s + x - z,4)*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
+							       12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
+							       50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
+							       76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
+							       35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
+					(210*pow(s + x - z,4)*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
+							       12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
+							       50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
+							       76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
+							       35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
+					(pow(l,7)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
+					(14*pow(s + x - z,3)*pow(54*pow(l,5) - 252*pow(l,3)*pow(z,2) - 42*l*pow(z,4),2)*
+					 (-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
+					  40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
+					  68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
+					  136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
+					  70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),3)) +
+					(7*pow(s + x - z,3)*(270*pow(l,4) - 756*pow(l,2)*pow(z,2) - 42*pow(z,4))*
+					 (-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
+					  40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
+					  68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
+					  136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
+					  70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) -
+					(84*pow(s + x - z,3)*(54*pow(l,5) - 252*pow(l,3)*pow(z,2) - 42*l*pow(z,4))*
+					 (-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
+					  40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
+					  68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
+					  136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
+					  70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
+					(pow(l,4)*pow(pow(l,2) - pow(z,2),4)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) -
+					(70*pow(s + x - z,3)*(54*pow(l,5) - 252*pow(l,3)*pow(z,2) - 42*l*pow(z,4))*
+					 (-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
+					  40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
+					  68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
+					  136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
+					  70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
+					(pow(l,6)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) -
+					(336*pow(s + x - z,3)*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
+							       40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
+							       68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
+							       136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
+							       70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
+					(pow(l,3)*pow(pow(l,2) - pow(z,2),5)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
+					(378*pow(s + x - z,3)*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
+							       40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
+							       68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
+							       136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
+							       70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
+					(210*pow(s + x - z,3)*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
+							       40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
+							       68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
+							       136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
+							       70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
+					(pow(l,7)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+					(pow(s + x - z,2)*((96*pow(l,2)*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),4) +
+							   (8*pow(l,2)*pow(r,2))/pow(pow(l,2) - pow(z,2),3) - (16*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),3) -
+							   (2*pow(r,2))/pow(pow(l,2) - pow(z,2),2)))/(pow(l,2) - pow(z,2)) -
+					(4*l*pow(s + x - z,2)*((-16*l*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),3) - (2*l*pow(r,2))/pow(pow(l,2) - pow(z,2),2)))/
+					pow(pow(l,2) - pow(z,2),2) + (8*pow(l,2)*pow(s + x - z,2)*
+								      (c*r + (4*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),2) + pow(r,2)/(pow(l,2) - pow(z,2))))/pow(pow(l,2) - pow(z,2),3) -
+					(2*pow(s + x - z,2)*(c*r + (4*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),2) + pow(r,2)/(pow(l,2) - pow(z,2))))/
+					pow(pow(l,2) - pow(z,2),2)) + 4*l*((-8*l*pow(r,2)*(s + x - z)*z)/pow(pow(l,2) - pow(z,2),3) -
+									   (2*l*pow(r,2))/pow(pow(l,2) - pow(z,2),2) - (7*pow(s + x - z,4)*
+															(-150*pow(l,9) + 39*c*pow(l,12)*r + 198*pow(l,10)*pow(r,2) - 840*pow(l,7)*s*z - 480*pow(l,7)*pow(z,2) -
+															 132*c*pow(l,10)*r*pow(z,2) + 810*pow(l,8)*pow(r,2)*pow(z,2) + 840*pow(l,5)*s*pow(z,3) + 1620*pow(l,5)*pow(z,4) +
+															 450*c*pow(l,8)*r*pow(z,4) - 2310*pow(l,6)*pow(r,2)*pow(z,4) + 840*pow(l,3)*s*pow(z,5) - 1200*pow(l,3)*pow(z,6) -
+															 532*c*pow(l,6)*r*pow(z,6) + 1750*pow(l,4)*pow(r,2)*pow(z,6) - 840*l*s*pow(z,7) + 210*l*pow(z,8) + 175*c*pow(l,4)*r*pow(z,8)))
+									   /(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
+									   (7*pow(s + x - z,3)*(-150*pow(l,9)*s - 600*pow(l,9)*z + 78*c*pow(l,12)*r*z + 792*pow(l,10)*pow(r,2)*z - 1320*pow(l,7)*s*pow(z,2) +
+												320*pow(l,7)*pow(z,3) - 88*c*pow(l,10)*r*pow(z,3) + 2460*pow(l,5)*s*pow(z,4) + 1440*pow(l,5)*pow(z,5) +
+												612*c*pow(l,8)*r*pow(z,5) - 2184*pow(l,6)*pow(r,2)*pow(z,5) - 360*pow(l,3)*s*pow(z,6) - 1440*pow(l,3)*pow(z,7) -
+												952*c*pow(l,6)*r*pow(z,7) + 2800*pow(l,4)*pow(r,2)*pow(z,7) - 630*l*s*pow(z,8) + 280*l*pow(z,9) + 350*c*pow(l,4)*r*pow(z,9)))
+									   /(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+									   (7*pow(s + x - z,4)*(54*pow(l,5) - 252*pow(l,3)*pow(z,2) - 42*l*pow(z,4))*
+									    (-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
+									     12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
+									     50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
+									     76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
+									     35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
+									   (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) +
+									   (42*pow(s + x - z,4)*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
+												 12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
+												 50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
+												 76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
+												 35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
+									   (pow(l,4)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+									   (35*pow(s + x - z,4)*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
+												 12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
+												 50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
+												 76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
+												 35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
+									   (pow(l,6)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+									   (7*pow(s + x - z,3)*(54*pow(l,5) - 252*pow(l,3)*pow(z,2) - 42*l*pow(z,4))*
+									    (-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
+									     40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
+									     68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
+									     136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
+									     70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
+									   (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) +
+									   (42*pow(s + x - z,3)*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
+												 40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
+												 68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
+												 136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
+												 70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
+									   (pow(l,4)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+									   (35*pow(s + x - z,3)*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
+												 40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
+												 68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
+												 136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
+												 70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
+									   (pow(l,6)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+									   (pow(s + x - z,2)*((-16*l*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),3) - (2*l*pow(r,2))/pow(pow(l,2) - pow(z,2),2)))/
+									   (pow(l,2) - pow(z,2)) - (2*l*pow(s + x - z,2)*(c*r + (4*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),2) +
+															  pow(r,2)/(pow(l,2) - pow(z,2))))/pow(pow(l,2) - pow(z,2),2)) +
+      2*((2*pow(r,2)*(s + x - z)*z)/pow(pow(l,2) - pow(z,2),2) + pow(r,2)/(pow(l,2) - pow(z,2)) -
+	 (7*pow(s + x - z,4)*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
+			      12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
+			      50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
+			      76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
+			      35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
+	 (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
+	 (7*pow(s + x - z,3)*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
+			      40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
+			      68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
+			      136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
+			      70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
+	 (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+	 (pow(s + x - z,2)*(c*r + (4*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),2) + pow(r,2)/(pow(l,2) - pow(z,2))))/
+	 (pow(l,2) - pow(z,2)));
+  }
+  else if (label_i=='l'&&label_j=='r'){
+    result = (pow(l,2) - pow(s + x,2))*((-16*l*r*(s + x - z)*z)/pow(pow(l,2) - pow(z,2),3) - (4*l*r)/pow(pow(l,2) - pow(z,2),2) -
+					(7*pow(s + x - z,4)*(39*c*pow(l,12) + 396*pow(l,10)*r - 132*c*pow(l,10)*pow(z,2) + 1620*pow(l,8)*r*pow(z,2) +
+							     450*c*pow(l,8)*pow(z,4) - 4620*pow(l,6)*r*pow(z,4) - 532*c*pow(l,6)*pow(z,6) + 3500*pow(l,4)*r*pow(z,6) +
+							     175*c*pow(l,4)*pow(z,8)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+					(7*pow(s + x - z,4)*(54*pow(l,5) - 252*pow(l,3)*pow(z,2) - 42*l*pow(z,4))*
+					 (3*c*pow(l,13) + 36*pow(l,11)*r - 12*c*pow(l,11)*pow(z,2) + 180*pow(l,9)*r*pow(z,2) + 50*c*pow(l,9)*pow(z,4) -
+					  660*pow(l,7)*r*pow(z,4) - 76*c*pow(l,7)*pow(z,6) + 700*pow(l,5)*r*pow(z,6) + 35*c*pow(l,5)*pow(z,8)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) +
+					(42*pow(s + x - z,4)*(3*c*pow(l,13) + 36*pow(l,11)*r - 12*c*pow(l,11)*pow(z,2) + 180*pow(l,9)*r*pow(z,2) +
+							      50*c*pow(l,9)*pow(z,4) - 660*pow(l,7)*r*pow(z,4) - 76*c*pow(l,7)*pow(z,6) + 700*pow(l,5)*r*pow(z,6) +
+							      35*c*pow(l,5)*pow(z,8)))/
+					(pow(l,4)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+					(35*pow(s + x - z,4)*(3*c*pow(l,13) + 36*pow(l,11)*r - 12*c*pow(l,11)*pow(z,2) + 180*pow(l,9)*r*pow(z,2) +
+							      50*c*pow(l,9)*pow(z,4) - 660*pow(l,7)*r*pow(z,4) - 76*c*pow(l,7)*pow(z,6) + 700*pow(l,5)*r*pow(z,6) +
+							      35*c*pow(l,5)*pow(z,8)))/
+					(pow(l,6)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
+					(7*pow(s + x - z,3)*(78*c*pow(l,12)*z + 1584*pow(l,10)*r*z - 88*c*pow(l,10)*pow(z,3) + 612*c*pow(l,8)*pow(z,5) -
+							     4368*pow(l,6)*r*pow(z,5) - 952*c*pow(l,6)*pow(z,7) + 5600*pow(l,4)*r*pow(z,7) + 350*c*pow(l,4)*pow(z,9)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+					(7*pow(s + x - z,3)*(54*pow(l,5) - 252*pow(l,3)*pow(z,2) - 42*l*pow(z,4))*
+					 (6*c*pow(l,13)*z + 144*pow(l,11)*r*z - 8*c*pow(l,11)*pow(z,3) + 68*c*pow(l,9)*pow(z,5) - 624*pow(l,7)*r*pow(z,5) -
+					  136*c*pow(l,7)*pow(z,7) + 1120*pow(l,5)*r*pow(z,7) + 70*c*pow(l,5)*pow(z,9)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) +
+					(42*pow(s + x - z,3)*(6*c*pow(l,13)*z + 144*pow(l,11)*r*z - 8*c*pow(l,11)*pow(z,3) + 68*c*pow(l,9)*pow(z,5) -
+							      624*pow(l,7)*r*pow(z,5) - 136*c*pow(l,7)*pow(z,7) + 1120*pow(l,5)*r*pow(z,7) + 70*c*pow(l,5)*pow(z,9)))/
+					(pow(l,4)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+					(35*pow(s + x - z,3)*(6*c*pow(l,13)*z + 144*pow(l,11)*r*z - 8*c*pow(l,11)*pow(z,3) + 68*c*pow(l,9)*pow(z,5) -
+							      624*pow(l,7)*r*pow(z,5) - 136*c*pow(l,7)*pow(z,7) + 1120*pow(l,5)*r*pow(z,7) + 70*c*pow(l,5)*pow(z,9)))/
+					(pow(l,6)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+					(pow(s + x - z,2)*((-32*l*r*pow(z,2))/pow(pow(l,2) - pow(z,2),3) - (4*l*r)/pow(pow(l,2) - pow(z,2),2)))/(pow(l,2) - pow(z,2)) -
+					(2*l*pow(s + x - z,2)*(c + (8*r*pow(z,2))/pow(pow(l,2) - pow(z,2),2) + (2*r)/(pow(l,2) - pow(z,2))))/pow(pow(l,2) - pow(z,2),2))
+      + 2*l*((4*r*(s + x - z)*z)/pow(pow(l,2) - pow(z,2),2) + (2*r)/(pow(l,2) - pow(z,2)) -
+	     (7*pow(s + x - z,4)*(3*c*pow(l,13) + 36*pow(l,11)*r - 12*c*pow(l,11)*pow(z,2) + 180*pow(l,9)*r*pow(z,2) +
+				  50*c*pow(l,9)*pow(z,4) - 660*pow(l,7)*r*pow(z,4) - 76*c*pow(l,7)*pow(z,6) + 700*pow(l,5)*r*pow(z,6) +
+				  35*c*pow(l,5)*pow(z,8)))/
+	     (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
+	     (7*pow(s + x - z,3)*(6*c*pow(l,13)*z + 144*pow(l,11)*r*z - 8*c*pow(l,11)*pow(z,3) + 68*c*pow(l,9)*pow(z,5) -
+				  624*pow(l,7)*r*pow(z,5) - 136*c*pow(l,7)*pow(z,7) + 1120*pow(l,5)*r*pow(z,7) + 70*c*pow(l,5)*pow(z,9)))/
+	     (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+	     (pow(s + x - z,2)*(c + (8*r*pow(z,2))/pow(pow(l,2) - pow(z,2),2) + (2*r)/(pow(l,2) - pow(z,2))))/(pow(l,2) - pow(z,2)));
+  }
+  else if(label_i=='l'&&label_j=='z'){
+    result = (pow(l,2) - pow(s + x,2))*((-48*l*pow(r,2)*(s + x - z)*pow(z,2))/pow(pow(l,2) - pow(z,2),4) -
+					(8*l*pow(r,2)*(s + x - z))/pow(pow(l,2) - pow(z,2),3) -
+					(7*pow(s + x - z,4)*(-840*pow(l,7)*s - 960*pow(l,7)*z - 264*c*pow(l,10)*r*z + 1620*pow(l,8)*pow(r,2)*z + 2520*pow(l,5)*s*pow(z,2) +
+							     6480*pow(l,5)*pow(z,3) + 1800*c*pow(l,8)*r*pow(z,3) - 9240*pow(l,6)*pow(r,2)*pow(z,3) + 4200*pow(l,3)*s*pow(z,4) -
+							     7200*pow(l,3)*pow(z,5) - 3192*c*pow(l,6)*r*pow(z,5) + 10500*pow(l,4)*pow(r,2)*pow(z,5) - 5880*l*s*pow(z,6) +
+							     1680*l*pow(z,7) + 1400*c*pow(l,4)*r*pow(z,7)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+					(7*pow(s + x - z,4)*(-126*pow(l,4)*z - 84*pow(l,2)*pow(z,3) - 1470*pow(z,5))*
+					 (-150*pow(l,9) + 39*c*pow(l,12)*r + 198*pow(l,10)*pow(r,2) - 840*pow(l,7)*s*z - 480*pow(l,7)*pow(z,2) -
+					  132*c*pow(l,10)*r*pow(z,2) + 810*pow(l,8)*pow(r,2)*pow(z,2) + 840*pow(l,5)*s*pow(z,3) + 1620*pow(l,5)*pow(z,4) +
+					  450*c*pow(l,8)*r*pow(z,4) - 2310*pow(l,6)*pow(r,2)*pow(z,4) + 840*pow(l,3)*s*pow(z,5) - 1200*pow(l,3)*pow(z,6) -
+					  532*c*pow(l,6)*r*pow(z,6) + 1750*pow(l,4)*pow(r,2)*pow(z,6) - 840*l*s*pow(z,7) + 210*l*pow(z,8) + 175*c*pow(l,4)*r*pow(z,8)))
+					/(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) -
+					(42*pow(s + x - z,4)*z*(-150*pow(l,9) + 39*c*pow(l,12)*r + 198*pow(l,10)*pow(r,2) - 840*pow(l,7)*s*z - 480*pow(l,7)*pow(z,2) -
+								132*c*pow(l,10)*r*pow(z,2) + 810*pow(l,8)*pow(r,2)*pow(z,2) + 840*pow(l,5)*s*pow(z,3) + 1620*pow(l,5)*pow(z,4) +
+								450*c*pow(l,8)*r*pow(z,4) - 2310*pow(l,6)*pow(r,2)*pow(z,4) + 840*pow(l,3)*s*pow(z,5) - 1200*pow(l,3)*pow(z,6) -
+								532*c*pow(l,6)*r*pow(z,6) + 1750*pow(l,4)*pow(r,2)*pow(z,6) - 840*l*s*pow(z,7) + 210*l*pow(z,8) + 175*c*pow(l,4)*r*pow(z,8)))
+					/(pow(l,5)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+					(28*pow(s + x - z,3)*(-150*pow(l,9) + 39*c*pow(l,12)*r + 198*pow(l,10)*pow(r,2) - 840*pow(l,7)*s*z - 480*pow(l,7)*pow(z,2) -
+							      132*c*pow(l,10)*r*pow(z,2) + 810*pow(l,8)*pow(r,2)*pow(z,2) + 840*pow(l,5)*s*pow(z,3) + 1620*pow(l,5)*pow(z,4) +
+							      450*c*pow(l,8)*r*pow(z,4) - 2310*pow(l,6)*pow(r,2)*pow(z,4) + 840*pow(l,3)*s*pow(z,5) - 1200*pow(l,3)*pow(z,6) -
+							      532*c*pow(l,6)*r*pow(z,6) + 1750*pow(l,4)*pow(r,2)*pow(z,6) - 840*l*s*pow(z,7) + 210*l*pow(z,8) + 175*c*pow(l,4)*r*pow(z,8)))
+					/(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
+					(7*pow(s + x - z,3)*(-600*pow(l,9) + 78*c*pow(l,12)*r + 792*pow(l,10)*pow(r,2) - 2640*pow(l,7)*s*z + 960*pow(l,7)*pow(z,2) -
+							     264*c*pow(l,10)*r*pow(z,2) + 9840*pow(l,5)*s*pow(z,3) + 7200*pow(l,5)*pow(z,4) + 3060*c*pow(l,8)*r*pow(z,4) -
+							     10920*pow(l,6)*pow(r,2)*pow(z,4) - 2160*pow(l,3)*s*pow(z,5) - 10080*pow(l,3)*pow(z,6) - 6664*c*pow(l,6)*r*pow(z,6) +
+							     19600*pow(l,4)*pow(r,2)*pow(z,6) - 5040*l*s*pow(z,7) + 2520*l*pow(z,8) + 3150*c*pow(l,4)*r*pow(z,8)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+					(7*pow(s + x - z,4)*(54*pow(l,5) - 252*pow(l,3)*pow(z,2) - 42*l*pow(z,4))*
+					 (-105*pow(l,8)*s - 120*pow(l,8)*z - 24*c*pow(l,11)*r*z + 180*pow(l,9)*pow(r,2)*z + 420*pow(l,6)*s*pow(z,2) +
+					  1080*pow(l,6)*pow(z,3) + 200*c*pow(l,9)*r*pow(z,3) - 1320*pow(l,7)*pow(r,2)*pow(z,3) + 1050*pow(l,4)*s*pow(z,4) -
+					  1800*pow(l,4)*pow(z,5) - 456*c*pow(l,7)*r*pow(z,5) + 2100*pow(l,5)*pow(r,2)*pow(z,5) - 2940*pow(l,2)*s*pow(z,6) +
+					  840*pow(l,2)*pow(z,7) + 280*c*pow(l,5)*r*pow(z,7) + 1575*s*pow(z,8)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) +
+					(42*pow(s + x - z,4)*(-105*pow(l,8)*s - 120*pow(l,8)*z - 24*c*pow(l,11)*r*z + 180*pow(l,9)*pow(r,2)*z + 420*pow(l,6)*s*pow(z,2) +
+							      1080*pow(l,6)*pow(z,3) + 200*c*pow(l,9)*r*pow(z,3) - 1320*pow(l,7)*pow(r,2)*pow(z,3) + 1050*pow(l,4)*s*pow(z,4) -
+							      1800*pow(l,4)*pow(z,5) - 456*c*pow(l,7)*r*pow(z,5) + 2100*pow(l,5)*pow(r,2)*pow(z,5) - 2940*pow(l,2)*s*pow(z,6) +
+							      840*pow(l,2)*pow(z,7) + 280*c*pow(l,5)*r*pow(z,7) + 1575*s*pow(z,8)))/
+					(pow(l,4)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+					(35*pow(s + x - z,4)*(-105*pow(l,8)*s - 120*pow(l,8)*z - 24*c*pow(l,11)*r*z + 180*pow(l,9)*pow(r,2)*z + 420*pow(l,6)*s*pow(z,2) +
+							      1080*pow(l,6)*pow(z,3) + 200*c*pow(l,9)*r*pow(z,3) - 1320*pow(l,7)*pow(r,2)*pow(z,3) + 1050*pow(l,4)*s*pow(z,4) -
+							      1800*pow(l,4)*pow(z,5) - 456*c*pow(l,7)*r*pow(z,5) + 2100*pow(l,5)*pow(r,2)*pow(z,5) - 2940*pow(l,2)*s*pow(z,6) +
+							      840*pow(l,2)*pow(z,7) + 280*c*pow(l,5)*r*pow(z,7) + 1575*s*pow(z,8)))/
+					(pow(l,6)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+					(7*pow(s + x - z,3)*(-126*pow(l,4)*z - 84*pow(l,2)*pow(z,3) - 1470*pow(z,5))*
+					 (-150*pow(l,9)*s - 600*pow(l,9)*z + 78*c*pow(l,12)*r*z + 792*pow(l,10)*pow(r,2)*z - 1320*pow(l,7)*s*pow(z,2) +
+					  320*pow(l,7)*pow(z,3) - 88*c*pow(l,10)*r*pow(z,3) + 2460*pow(l,5)*s*pow(z,4) + 1440*pow(l,5)*pow(z,5) +
+					  612*c*pow(l,8)*r*pow(z,5) - 2184*pow(l,6)*pow(r,2)*pow(z,5) - 360*pow(l,3)*s*pow(z,6) - 1440*pow(l,3)*pow(z,7) -
+					  952*c*pow(l,6)*r*pow(z,7) + 2800*pow(l,4)*pow(r,2)*pow(z,7) - 630*l*s*pow(z,8) + 280*l*pow(z,9) + 350*c*pow(l,4)*r*pow(z,9)))
+					/(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) -
+					(42*pow(s + x - z,3)*z*(-150*pow(l,9)*s - 600*pow(l,9)*z + 78*c*pow(l,12)*r*z + 792*pow(l,10)*pow(r,2)*z -
+								1320*pow(l,7)*s*pow(z,2) + 320*pow(l,7)*pow(z,3) - 88*c*pow(l,10)*r*pow(z,3) + 2460*pow(l,5)*s*pow(z,4) +
+								1440*pow(l,5)*pow(z,5) + 612*c*pow(l,8)*r*pow(z,5) - 2184*pow(l,6)*pow(r,2)*pow(z,5) - 360*pow(l,3)*s*pow(z,6) -
+								1440*pow(l,3)*pow(z,7) - 952*c*pow(l,6)*r*pow(z,7) + 2800*pow(l,4)*pow(r,2)*pow(z,7) - 630*l*s*pow(z,8) + 280*l*pow(z,9) +
+								350*c*pow(l,4)*r*pow(z,9)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+					(21*pow(s + x - z,2)*(-150*pow(l,9)*s - 600*pow(l,9)*z + 78*c*pow(l,12)*r*z + 792*pow(l,10)*pow(r,2)*z - 1320*pow(l,7)*s*pow(z,2) +
+							      320*pow(l,7)*pow(z,3) - 88*c*pow(l,10)*r*pow(z,3) + 2460*pow(l,5)*s*pow(z,4) + 1440*pow(l,5)*pow(z,5) +
+							      612*c*pow(l,8)*r*pow(z,5) - 2184*pow(l,6)*pow(r,2)*pow(z,5) - 360*pow(l,3)*s*pow(z,6) - 1440*pow(l,3)*pow(z,7) -
+							      952*c*pow(l,6)*r*pow(z,7) + 2800*pow(l,4)*pow(r,2)*pow(z,7) - 630*l*s*pow(z,8) + 280*l*pow(z,9) + 350*c*pow(l,4)*r*pow(z,9)))
+					/(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
+					(14*pow(s + x - z,4)*(54*pow(l,5) - 252*pow(l,3)*pow(z,2) - 42*l*pow(z,4))*
+					 (-126*pow(l,4)*z - 84*pow(l,2)*pow(z,3) - 1470*pow(z,5))*
+					 (-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
+					  12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
+					  50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
+					  76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
+					  35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),3)) +
+					(7*pow(s + x - z,4)*(-504*pow(l,3)*z - 168*l*pow(z,3))*
+					 (-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
+					  12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
+					  50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
+					  76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
+					  35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) +
+					(42*pow(s + x - z,4)*z*(54*pow(l,5) - 252*pow(l,3)*pow(z,2) - 42*l*pow(z,4))*
+					 (-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
+					  12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
+					  50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
+					  76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
+					  35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),4)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) -
+					(28*pow(s + x - z,3)*(54*pow(l,5) - 252*pow(l,3)*pow(z,2) - 42*l*pow(z,4))*
+					 (-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
+					  12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
+					  50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
+					  76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
+					  35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) -
+					(42*pow(s + x - z,4)*(-126*pow(l,4)*z - 84*pow(l,2)*pow(z,3) - 1470*pow(z,5))*
+					 (-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
+					  12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
+					  50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
+					  76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
+					  35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
+					(pow(l,4)*pow(pow(l,2) - pow(z,2),4)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) -
+					(35*pow(s + x - z,4)*(-126*pow(l,4)*z - 84*pow(l,2)*pow(z,3) - 1470*pow(z,5))*
+					 (-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
+					  12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
+					  50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
+					  76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
+					  35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
+					(pow(l,6)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) +
+					(336*pow(s + x - z,4)*z*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
+								 12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
+								 50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
+								 76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
+								 35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
+					(pow(l,4)*pow(pow(l,2) - pow(z,2),5)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
+					(168*pow(s + x - z,3)*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
+							       12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
+							       50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
+							       76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
+							       35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
+					(pow(l,4)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+					(210*pow(s + x - z,4)*z*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
+								 12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
+								 50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
+								 76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
+								 35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
+					(pow(l,6)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
+					(140*pow(s + x - z,3)*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
+							       12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
+							       50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
+							       76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
+							       35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
+					(pow(l,6)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+					(7*pow(s + x - z,3)*(54*pow(l,5) - 252*pow(l,3)*pow(z,2) - 42*l*pow(z,4))*
+					 (-60*pow(l,10) + 6*c*pow(l,13)*r + 72*pow(l,11)*pow(r,2) - 330*pow(l,8)*s*z + 120*pow(l,8)*pow(z,2) -
+					  24*c*pow(l,11)*r*pow(z,2) + 1640*pow(l,6)*s*pow(z,3) + 1200*pow(l,6)*pow(z,4) + 340*c*pow(l,9)*r*pow(z,4) -
+					  1560*pow(l,7)*pow(r,2)*pow(z,4) - 540*pow(l,4)*s*pow(z,5) - 2520*pow(l,4)*pow(z,6) - 952*c*pow(l,7)*r*pow(z,6) +
+					  3920*pow(l,5)*pow(r,2)*pow(z,6) - 2520*pow(l,2)*s*pow(z,7) + 1260*pow(l,2)*pow(z,8) + 630*c*pow(l,5)*r*pow(z,8) +
+					  1750*s*pow(z,9)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) +
+					(42*pow(s + x - z,3)*(-60*pow(l,10) + 6*c*pow(l,13)*r + 72*pow(l,11)*pow(r,2) - 330*pow(l,8)*s*z + 120*pow(l,8)*pow(z,2) -
+							      24*c*pow(l,11)*r*pow(z,2) + 1640*pow(l,6)*s*pow(z,3) + 1200*pow(l,6)*pow(z,4) + 340*c*pow(l,9)*r*pow(z,4) -
+							      1560*pow(l,7)*pow(r,2)*pow(z,4) - 540*pow(l,4)*s*pow(z,5) - 2520*pow(l,4)*pow(z,6) - 952*c*pow(l,7)*r*pow(z,6) +
+							      3920*pow(l,5)*pow(r,2)*pow(z,6) - 2520*pow(l,2)*s*pow(z,7) + 1260*pow(l,2)*pow(z,8) + 630*c*pow(l,5)*r*pow(z,8) +
+							      1750*s*pow(z,9)))/
+					(pow(l,4)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+					(35*pow(s + x - z,3)*(-60*pow(l,10) + 6*c*pow(l,13)*r + 72*pow(l,11)*pow(r,2) - 330*pow(l,8)*s*z + 120*pow(l,8)*pow(z,2) -
+							      24*c*pow(l,11)*r*pow(z,2) + 1640*pow(l,6)*s*pow(z,3) + 1200*pow(l,6)*pow(z,4) + 340*c*pow(l,9)*r*pow(z,4) -
+							      1560*pow(l,7)*pow(r,2)*pow(z,4) - 540*pow(l,4)*s*pow(z,5) - 2520*pow(l,4)*pow(z,6) - 952*c*pow(l,7)*r*pow(z,6) +
+							      3920*pow(l,5)*pow(r,2)*pow(z,6) - 2520*pow(l,2)*s*pow(z,7) + 1260*pow(l,2)*pow(z,8) + 630*c*pow(l,5)*r*pow(z,8) +
+							      1750*s*pow(z,9)))/
+					(pow(l,6)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
+					(14*pow(s + x - z,3)*(54*pow(l,5) - 252*pow(l,3)*pow(z,2) - 42*l*pow(z,4))*
+					 (-126*pow(l,4)*z - 84*pow(l,2)*pow(z,3) - 1470*pow(z,5))*
+					 (-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
+					  40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
+					  68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
+					  136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
+					  70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),3)) +
+					(7*pow(s + x - z,3)*(-504*pow(l,3)*z - 168*l*pow(z,3))*
+					 (-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
+					  40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
+					  68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
+					  136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
+					  70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) +
+					(42*pow(s + x - z,3)*z*(54*pow(l,5) - 252*pow(l,3)*pow(z,2) - 42*l*pow(z,4))*
+					 (-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
+					  40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
+					  68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
+					  136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
+					  70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),4)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) -
+					(21*pow(s + x - z,2)*(54*pow(l,5) - 252*pow(l,3)*pow(z,2) - 42*l*pow(z,4))*
+					 (-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
+					  40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
+					  68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
+					  136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
+					  70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) -
+					(42*pow(s + x - z,3)*(-126*pow(l,4)*z - 84*pow(l,2)*pow(z,3) - 1470*pow(z,5))*
+					 (-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
+					  40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
+					  68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
+					  136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
+					  70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
+					(pow(l,4)*pow(pow(l,2) - pow(z,2),4)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) -
+					(35*pow(s + x - z,3)*(-126*pow(l,4)*z - 84*pow(l,2)*pow(z,3) - 1470*pow(z,5))*
+					 (-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
+					  40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
+					  68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
+					  136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
+					  70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
+					(pow(l,6)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) +
+					(336*pow(s + x - z,3)*z*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
+								 40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
+								 68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
+								 136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
+								 70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
+					(pow(l,4)*pow(pow(l,2) - pow(z,2),5)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
+					(126*pow(s + x - z,2)*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
+							       40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
+							       68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
+							       136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
+							       70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
+					(pow(l,4)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+					(210*pow(s + x - z,3)*z*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
+								 40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
+								 68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
+								 136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
+								 70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
+					(pow(l,6)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
+					(105*pow(s + x - z,2)*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
+							       40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
+							       68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
+							       136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
+							       70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
+					(pow(l,6)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+					(pow(s + x - z,2)*((-96*l*pow(r,2)*pow(z,3))/pow(pow(l,2) - pow(z,2),4) - (40*l*pow(r,2)*z)/pow(pow(l,2) - pow(z,2),3)))/
+					(pow(l,2) - pow(z,2)) + (2*pow(s + x - z,2)*z*((-16*l*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),3) -
+										       (2*l*pow(r,2))/pow(pow(l,2) - pow(z,2),2)))/pow(pow(l,2) - pow(z,2),2) -
+					(2*(s + x - z)*((-16*l*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),3) - (2*l*pow(r,2))/pow(pow(l,2) - pow(z,2),2)))/
+					(pow(l,2) - pow(z,2)) - (2*l*pow(s + x - z,2)*((16*pow(r,2)*pow(z,3))/pow(pow(l,2) - pow(z,2),3) +
+										       (10*pow(r,2)*z)/pow(pow(l,2) - pow(z,2),2)))/pow(pow(l,2) - pow(z,2),2) -
+					(8*l*pow(s + x - z,2)*z*(c*r + (4*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),2) + pow(r,2)/(pow(l,2) - pow(z,2))))/
+					pow(pow(l,2) - pow(z,2),3) + (4*l*(s + x - z)*(c*r + (4*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),2) +
+										       pow(r,2)/(pow(l,2) - pow(z,2))))/pow(pow(l,2) - pow(z,2),2)) +
+      2*l*((8*pow(r,2)*(s + x - z)*pow(z,2))/pow(pow(l,2) - pow(z,2),3) + (2*pow(r,2)*(s + x - z))/pow(pow(l,2) - pow(z,2),2) -
+	   (7*pow(s + x - z,4)*(-105*pow(l,8)*s - 120*pow(l,8)*z - 24*c*pow(l,11)*r*z + 180*pow(l,9)*pow(r,2)*z + 420*pow(l,6)*s*pow(z,2) +
+				1080*pow(l,6)*pow(z,3) + 200*c*pow(l,9)*r*pow(z,3) - 1320*pow(l,7)*pow(r,2)*pow(z,3) + 1050*pow(l,4)*s*pow(z,4) -
+				1800*pow(l,4)*pow(z,5) - 456*c*pow(l,7)*r*pow(z,5) + 2100*pow(l,5)*pow(r,2)*pow(z,5) - 2940*pow(l,2)*s*pow(z,6) +
+				840*pow(l,2)*pow(z,7) + 280*c*pow(l,5)*r*pow(z,7) + 1575*s*pow(z,8)))/
+	   (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+	   (7*pow(s + x - z,4)*(-126*pow(l,4)*z - 84*pow(l,2)*pow(z,3) - 1470*pow(z,5))*
+	    (-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
+	     12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
+	     50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
+	     76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
+	     35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
+	   (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) -
+	   (42*pow(s + x - z,4)*z*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
+				   12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
+				   50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
+				   76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
+				   35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
+	   (pow(l,5)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+	   (28*pow(s + x - z,3)*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
+				 12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
+				 50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
+				 76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
+				 35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
+	   (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
+	   (7*pow(s + x - z,3)*(-60*pow(l,10) + 6*c*pow(l,13)*r + 72*pow(l,11)*pow(r,2) - 330*pow(l,8)*s*z + 120*pow(l,8)*pow(z,2) -
+				24*c*pow(l,11)*r*pow(z,2) + 1640*pow(l,6)*s*pow(z,3) + 1200*pow(l,6)*pow(z,4) + 340*c*pow(l,9)*r*pow(z,4) -
+				1560*pow(l,7)*pow(r,2)*pow(z,4) - 540*pow(l,4)*s*pow(z,5) - 2520*pow(l,4)*pow(z,6) - 952*c*pow(l,7)*r*pow(z,6) +
+				3920*pow(l,5)*pow(r,2)*pow(z,6) - 2520*pow(l,2)*s*pow(z,7) + 1260*pow(l,2)*pow(z,8) + 630*c*pow(l,5)*r*pow(z,8) +
+				1750*s*pow(z,9)))/
+	   (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+	   (7*pow(s + x - z,3)*(-126*pow(l,4)*z - 84*pow(l,2)*pow(z,3) - 1470*pow(z,5))*
+	    (-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
+	     40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
+	     68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
+	     136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
+	     70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
+	   (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) -
+	   (42*pow(s + x - z,3)*z*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
+				   40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
+				   68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
+				   136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
+				   70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
+	   (pow(l,5)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+	   (21*pow(s + x - z,2)*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
+				 40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
+				 68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
+				 136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
+				 70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
+	   (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+	   (pow(s + x - z,2)*((16*pow(r,2)*pow(z,3))/pow(pow(l,2) - pow(z,2),3) + (10*pow(r,2)*z)/pow(pow(l,2) - pow(z,2),2)))/
+	   (pow(l,2) - pow(z,2)) + (2*pow(s + x - z,2)*z*(c*r + (4*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),2) +
+							  pow(r,2)/(pow(l,2) - pow(z,2))))/pow(pow(l,2) - pow(z,2),2) -
+	   (2*(s + x - z)*(c*r + (4*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),2) + pow(r,2)/(pow(l,2) - pow(z,2))))/(pow(l,2) - pow(z,2)));
+  }
+  else if (label_i=='l'&&label_j=='c'){
+    result = (pow(l,2) - pow(s + x,2))*((-2*l*r*pow(s + x - z,2))/pow(pow(l,2) - pow(z,2),2) -
+					(7*pow(s + x - z,4)*(39*pow(l,12)*r - 132*pow(l,10)*r*pow(z,2) + 450*pow(l,8)*r*pow(z,4) - 532*pow(l,6)*r*pow(z,6) +
+							     175*pow(l,4)*r*pow(z,8)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+					(7*pow(s + x - z,4)*(54*pow(l,5) - 252*pow(l,3)*pow(z,2) - 42*l*pow(z,4))*
+					 (3*pow(l,13)*r - 12*pow(l,11)*r*pow(z,2) + 50*pow(l,9)*r*pow(z,4) - 76*pow(l,7)*r*pow(z,6) + 35*pow(l,5)*r*pow(z,8)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) +
+					(42*pow(s + x - z,4)*(3*pow(l,13)*r - 12*pow(l,11)*r*pow(z,2) + 50*pow(l,9)*r*pow(z,4) - 76*pow(l,7)*r*pow(z,6) +
+							      35*pow(l,5)*r*pow(z,8)))/
+					(pow(l,4)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+					(35*pow(s + x - z,4)*(3*pow(l,13)*r - 12*pow(l,11)*r*pow(z,2) + 50*pow(l,9)*r*pow(z,4) - 76*pow(l,7)*r*pow(z,6) +
+							      35*pow(l,5)*r*pow(z,8)))/
+					(pow(l,6)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
+					(7*pow(s + x - z,3)*(78*pow(l,12)*r*z - 88*pow(l,10)*r*pow(z,3) + 612*pow(l,8)*r*pow(z,5) - 952*pow(l,6)*r*pow(z,7) +
+							     350*pow(l,4)*r*pow(z,9)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+					(7*pow(s + x - z,3)*(54*pow(l,5) - 252*pow(l,3)*pow(z,2) - 42*l*pow(z,4))*
+					 (6*pow(l,13)*r*z - 8*pow(l,11)*r*pow(z,3) + 68*pow(l,9)*r*pow(z,5) - 136*pow(l,7)*r*pow(z,7) + 70*pow(l,5)*r*pow(z,9)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) +
+					(42*pow(s + x - z,3)*(6*pow(l,13)*r*z - 8*pow(l,11)*r*pow(z,3) + 68*pow(l,9)*r*pow(z,5) - 136*pow(l,7)*r*pow(z,7) +
+							      70*pow(l,5)*r*pow(z,9)))/
+					(pow(l,4)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+					(35*pow(s + x - z,3)*(6*pow(l,13)*r*z - 8*pow(l,11)*r*pow(z,3) + 68*pow(l,9)*r*pow(z,5) - 136*pow(l,7)*r*pow(z,7) +
+							      70*pow(l,5)*r*pow(z,9)))/
+					(pow(l,6)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6)))) +
+      2*l*((r*pow(s + x - z,2))/(pow(l,2) - pow(z,2)) - (7*pow(s + x - z,4)*
+							 (3*pow(l,13)*r - 12*pow(l,11)*r*pow(z,2) + 50*pow(l,9)*r*pow(z,4) - 76*pow(l,7)*r*pow(z,6) + 35*pow(l,5)*r*pow(z,8)))/
+	   (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
+	   (7*pow(s + x - z,3)*(6*pow(l,13)*r*z - 8*pow(l,11)*r*pow(z,3) + 68*pow(l,9)*r*pow(z,5) - 136*pow(l,7)*r*pow(z,7) +
+				70*pow(l,5)*r*pow(z,9)))/
+	   (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))));
+  }
+  else if (label_i=='l'&&label_j=='s'){
+    result = (pow(l,2) - pow(s + x,2))*((-8*l*pow(r,2)*z)/pow(pow(l,2) - pow(z,2),3) -
+					(7*pow(s + x - z,4)*(-840*pow(l,7)*z + 840*pow(l,5)*pow(z,3) + 840*pow(l,3)*pow(z,5) - 840*l*pow(z,7)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
+					(7*pow(s + x - z,3)*(-150*pow(l,9) - 1320*pow(l,7)*pow(z,2) + 2460*pow(l,5)*pow(z,4) - 360*pow(l,3)*pow(z,6) - 630*l*pow(z,8)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
+					(28*pow(s + x - z,3)*(-150*pow(l,9) + 39*c*pow(l,12)*r + 198*pow(l,10)*pow(r,2) - 840*pow(l,7)*s*z - 480*pow(l,7)*pow(z,2) -
+							      132*c*pow(l,10)*r*pow(z,2) + 810*pow(l,8)*pow(r,2)*pow(z,2) + 840*pow(l,5)*s*pow(z,3) + 1620*pow(l,5)*pow(z,4) +
+							      450*c*pow(l,8)*r*pow(z,4) - 2310*pow(l,6)*pow(r,2)*pow(z,4) + 840*pow(l,3)*s*pow(z,5) - 1200*pow(l,3)*pow(z,6) -
+							      532*c*pow(l,6)*r*pow(z,6) + 1750*pow(l,4)*pow(r,2)*pow(z,6) - 840*l*s*pow(z,7) + 210*l*pow(z,8) + 175*c*pow(l,4)*r*pow(z,8)))
+					/(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+					(7*pow(s + x - z,4)*(54*pow(l,5) - 252*pow(l,3)*pow(z,2) - 42*l*pow(z,4))*
+					 (-105*pow(l,8)*z + 140*pow(l,6)*pow(z,3) + 210*pow(l,4)*pow(z,5) - 420*pow(l,2)*pow(z,7) + 175*pow(z,9)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) +
+					(42*pow(s + x - z,4)*(-105*pow(l,8)*z + 140*pow(l,6)*pow(z,3) + 210*pow(l,4)*pow(z,5) - 420*pow(l,2)*pow(z,7) + 175*pow(z,9)))/
+					(pow(l,4)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+					(35*pow(s + x - z,4)*(-105*pow(l,8)*z + 140*pow(l,6)*pow(z,3) + 210*pow(l,4)*pow(z,5) - 420*pow(l,2)*pow(z,7) + 175*pow(z,9)))/
+					(pow(l,6)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
+					(21*pow(s + x - z,2)*(-150*pow(l,9)*s - 600*pow(l,9)*z + 78*c*pow(l,12)*r*z + 792*pow(l,10)*pow(r,2)*z - 1320*pow(l,7)*s*pow(z,2) +
+							      320*pow(l,7)*pow(z,3) - 88*c*pow(l,10)*r*pow(z,3) + 2460*pow(l,5)*s*pow(z,4) + 1440*pow(l,5)*pow(z,5) +
+							      612*c*pow(l,8)*r*pow(z,5) - 2184*pow(l,6)*pow(r,2)*pow(z,5) - 360*pow(l,3)*s*pow(z,6) - 1440*pow(l,3)*pow(z,7) -
+							      952*c*pow(l,6)*r*pow(z,7) + 2800*pow(l,4)*pow(r,2)*pow(z,7) - 630*l*s*pow(z,8) + 280*l*pow(z,9) + 350*c*pow(l,4)*r*pow(z,9)))
+					/(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+					(28*pow(s + x - z,3)*(54*pow(l,5) - 252*pow(l,3)*pow(z,2) - 42*l*pow(z,4))*
+					 (-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
+					  12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
+					  50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
+					  76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
+					  35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) +
+					(168*pow(s + x - z,3)*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
+							       12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
+							       50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
+							       76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
+							       35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
+					(pow(l,4)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+					(140*pow(s + x - z,3)*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
+							       12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
+							       50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
+							       76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
+							       35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
+					(pow(l,6)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+					(7*pow(s + x - z,3)*(54*pow(l,5) - 252*pow(l,3)*pow(z,2) - 42*l*pow(z,4))*
+					 (-15*pow(l,10) - 165*pow(l,8)*pow(z,2) + 410*pow(l,6)*pow(z,4) - 90*pow(l,4)*pow(z,6) - 315*pow(l,2)*pow(z,8) +
+					  175*pow(z,10)))/(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*
+							   pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) +
+					(42*pow(s + x - z,3)*(-15*pow(l,10) - 165*pow(l,8)*pow(z,2) + 410*pow(l,6)*pow(z,4) - 90*pow(l,4)*pow(z,6) -
+							      315*pow(l,2)*pow(z,8) + 175*pow(z,10)))/
+					(pow(l,4)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+					(35*pow(s + x - z,3)*(-15*pow(l,10) - 165*pow(l,8)*pow(z,2) + 410*pow(l,6)*pow(z,4) - 90*pow(l,4)*pow(z,6) -
+							      315*pow(l,2)*pow(z,8) + 175*pow(z,10)))/
+					(pow(l,6)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+					(21*pow(s + x - z,2)*(54*pow(l,5) - 252*pow(l,3)*pow(z,2) - 42*l*pow(z,4))*
+					 (-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
+					  40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
+					  68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
+					  136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
+					  70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) +
+					(126*pow(s + x - z,2)*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
+							       40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
+							       68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
+							       136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
+							       70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
+					(pow(l,4)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+					(105*pow(s + x - z,2)*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
+							       40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
+							       68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
+							       136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
+							       70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
+					(pow(l,6)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+					(2*(s + x - z)*((-16*l*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),3) - (2*l*pow(r,2))/pow(pow(l,2) - pow(z,2),2)))/
+					(pow(l,2) - pow(z,2)) - (4*l*(s + x - z)*(c*r + (4*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),2) +
+										  pow(r,2)/(pow(l,2) - pow(z,2))))/pow(pow(l,2) - pow(z,2),2)) -
+      2*(s + x)*((-8*l*pow(r,2)*(s + x - z)*z)/pow(pow(l,2) - pow(z,2),3) - (2*l*pow(r,2))/pow(pow(l,2) - pow(z,2),2) -
+		 (7*pow(s + x - z,4)*(-150*pow(l,9) + 39*c*pow(l,12)*r + 198*pow(l,10)*pow(r,2) - 840*pow(l,7)*s*z - 480*pow(l,7)*pow(z,2) -
+				      132*c*pow(l,10)*r*pow(z,2) + 810*pow(l,8)*pow(r,2)*pow(z,2) + 840*pow(l,5)*s*pow(z,3) + 1620*pow(l,5)*pow(z,4) +
+				      450*c*pow(l,8)*r*pow(z,4) - 2310*pow(l,6)*pow(r,2)*pow(z,4) + 840*pow(l,3)*s*pow(z,5) - 1200*pow(l,3)*pow(z,6) -
+				      532*c*pow(l,6)*r*pow(z,6) + 1750*pow(l,4)*pow(r,2)*pow(z,6) - 840*l*s*pow(z,7) + 210*l*pow(z,8) + 175*c*pow(l,4)*r*pow(z,8)))
+		 /(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
+		 (7*pow(s + x - z,3)*(-150*pow(l,9)*s - 600*pow(l,9)*z + 78*c*pow(l,12)*r*z + 792*pow(l,10)*pow(r,2)*z - 1320*pow(l,7)*s*pow(z,2) +
+				      320*pow(l,7)*pow(z,3) - 88*c*pow(l,10)*r*pow(z,3) + 2460*pow(l,5)*s*pow(z,4) + 1440*pow(l,5)*pow(z,5) +
+				      612*c*pow(l,8)*r*pow(z,5) - 2184*pow(l,6)*pow(r,2)*pow(z,5) - 360*pow(l,3)*s*pow(z,6) - 1440*pow(l,3)*pow(z,7) -
+				      952*c*pow(l,6)*r*pow(z,7) + 2800*pow(l,4)*pow(r,2)*pow(z,7) - 630*l*s*pow(z,8) + 280*l*pow(z,9) + 350*c*pow(l,4)*r*pow(z,9)))
+		 /(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+		 (7*pow(s + x - z,4)*(54*pow(l,5) - 252*pow(l,3)*pow(z,2) - 42*l*pow(z,4))*
+		  (-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
+		   12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
+		   50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
+		   76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
+		   35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
+		 (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) +
+		 (42*pow(s + x - z,4)*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
+				       12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
+				       50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
+				       76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
+				       35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
+		 (pow(l,4)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+		 (35*pow(s + x - z,4)*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
+				       12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
+				       50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
+				       76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
+				       35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
+		 (pow(l,6)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+		 (7*pow(s + x - z,3)*(54*pow(l,5) - 252*pow(l,3)*pow(z,2) - 42*l*pow(z,4))*
+		  (-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
+		   40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
+		   68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
+		   136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
+		   70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
+		 (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) +
+		 (42*pow(s + x - z,3)*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
+				       40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
+				       68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
+				       136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
+				       70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
+		 (pow(l,4)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+		 (35*pow(s + x - z,3)*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
+				       40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
+				       68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
+				       136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
+				       70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
+		 (pow(l,6)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+		 (pow(s + x - z,2)*((-16*l*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),3) - (2*l*pow(r,2))/pow(pow(l,2) - pow(z,2),2)))/
+		 (pow(l,2) - pow(z,2)) - (2*l*pow(s + x - z,2)*(c*r + (4*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),2) +
+								pow(r,2)/(pow(l,2) - pow(z,2))))/pow(pow(l,2) - pow(z,2),2)) +
+      2*l*((2*pow(r,2)*z)/pow(pow(l,2) - pow(z,2),2) - (7*pow(s + x - z,4)*
+							(-105*pow(l,8)*z + 140*pow(l,6)*pow(z,3) + 210*pow(l,4)*pow(z,5) - 420*pow(l,2)*pow(z,7) + 175*pow(z,9)))/
+	   (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
+	   (28*pow(s + x - z,3)*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
+				 12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
+				 50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
+				 76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
+				 35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
+	   (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
+	   (7*pow(s + x - z,3)*(-15*pow(l,10) - 165*pow(l,8)*pow(z,2) + 410*pow(l,6)*pow(z,4) - 90*pow(l,4)*pow(z,6) -
+				315*pow(l,2)*pow(z,8) + 175*pow(z,10)))/
+	   (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
+	   (21*pow(s + x - z,2)*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
+				 40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
+				 68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
+				 136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
+				 70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
+	   (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+	   (2*(s + x - z)*(c*r + (4*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),2) + pow(r,2)/(pow(l,2) - pow(z,2))))/(pow(l,2) - pow(z,2)));
+  }
+  else if (label_i=='r'&&label_j=='r'){
+    result = (pow(l,2) - pow(s + x,2))*((4*(s + x - z)*z)/pow(pow(l,2) - pow(z,2),2) + 2/(pow(l,2) - pow(z,2)) -
+					(7*pow(s + x - z,4)*(36*pow(l,11) + 180*pow(l,9)*pow(z,2) - 660*pow(l,7)*pow(z,4) + 700*pow(l,5)*pow(z,6)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
+					(7*pow(s + x - z,3)*(144*pow(l,11)*z - 624*pow(l,7)*pow(z,5) + 1120*pow(l,5)*pow(z,7)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+					(pow(s + x - z,2)*((8*pow(z,2))/pow(pow(l,2) - pow(z,2),2) + 2/(pow(l,2) - pow(z,2))))/(pow(l,2) - pow(z,2)));
+  }
+  else if(label_i=='r'&&label_j=='z'){
+    result = (pow(l,2) - pow(s + x,2))*((16*r*(s + x - z)*pow(z,2))/pow(pow(l,2) - pow(z,2),3) + (4*r*(s + x - z))/pow(pow(l,2) - pow(z,2),2) -
+					(7*pow(s + x - z,4)*(-24*c*pow(l,11)*z + 360*pow(l,9)*r*z + 200*c*pow(l,9)*pow(z,3) - 2640*pow(l,7)*r*pow(z,3) -
+							     456*c*pow(l,7)*pow(z,5) + 4200*pow(l,5)*r*pow(z,5) + 280*c*pow(l,5)*pow(z,7)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+					(7*pow(s + x - z,4)*(-126*pow(l,4)*z - 84*pow(l,2)*pow(z,3) - 1470*pow(z,5))*
+					 (3*c*pow(l,13) + 36*pow(l,11)*r - 12*c*pow(l,11)*pow(z,2) + 180*pow(l,9)*r*pow(z,2) + 50*c*pow(l,9)*pow(z,4) -
+					  660*pow(l,7)*r*pow(z,4) - 76*c*pow(l,7)*pow(z,6) + 700*pow(l,5)*r*pow(z,6) + 35*c*pow(l,5)*pow(z,8)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) -
+					(42*pow(s + x - z,4)*z*(3*c*pow(l,13) + 36*pow(l,11)*r - 12*c*pow(l,11)*pow(z,2) + 180*pow(l,9)*r*pow(z,2) +
+								50*c*pow(l,9)*pow(z,4) - 660*pow(l,7)*r*pow(z,4) - 76*c*pow(l,7)*pow(z,6) + 700*pow(l,5)*r*pow(z,6) + 35*c*pow(l,5)*pow(z,8)
+								))/(pow(l,5)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+					(28*pow(s + x - z,3)*(3*c*pow(l,13) + 36*pow(l,11)*r - 12*c*pow(l,11)*pow(z,2) + 180*pow(l,9)*r*pow(z,2) +
+							      50*c*pow(l,9)*pow(z,4) - 660*pow(l,7)*r*pow(z,4) - 76*c*pow(l,7)*pow(z,6) + 700*pow(l,5)*r*pow(z,6) + 35*c*pow(l,5)*pow(z,8)
+							      ))/(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
+					(7*pow(s + x - z,3)*(6*c*pow(l,13) + 144*pow(l,11)*r - 24*c*pow(l,11)*pow(z,2) + 340*c*pow(l,9)*pow(z,4) -
+							     3120*pow(l,7)*r*pow(z,4) - 952*c*pow(l,7)*pow(z,6) + 7840*pow(l,5)*r*pow(z,6) + 630*c*pow(l,5)*pow(z,8)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+					(7*pow(s + x - z,3)*(-126*pow(l,4)*z - 84*pow(l,2)*pow(z,3) - 1470*pow(z,5))*
+					 (6*c*pow(l,13)*z + 144*pow(l,11)*r*z - 8*c*pow(l,11)*pow(z,3) + 68*c*pow(l,9)*pow(z,5) - 624*pow(l,7)*r*pow(z,5) -
+					  136*c*pow(l,7)*pow(z,7) + 1120*pow(l,5)*r*pow(z,7) + 70*c*pow(l,5)*pow(z,9)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) -
+					(42*pow(s + x - z,3)*z*(6*c*pow(l,13)*z + 144*pow(l,11)*r*z - 8*c*pow(l,11)*pow(z,3) + 68*c*pow(l,9)*pow(z,5) -
+								624*pow(l,7)*r*pow(z,5) - 136*c*pow(l,7)*pow(z,7) + 1120*pow(l,5)*r*pow(z,7) + 70*c*pow(l,5)*pow(z,9)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+					(21*pow(s + x - z,2)*(6*c*pow(l,13)*z + 144*pow(l,11)*r*z - 8*c*pow(l,11)*pow(z,3) + 68*c*pow(l,9)*pow(z,5) -
+							      624*pow(l,7)*r*pow(z,5) - 136*c*pow(l,7)*pow(z,7) + 1120*pow(l,5)*r*pow(z,7) + 70*c*pow(l,5)*pow(z,9)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+					(pow(s + x - z,2)*((32*r*pow(z,3))/pow(pow(l,2) - pow(z,2),3) + (20*r*z)/pow(pow(l,2) - pow(z,2),2)))/(pow(l,2) - pow(z,2)) +
+					(2*pow(s + x - z,2)*z*(c + (8*r*pow(z,2))/pow(pow(l,2) - pow(z,2),2) + (2*r)/(pow(l,2) - pow(z,2))))/
+					pow(pow(l,2) - pow(z,2),2) - (2*(s + x - z)*(c + (8*r*pow(z,2))/pow(pow(l,2) - pow(z,2),2) + (2*r)/(pow(l,2) - pow(z,2))))/
+					(pow(l,2) - pow(z,2)));
+  }
+  else if (label_i=='r'&&label_j=='c'){
+    result = (pow(l,2) - pow(s + x,2))*(pow(s + x - z,2)/(pow(l,2) - pow(z,2)) -
+					(7*pow(s + x - z,4)*(3*pow(l,13) - 12*pow(l,11)*pow(z,2) + 50*pow(l,9)*pow(z,4) - 76*pow(l,7)*pow(z,6) + 35*pow(l,5)*pow(z,8)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
+					(7*pow(s + x - z,3)*(6*pow(l,13)*z - 8*pow(l,11)*pow(z,3) + 68*pow(l,9)*pow(z,5) - 136*pow(l,7)*pow(z,7) +
+							     70*pow(l,5)*pow(z,9)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))));
+  }
+  else if (label_i=='r'&&label_j=='s'){
+    result = (pow(l,2) - pow(s + x,2))*((4*r*z)/pow(pow(l,2) - pow(z,2),2) -
+					(28*pow(s + x - z,3)*(3*c*pow(l,13) + 36*pow(l,11)*r - 12*c*pow(l,11)*pow(z,2) + 180*pow(l,9)*r*pow(z,2) +
+							      50*c*pow(l,9)*pow(z,4) - 660*pow(l,7)*r*pow(z,4) - 76*c*pow(l,7)*pow(z,6) + 700*pow(l,5)*r*pow(z,6) +
+							      35*c*pow(l,5)*pow(z,8)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
+					(21*pow(s + x - z,2)*(6*c*pow(l,13)*z + 144*pow(l,11)*r*z - 8*c*pow(l,11)*pow(z,3) + 68*c*pow(l,9)*pow(z,5) -
+							      624*pow(l,7)*r*pow(z,5) - 136*c*pow(l,7)*pow(z,7) + 1120*pow(l,5)*r*pow(z,7) + 70*c*pow(l,5)*pow(z,9)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+					(2*(s + x - z)*(c + (8*r*pow(z,2))/pow(pow(l,2) - pow(z,2),2) + (2*r)/(pow(l,2) - pow(z,2))))/(pow(l,2) - pow(z,2))) -
+      2*(s + x)*((4*r*(s + x - z)*z)/pow(pow(l,2) - pow(z,2),2) + (2*r)/(pow(l,2) - pow(z,2)) -
+		 (7*pow(s + x - z,4)*(3*c*pow(l,13) + 36*pow(l,11)*r - 12*c*pow(l,11)*pow(z,2) + 180*pow(l,9)*r*pow(z,2) +
+				      50*c*pow(l,9)*pow(z,4) - 660*pow(l,7)*r*pow(z,4) - 76*c*pow(l,7)*pow(z,6) + 700*pow(l,5)*r*pow(z,6) +
+				      35*c*pow(l,5)*pow(z,8)))/
+		 (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
+		 (7*pow(s + x - z,3)*(6*c*pow(l,13)*z + 144*pow(l,11)*r*z - 8*c*pow(l,11)*pow(z,3) + 68*c*pow(l,9)*pow(z,5) -
+				      624*pow(l,7)*r*pow(z,5) - 136*c*pow(l,7)*pow(z,7) + 1120*pow(l,5)*r*pow(z,7) + 70*c*pow(l,5)*pow(z,9)))/
+		 (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+		 (pow(s + x - z,2)*(c + (8*r*pow(z,2))/pow(pow(l,2) - pow(z,2),2) + (2*r)/(pow(l,2) - pow(z,2))))/(pow(l,2) - pow(z,2)));
+  }
+  else if (label_i=='z'&&label_j=='z'){
+    result = (pow(l,2) - pow(s + x,2))*((48*pow(r,2)*(s + x - z)*pow(z,3))/pow(pow(l,2) - pow(z,2),4) +
+					(24*pow(r,2)*(s + x - z)*z)/pow(pow(l,2) - pow(z,2),3) - (8*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),3) -
+					(2*pow(r,2))/pow(pow(l,2) - pow(z,2),2) - (7*pow(s + x - z,4)*
+										   (-120*pow(l,8) - 24*c*pow(l,11)*r + 180*pow(l,9)*pow(r,2) + 840*pow(l,6)*s*z + 3240*pow(l,6)*pow(z,2) +
+										    600*c*pow(l,9)*r*pow(z,2) - 3960*pow(l,7)*pow(r,2)*pow(z,2) + 4200*pow(l,4)*s*pow(z,3) - 9000*pow(l,4)*pow(z,4) -
+										    2280*c*pow(l,7)*r*pow(z,4) + 10500*pow(l,5)*pow(r,2)*pow(z,4) - 17640*pow(l,2)*s*pow(z,5) + 5880*pow(l,2)*pow(z,6) +
+										    1960*c*pow(l,5)*r*pow(z,6) + 12600*s*pow(z,7)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+					(14*pow(s + x - z,4)*(-126*pow(l,4)*z - 84*pow(l,2)*pow(z,3) - 1470*pow(z,5))*
+					 (-105*pow(l,8)*s - 120*pow(l,8)*z - 24*c*pow(l,11)*r*z + 180*pow(l,9)*pow(r,2)*z + 420*pow(l,6)*s*pow(z,2) +
+					  1080*pow(l,6)*pow(z,3) + 200*c*pow(l,9)*r*pow(z,3) - 1320*pow(l,7)*pow(r,2)*pow(z,3) + 1050*pow(l,4)*s*pow(z,4) -
+					  1800*pow(l,4)*pow(z,5) - 456*c*pow(l,7)*r*pow(z,5) + 2100*pow(l,5)*pow(r,2)*pow(z,5) - 2940*pow(l,2)*s*pow(z,6) +
+					  840*pow(l,2)*pow(z,7) + 280*c*pow(l,5)*r*pow(z,7) + 1575*s*pow(z,8)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) -
+					(84*pow(s + x - z,4)*z*(-105*pow(l,8)*s - 120*pow(l,8)*z - 24*c*pow(l,11)*r*z + 180*pow(l,9)*pow(r,2)*z + 420*pow(l,6)*s*pow(z,2) +
+								1080*pow(l,6)*pow(z,3) + 200*c*pow(l,9)*r*pow(z,3) - 1320*pow(l,7)*pow(r,2)*pow(z,3) + 1050*pow(l,4)*s*pow(z,4) -
+								1800*pow(l,4)*pow(z,5) - 456*c*pow(l,7)*r*pow(z,5) + 2100*pow(l,5)*pow(r,2)*pow(z,5) - 2940*pow(l,2)*s*pow(z,6) +
+								840*pow(l,2)*pow(z,7) + 280*c*pow(l,5)*r*pow(z,7) + 1575*s*pow(z,8)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+					(56*pow(s + x - z,3)*(-105*pow(l,8)*s - 120*pow(l,8)*z - 24*c*pow(l,11)*r*z + 180*pow(l,9)*pow(r,2)*z + 420*pow(l,6)*s*pow(z,2) +
+							      1080*pow(l,6)*pow(z,3) + 200*c*pow(l,9)*r*pow(z,3) - 1320*pow(l,7)*pow(r,2)*pow(z,3) + 1050*pow(l,4)*s*pow(z,4) -
+							      1800*pow(l,4)*pow(z,5) - 456*c*pow(l,7)*r*pow(z,5) + 2100*pow(l,5)*pow(r,2)*pow(z,5) - 2940*pow(l,2)*s*pow(z,6) +
+							      840*pow(l,2)*pow(z,7) + 280*c*pow(l,5)*r*pow(z,7) + 1575*s*pow(z,8)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
+					(7*pow(s + x - z,3)*(-330*pow(l,8)*s + 240*pow(l,8)*z - 48*c*pow(l,11)*r*z + 4920*pow(l,6)*s*pow(z,2) + 4800*pow(l,6)*pow(z,3) +
+							     1360*c*pow(l,9)*r*pow(z,3) - 6240*pow(l,7)*pow(r,2)*pow(z,3) - 2700*pow(l,4)*s*pow(z,4) - 15120*pow(l,4)*pow(z,5) -
+							     5712*c*pow(l,7)*r*pow(z,5) + 23520*pow(l,5)*pow(r,2)*pow(z,5) - 17640*pow(l,2)*s*pow(z,6) + 10080*pow(l,2)*pow(z,7) +
+							     5040*c*pow(l,5)*r*pow(z,7) + 15750*s*pow(z,8)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
+					(14*pow(s + x - z,4)*pow(-126*pow(l,4)*z - 84*pow(l,2)*pow(z,3) - 1470*pow(z,5),2)*
+					 (-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
+					  12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
+					  50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
+					  76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
+					  35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),3)) +
+					(7*pow(s + x - z,4)*(-126*pow(l,4) - 252*pow(l,2)*pow(z,2) - 7350*pow(z,4))*
+					 (-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
+					  12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
+					  50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
+					  76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
+					  35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) +
+					(84*pow(s + x - z,4)*z*(-126*pow(l,4)*z - 84*pow(l,2)*pow(z,3) - 1470*pow(z,5))*
+					 (-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
+					  12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
+					  50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
+					  76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
+					  35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),4)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) -
+					(56*pow(s + x - z,3)*(-126*pow(l,4)*z - 84*pow(l,2)*pow(z,3) - 1470*pow(z,5))*
+					 (-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
+					  12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
+					  50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
+					  76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
+					  35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) -
+					(336*pow(s + x - z,4)*pow(z,2)*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z -
+									60*pow(l,8)*pow(z,2) - 12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) +
+									270*pow(l,6)*pow(z,4) + 50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) -
+									300*pow(l,4)*pow(z,6) - 76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) +
+									105*pow(l,2)*pow(z,8) + 35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),5)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
+					(42*pow(s + x - z,4)*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
+							      12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
+							      50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
+							      76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
+							      35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+					(336*pow(s + x - z,3)*z*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
+								 12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
+								 50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
+								 76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
+								 35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
+					(84*pow(s + x - z,2)*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
+							      12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
+							      50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
+							      76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
+							      35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+					(14*pow(s + x - z,3)*(-126*pow(l,4)*z - 84*pow(l,2)*pow(z,3) - 1470*pow(z,5))*
+					 (-60*pow(l,10) + 6*c*pow(l,13)*r + 72*pow(l,11)*pow(r,2) - 330*pow(l,8)*s*z + 120*pow(l,8)*pow(z,2) -
+					  24*c*pow(l,11)*r*pow(z,2) + 1640*pow(l,6)*s*pow(z,3) + 1200*pow(l,6)*pow(z,4) + 340*c*pow(l,9)*r*pow(z,4) -
+					  1560*pow(l,7)*pow(r,2)*pow(z,4) - 540*pow(l,4)*s*pow(z,5) - 2520*pow(l,4)*pow(z,6) - 952*c*pow(l,7)*r*pow(z,6) +
+					  3920*pow(l,5)*pow(r,2)*pow(z,6) - 2520*pow(l,2)*s*pow(z,7) + 1260*pow(l,2)*pow(z,8) + 630*c*pow(l,5)*r*pow(z,8) +
+					  1750*s*pow(z,9)))/(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*
+							     pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) -
+					(84*pow(s + x - z,3)*z*(-60*pow(l,10) + 6*c*pow(l,13)*r + 72*pow(l,11)*pow(r,2) - 330*pow(l,8)*s*z + 120*pow(l,8)*pow(z,2) -
+								24*c*pow(l,11)*r*pow(z,2) + 1640*pow(l,6)*s*pow(z,3) + 1200*pow(l,6)*pow(z,4) + 340*c*pow(l,9)*r*pow(z,4) -
+								1560*pow(l,7)*pow(r,2)*pow(z,4) - 540*pow(l,4)*s*pow(z,5) - 2520*pow(l,4)*pow(z,6) - 952*c*pow(l,7)*r*pow(z,6) +
+								3920*pow(l,5)*pow(r,2)*pow(z,6) - 2520*pow(l,2)*s*pow(z,7) + 1260*pow(l,2)*pow(z,8) + 630*c*pow(l,5)*r*pow(z,8) +
+								1750*s*pow(z,9)))/(pow(l,5)*pow(pow(l,2) - pow(z,2),4)*
+										   (9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+					(42*pow(s + x - z,2)*(-60*pow(l,10) + 6*c*pow(l,13)*r + 72*pow(l,11)*pow(r,2) - 330*pow(l,8)*s*z + 120*pow(l,8)*pow(z,2) -
+							      24*c*pow(l,11)*r*pow(z,2) + 1640*pow(l,6)*s*pow(z,3) + 1200*pow(l,6)*pow(z,4) + 340*c*pow(l,9)*r*pow(z,4) -
+							      1560*pow(l,7)*pow(r,2)*pow(z,4) - 540*pow(l,4)*s*pow(z,5) - 2520*pow(l,4)*pow(z,6) - 952*c*pow(l,7)*r*pow(z,6) +
+							      3920*pow(l,5)*pow(r,2)*pow(z,6) - 2520*pow(l,2)*s*pow(z,7) + 1260*pow(l,2)*pow(z,8) + 630*c*pow(l,5)*r*pow(z,8) +
+							      1750*s*pow(z,9)))/(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*
+										 (9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
+					(14*pow(s + x - z,3)*pow(-126*pow(l,4)*z - 84*pow(l,2)*pow(z,3) - 1470*pow(z,5),2)*
+					 (-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
+					  40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
+					  68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
+					  136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
+					  70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),3)) +
+					(7*pow(s + x - z,3)*(-126*pow(l,4) - 252*pow(l,2)*pow(z,2) - 7350*pow(z,4))*
+					 (-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
+					  40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
+					  68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
+					  136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
+					  70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) +
+					(84*pow(s + x - z,3)*z*(-126*pow(l,4)*z - 84*pow(l,2)*pow(z,3) - 1470*pow(z,5))*
+					 (-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
+					  40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
+					  68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
+					  136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
+					  70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),4)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) -
+					(42*pow(s + x - z,2)*(-126*pow(l,4)*z - 84*pow(l,2)*pow(z,3) - 1470*pow(z,5))*
+					 (-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
+					  40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
+					  68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
+					  136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
+					  70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) -
+					(336*pow(s + x - z,3)*pow(z,2)*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z -
+									165*pow(l,8)*s*pow(z,2) + 40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) +
+									240*pow(l,6)*pow(z,5) + 68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) -
+									360*pow(l,4)*pow(z,7) - 136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) +
+									140*pow(l,2)*pow(z,9) + 70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),5)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
+					(42*pow(s + x - z,3)*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
+							      40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
+							      68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
+							      136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
+							      70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+					(252*pow(s + x - z,2)*z*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
+								 40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
+								 68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
+								 136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
+								 70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
+					(42*(s + x - z)*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
+							 40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
+							 68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
+							 136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
+							 70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+					(pow(s + x - z,2)*((96*pow(r,2)*pow(z,4))/pow(pow(l,2) - pow(z,2),4) + (88*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),3) +
+							   (10*pow(r,2))/pow(pow(l,2) - pow(z,2),2)))/(pow(l,2) - pow(z,2)) +
+					(4*pow(s + x - z,2)*z*((16*pow(r,2)*pow(z,3))/pow(pow(l,2) - pow(z,2),3) + (10*pow(r,2)*z)/pow(pow(l,2) - pow(z,2),2)))/
+					pow(pow(l,2) - pow(z,2),2) - (4*(s + x - z)*((16*pow(r,2)*pow(z,3))/pow(pow(l,2) - pow(z,2),3) +
+										     (10*pow(r,2)*z)/pow(pow(l,2) - pow(z,2),2)))/(pow(l,2) - pow(z,2)) +
+					(8*pow(s + x - z,2)*pow(z,2)*(c*r + (4*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),2) + pow(r,2)/(pow(l,2) - pow(z,2))))/
+					pow(pow(l,2) - pow(z,2),3) + (2*pow(s + x - z,2)*
+								      (c*r + (4*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),2) + pow(r,2)/(pow(l,2) - pow(z,2))))/pow(pow(l,2) - pow(z,2),2) -
+					(8*(s + x - z)*z*(c*r + (4*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),2) + pow(r,2)/(pow(l,2) - pow(z,2))))/
+					pow(pow(l,2) - pow(z,2),2) + (2*(c*r + (4*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),2) + pow(r,2)/(pow(l,2) - pow(z,2))))/
+					(pow(l,2) - pow(z,2)));
+  }
+  else if (label_i=='z'&&label_j=='c'){
+    result = (pow(l,2) - pow(s + x,2))*((2*r*pow(s + x - z,2)*z)/pow(pow(l,2) - pow(z,2),2) - (2*r*(s + x - z))/(pow(l,2) - pow(z,2)) -
+					(7*pow(s + x - z,4)*(-24*pow(l,11)*r*z + 200*pow(l,9)*r*pow(z,3) - 456*pow(l,7)*r*pow(z,5) + 280*pow(l,5)*r*pow(z,7)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+					(7*pow(s + x - z,4)*(-126*pow(l,4)*z - 84*pow(l,2)*pow(z,3) - 1470*pow(z,5))*
+					 (3*pow(l,13)*r - 12*pow(l,11)*r*pow(z,2) + 50*pow(l,9)*r*pow(z,4) - 76*pow(l,7)*r*pow(z,6) + 35*pow(l,5)*r*pow(z,8)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) -
+					(42*pow(s + x - z,4)*z*(3*pow(l,13)*r - 12*pow(l,11)*r*pow(z,2) + 50*pow(l,9)*r*pow(z,4) - 76*pow(l,7)*r*pow(z,6) +
+								35*pow(l,5)*r*pow(z,8)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+					(28*pow(s + x - z,3)*(3*pow(l,13)*r - 12*pow(l,11)*r*pow(z,2) + 50*pow(l,9)*r*pow(z,4) - 76*pow(l,7)*r*pow(z,6) +
+							      35*pow(l,5)*r*pow(z,8)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
+					(7*pow(s + x - z,3)*(6*pow(l,13)*r - 24*pow(l,11)*r*pow(z,2) + 340*pow(l,9)*r*pow(z,4) - 952*pow(l,7)*r*pow(z,6) +
+							     630*pow(l,5)*r*pow(z,8)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+					(7*pow(s + x - z,3)*(-126*pow(l,4)*z - 84*pow(l,2)*pow(z,3) - 1470*pow(z,5))*
+					 (6*pow(l,13)*r*z - 8*pow(l,11)*r*pow(z,3) + 68*pow(l,9)*r*pow(z,5) - 136*pow(l,7)*r*pow(z,7) + 70*pow(l,5)*r*pow(z,9)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) -
+					(42*pow(s + x - z,3)*z*(6*pow(l,13)*r*z - 8*pow(l,11)*r*pow(z,3) + 68*pow(l,9)*r*pow(z,5) - 136*pow(l,7)*r*pow(z,7) +
+								70*pow(l,5)*r*pow(z,9)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+					(21*pow(s + x - z,2)*(6*pow(l,13)*r*z - 8*pow(l,11)*r*pow(z,3) + 68*pow(l,9)*r*pow(z,5) - 136*pow(l,7)*r*pow(z,7) +
+							      70*pow(l,5)*r*pow(z,9)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))));
+  }
+  else if (label_i=='z'&&label_j=='s'){
+    result = (pow(l,2) - pow(s + x,2))*((8*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),3) + (2*pow(r,2))/pow(pow(l,2) - pow(z,2),2) -
+					(7*pow(s + x - z,4)*(-105*pow(l,8) + 420*pow(l,6)*pow(z,2) + 1050*pow(l,4)*pow(z,4) - 2940*pow(l,2)*pow(z,6) + 1575*pow(z,8)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
+					(28*pow(s + x - z,3)*(-105*pow(l,8)*s - 120*pow(l,8)*z - 24*c*pow(l,11)*r*z + 180*pow(l,9)*pow(r,2)*z + 420*pow(l,6)*s*pow(z,2) +
+							      1080*pow(l,6)*pow(z,3) + 200*c*pow(l,9)*r*pow(z,3) - 1320*pow(l,7)*pow(r,2)*pow(z,3) + 1050*pow(l,4)*s*pow(z,4) -
+							      1800*pow(l,4)*pow(z,5) - 456*c*pow(l,7)*r*pow(z,5) + 2100*pow(l,5)*pow(r,2)*pow(z,5) - 2940*pow(l,2)*s*pow(z,6) +
+							      840*pow(l,2)*pow(z,7) + 280*c*pow(l,5)*r*pow(z,7) + 1575*s*pow(z,8)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+					(7*pow(s + x - z,4)*(-126*pow(l,4)*z - 84*pow(l,2)*pow(z,3) - 1470*pow(z,5))*
+					 (-105*pow(l,8)*z + 140*pow(l,6)*pow(z,3) + 210*pow(l,4)*pow(z,5) - 420*pow(l,2)*pow(z,7) + 175*pow(z,9)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) -
+					(42*pow(s + x - z,4)*z*(-105*pow(l,8)*z + 140*pow(l,6)*pow(z,3) + 210*pow(l,4)*pow(z,5) - 420*pow(l,2)*pow(z,7) + 175*pow(z,9)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+					(28*pow(s + x - z,3)*(-105*pow(l,8)*z + 140*pow(l,6)*pow(z,3) + 210*pow(l,4)*pow(z,5) - 420*pow(l,2)*pow(z,7) + 175*pow(z,9)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
+					(7*pow(s + x - z,3)*(-330*pow(l,8)*z + 1640*pow(l,6)*pow(z,3) - 540*pow(l,4)*pow(z,5) - 2520*pow(l,2)*pow(z,7) + 1750*pow(z,9)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+					(28*pow(s + x - z,3)*(-126*pow(l,4)*z - 84*pow(l,2)*pow(z,3) - 1470*pow(z,5))*
+					 (-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
+					  12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
+					  50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
+					  76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
+					  35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) -
+					(168*pow(s + x - z,3)*z*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
+								 12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
+								 50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
+								 76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
+								 35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+					(84*pow(s + x - z,2)*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
+							      12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
+							      50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
+							      76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
+							      35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
+					(21*pow(s + x - z,2)*(-60*pow(l,10) + 6*c*pow(l,13)*r + 72*pow(l,11)*pow(r,2) - 330*pow(l,8)*s*z + 120*pow(l,8)*pow(z,2) -
+							      24*c*pow(l,11)*r*pow(z,2) + 1640*pow(l,6)*s*pow(z,3) + 1200*pow(l,6)*pow(z,4) + 340*c*pow(l,9)*r*pow(z,4) -
+							      1560*pow(l,7)*pow(r,2)*pow(z,4) - 540*pow(l,4)*s*pow(z,5) - 2520*pow(l,4)*pow(z,6) - 952*c*pow(l,7)*r*pow(z,6) +
+							      3920*pow(l,5)*pow(r,2)*pow(z,6) - 2520*pow(l,2)*s*pow(z,7) + 1260*pow(l,2)*pow(z,8) + 630*c*pow(l,5)*r*pow(z,8) +
+							      1750*s*pow(z,9)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+					(7*pow(s + x - z,3)*(-126*pow(l,4)*z - 84*pow(l,2)*pow(z,3) - 1470*pow(z,5))*
+					 (-15*pow(l,10) - 165*pow(l,8)*pow(z,2) + 410*pow(l,6)*pow(z,4) - 90*pow(l,4)*pow(z,6) - 315*pow(l,2)*pow(z,8) +
+					  175*pow(z,10)))/(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*
+							   pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) -
+					(42*pow(s + x - z,3)*z*(-15*pow(l,10) - 165*pow(l,8)*pow(z,2) + 410*pow(l,6)*pow(z,4) - 90*pow(l,4)*pow(z,6) -
+								315*pow(l,2)*pow(z,8) + 175*pow(z,10)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+					(21*pow(s + x - z,2)*(-15*pow(l,10) - 165*pow(l,8)*pow(z,2) + 410*pow(l,6)*pow(z,4) - 90*pow(l,4)*pow(z,6) -
+							      315*pow(l,2)*pow(z,8) + 175*pow(z,10)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+					(21*pow(s + x - z,2)*(-126*pow(l,4)*z - 84*pow(l,2)*pow(z,3) - 1470*pow(z,5))*
+					 (-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
+					  40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
+					  68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
+					  136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
+					  70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) -
+					(126*pow(s + x - z,2)*z*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
+								 40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
+								 68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
+								 136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
+								 70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+					(42*(s + x - z)*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
+							 40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
+							 68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
+							 136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
+							 70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+					(2*(s + x - z)*((16*pow(r,2)*pow(z,3))/pow(pow(l,2) - pow(z,2),3) + (10*pow(r,2)*z)/pow(pow(l,2) - pow(z,2),2)))/
+					(pow(l,2) - pow(z,2)) + (4*(s + x - z)*z*(c*r + (4*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),2) +
+										  pow(r,2)/(pow(l,2) - pow(z,2))))/pow(pow(l,2) - pow(z,2),2) -
+					(2*(c*r + (4*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),2) + pow(r,2)/(pow(l,2) - pow(z,2))))/(pow(l,2) - pow(z,2))) -
+      2*(s + x)*((8*pow(r,2)*(s + x - z)*pow(z,2))/pow(pow(l,2) - pow(z,2),3) + (2*pow(r,2)*(s + x - z))/pow(pow(l,2) - pow(z,2),2) -
+		 (7*pow(s + x - z,4)*(-105*pow(l,8)*s - 120*pow(l,8)*z - 24*c*pow(l,11)*r*z + 180*pow(l,9)*pow(r,2)*z + 420*pow(l,6)*s*pow(z,2) +
+				      1080*pow(l,6)*pow(z,3) + 200*c*pow(l,9)*r*pow(z,3) - 1320*pow(l,7)*pow(r,2)*pow(z,3) + 1050*pow(l,4)*s*pow(z,4) -
+				      1800*pow(l,4)*pow(z,5) - 456*c*pow(l,7)*r*pow(z,5) + 2100*pow(l,5)*pow(r,2)*pow(z,5) - 2940*pow(l,2)*s*pow(z,6) +
+				      840*pow(l,2)*pow(z,7) + 280*c*pow(l,5)*r*pow(z,7) + 1575*s*pow(z,8)))/
+		 (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+		 (7*pow(s + x - z,4)*(-126*pow(l,4)*z - 84*pow(l,2)*pow(z,3) - 1470*pow(z,5))*
+		  (-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
+		   12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
+		   50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
+		   76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
+		   35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
+		 (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) -
+		 (42*pow(s + x - z,4)*z*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
+					 12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
+					 50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
+					 76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
+					 35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
+		 (pow(l,5)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+		 (28*pow(s + x - z,3)*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
+				       12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
+				       50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
+				       76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
+				       35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
+		 (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
+		 (7*pow(s + x - z,3)*(-60*pow(l,10) + 6*c*pow(l,13)*r + 72*pow(l,11)*pow(r,2) - 330*pow(l,8)*s*z + 120*pow(l,8)*pow(z,2) -
+				      24*c*pow(l,11)*r*pow(z,2) + 1640*pow(l,6)*s*pow(z,3) + 1200*pow(l,6)*pow(z,4) + 340*c*pow(l,9)*r*pow(z,4) -
+				      1560*pow(l,7)*pow(r,2)*pow(z,4) - 540*pow(l,4)*s*pow(z,5) - 2520*pow(l,4)*pow(z,6) - 952*c*pow(l,7)*r*pow(z,6) +
+				      3920*pow(l,5)*pow(r,2)*pow(z,6) - 2520*pow(l,2)*s*pow(z,7) + 1260*pow(l,2)*pow(z,8) + 630*c*pow(l,5)*r*pow(z,8) +
+				      1750*s*pow(z,9)))/
+		 (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+		 (7*pow(s + x - z,3)*(-126*pow(l,4)*z - 84*pow(l,2)*pow(z,3) - 1470*pow(z,5))*
+		  (-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
+		   40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
+		   68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
+		   136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
+		   70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
+		 (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*pow(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6),2)) -
+		 (42*pow(s + x - z,3)*z*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
+					 40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
+					 68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
+					 136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
+					 70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
+		 (pow(l,5)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+		 (21*pow(s + x - z,2)*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
+				       40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
+				       68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
+				       136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
+				       70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
+		 (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+		 (pow(s + x - z,2)*((16*pow(r,2)*pow(z,3))/pow(pow(l,2) - pow(z,2),3) + (10*pow(r,2)*z)/pow(pow(l,2) - pow(z,2),2)))/
+		 (pow(l,2) - pow(z,2)) + (2*pow(s + x - z,2)*z*(c*r + (4*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),2) +
+								pow(r,2)/(pow(l,2) - pow(z,2))))/pow(pow(l,2) - pow(z,2),2) -
+		 (2*(s + x - z)*(c*r + (4*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),2) + pow(r,2)/(pow(l,2) - pow(z,2))))/(pow(l,2) - pow(z,2)));
+  }
+  else if (label_i=='c'&&label_j=='c'){
+    result = 0.;
+  }
+  else if (label_i=='c'&&label_j=='s'){
+    result = (pow(l,2) - pow(s + x,2))*((2*r*(s + x - z))/(pow(l,2) - pow(z,2)) -
+					(28*pow(s + x - z,3)*(3*pow(l,13)*r - 12*pow(l,11)*r*pow(z,2) + 50*pow(l,9)*r*pow(z,4) - 76*pow(l,7)*r*pow(z,6) +
+							      35*pow(l,5)*r*pow(z,8)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
+					(21*pow(s + x - z,2)*(6*pow(l,13)*r*z - 8*pow(l,11)*r*pow(z,3) + 68*pow(l,9)*r*pow(z,5) - 136*pow(l,7)*r*pow(z,7) +
+							      70*pow(l,5)*r*pow(z,9)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6)))) -
+      2*(s + x)*((r*pow(s + x - z,2))/(pow(l,2) - pow(z,2)) -
+		 (7*pow(s + x - z,4)*(3*pow(l,13)*r - 12*pow(l,11)*r*pow(z,2) + 50*pow(l,9)*r*pow(z,4) - 76*pow(l,7)*r*pow(z,6) +
+				      35*pow(l,5)*r*pow(z,8)))/
+		 (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
+		 (7*pow(s + x - z,3)*(6*pow(l,13)*r*z - 8*pow(l,11)*r*pow(z,3) + 68*pow(l,9)*r*pow(z,5) - 136*pow(l,7)*r*pow(z,7) +
+				      70*pow(l,5)*r*pow(z,9)))/
+		 (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))));
+  }
+  else{
+    result = (pow(l,2) - pow(s + x,2))*((-56*pow(s + x - z,3)*(-105*pow(l,8)*z + 140*pow(l,6)*pow(z,3) + 210*pow(l,4)*pow(z,5) -
+							       420*pow(l,2)*pow(z,7) + 175*pow(z,9)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
+					(84*pow(s + x - z,2)*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
+							      12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
+							      50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
+							      76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
+							      35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
+					(42*pow(s + x - z,2)*(-15*pow(l,10) - 165*pow(l,8)*pow(z,2) + 410*pow(l,6)*pow(z,4) - 90*pow(l,4)*pow(z,6) -
+							      315*pow(l,2)*pow(z,8) + 175*pow(z,10)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
+					(42*(s + x - z)*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
+							 40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
+							 68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
+							 136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
+							 70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
+					(pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+					(2*(c*r + (4*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),2) + pow(r,2)/(pow(l,2) - pow(z,2))))/(pow(l,2) - pow(z,2))) -
+      4*(s + x)*((2*pow(r,2)*z)/pow(pow(l,2) - pow(z,2),2) -
+		 (7*pow(s + x - z,4)*(-105*pow(l,8)*z + 140*pow(l,6)*pow(z,3) + 210*pow(l,4)*pow(z,5) - 420*pow(l,2)*pow(z,7) + 175*pow(z,9)))/
+		 (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
+		 (28*pow(s + x - z,3)*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
+				       12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
+				       50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
+				       76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
+				       35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
+		 (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
+		 (7*pow(s + x - z,3)*(-15*pow(l,10) - 165*pow(l,8)*pow(z,2) + 410*pow(l,6)*pow(z,4) - 90*pow(l,4)*pow(z,6) -
+				      315*pow(l,2)*pow(z,8) + 175*pow(z,10)))/
+		 (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
+		 (21*pow(s + x - z,2)*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
+				       40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
+				       68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
+				       136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
+				       70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
+		 (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+		 (2*(s + x - z)*(c*r + (4*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),2) + pow(r,2)/(pow(l,2) - pow(z,2))))/(pow(l,2) - pow(z,2)))
+      - 2*((2*pow(r,2)*(s + x - z)*z)/pow(pow(l,2) - pow(z,2),2) + pow(r,2)/(pow(l,2) - pow(z,2)) -
+	   (7*pow(s + x - z,4)*(-15*pow(l,10) + 3*c*pow(l,13)*r + 18*pow(l,11)*pow(r,2) - 105*pow(l,8)*s*z - 60*pow(l,8)*pow(z,2) -
+				12*c*pow(l,11)*r*pow(z,2) + 90*pow(l,9)*pow(r,2)*pow(z,2) + 140*pow(l,6)*s*pow(z,3) + 270*pow(l,6)*pow(z,4) +
+				50*c*pow(l,9)*r*pow(z,4) - 330*pow(l,7)*pow(r,2)*pow(z,4) + 210*pow(l,4)*s*pow(z,5) - 300*pow(l,4)*pow(z,6) -
+				76*c*pow(l,7)*r*pow(z,6) + 350*pow(l,5)*pow(r,2)*pow(z,6) - 420*pow(l,2)*s*pow(z,7) + 105*pow(l,2)*pow(z,8) +
+				35*c*pow(l,5)*r*pow(z,8) + 175*s*pow(z,9)))/
+	   (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
+	   (7*pow(s + x - z,3)*(-15*pow(l,10)*s - 60*pow(l,10)*z + 6*c*pow(l,13)*r*z + 72*pow(l,11)*pow(r,2)*z - 165*pow(l,8)*s*pow(z,2) +
+				40*pow(l,8)*pow(z,3) - 8*c*pow(l,11)*r*pow(z,3) + 410*pow(l,6)*s*pow(z,4) + 240*pow(l,6)*pow(z,5) +
+				68*c*pow(l,9)*r*pow(z,5) - 312*pow(l,7)*pow(r,2)*pow(z,5) - 90*pow(l,4)*s*pow(z,6) - 360*pow(l,4)*pow(z,7) -
+				136*c*pow(l,7)*r*pow(z,7) + 560*pow(l,5)*pow(r,2)*pow(z,7) - 315*pow(l,2)*s*pow(z,8) + 140*pow(l,2)*pow(z,9) +
+				70*c*pow(l,5)*r*pow(z,9) + 175*s*pow(z,10)))/
+	   (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) +
+	   (pow(s + x - z,2)*(c*r + (4*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),2) + pow(r,2)/(pow(l,2) - pow(z,2))))/
+	   (pow(l,2) - pow(z,2)));
+  }
+  return result;
+}
 double shape::IntegrateRhoDerivative(double x, char label){
     double l,r,z,c,s;
     double result =0 ;
