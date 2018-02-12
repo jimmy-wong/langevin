@@ -34,6 +34,10 @@ void input(const string& Input_file_path, int* steps, double* starting, double* 
                 step_length[i] = stof(fields.at(i+1));
             }
         }
+        else{
+            input_file.close();
+            return;
+        }
     }
     input_file.close();
 }

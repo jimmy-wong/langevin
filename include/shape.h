@@ -36,6 +36,11 @@ private:
     int _steps[5];
 };
 double RhoShape(double zeta, void* params);
-double A_derivative(shape shape, double z_high, double z_low, char label);
-double A_dderivative(shape shape, double z_high, double z_low, char label);
-double A_para(shape shape, double z_high, double z_low, char label);
+//A_i
+double A(shape shape, double z_high, double z_low, char label_i);
+//\frac{\partial A_i}{\partial z}==A_i'
+double ADerivativeZ(shape shape, double z_high, double z_low, char label_i);
+//\frac{\partial A_i}{\partial q_l}
+double ADerivativeQ(shape shape, double z_high, double z_low, char label_i, char label_l);
+//\frac{\partial A_i'}{\partial q_l}
+double ADDerivativeZQ(shape shape, double z_high, double z_low, char label_i, char label_l);
