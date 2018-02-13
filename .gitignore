@@ -6,3 +6,10 @@ doc
 U236.txt
 fort.112
 */lagrange*
+CMakeCache.txt
+CMakeFiles/
+Makefile
+bin/
+cmake_install.cmake
+gsl-ref.pdf
+					

@@ -39,7 +39,7 @@ double dissipative_window(shape shape, const char label_i, const char label_j){
     double result;
     result = sigma*((shape.CenterOfMassDerivative('R',label_i)-shape.CenterOfMassDerivative('R',label_i))*
             (shape.CenterOfMassDerivative('R',label_j)-shape.CenterOfMassDerivative('L',label_j)))+
-            32./(9.*sigma)*(M_PI*A_para(shape, z-s,-l-s,label_i)*shape.Rho(-l-s))*(M_PI*A_para(shape, z-s,-l-s,label_j)*shape.Rho(-l-s));
+            32./(9.*sigma)*(M_PI*A(shape,z-s,-l-s,label_i)*shape.Rho(-l-s))*(M_PI*A(shape,z-s,-l-s,label_j)*shape.Rho(-l-s));
     result = result*shape.get_density()*shape.get_average_v()/2.;
     return result;
 }
