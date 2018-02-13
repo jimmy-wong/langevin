@@ -8,7 +8,7 @@
 using namespace std;
 using namespace boost;
 
-void input(const string& Input_file_path, int* steps, double* starting, double* step_length)
+void input(const string& Input_file_path, int* steps, double* starting, double* step_length, int* gs)
 {
     vector <string> fields;
     ifstream input_file(Input_file_path);
@@ -32,6 +32,11 @@ void input(const string& Input_file_path, int* steps, double* starting, double* 
         else if (fields.at(0)=="dlrzcs"){
             for(i=0; i<5; i++){
                 step_length[i] = stof(fields.at(i+1));
+            }
+        }
+        else if (fields.at(0)=="gs"){
+            for(i=0; i<5; i++){
+                gs[i] = stof(fields.at(i+1));
             }
         }
         else{
