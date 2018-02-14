@@ -26,6 +26,8 @@ struct para{
     double starting[5];
     double step_length[5];
     double* storation;
+    double gauss_random;
+    unsigned long rng_seed = 0;
     };
 
 para* param;
@@ -35,7 +37,7 @@ double inertia(shape shape, const char label_i, const char label_j);
 double inertia_df(shape shape, const char label_i, const char label_j, const char label_l);
 double hypercubic_interp_df(shape shape, double* starting, double* step_length, double* storation, const char label);
 double hypercubic_interp(shape shape, double* starting, double* step_length, double* storation);
-double random(double rand);
+void gauss_rand(double u, unsigned long rng_seed);
 
 void qp(const state_type y, state_type &dydt, double t){
 
@@ -79,6 +81,29 @@ void qp(const state_type y, state_type &dydt, double t){
             }
         }
     }
+    //\frac{\partial M^-1}{\partial q_l} = M^-1*\frac{\partial M}{\partial q_l}M^-1
+    gsl_matrix* inertia_df_tensor_tmp;
+    inertia_df_tensor_tmp = gsl_matrix_alloc(5, 5);
+    for (size_t i=0; i<5; i++){
+        for(size_t j=0; j<5; j++){
+            for (size_t k=0; k<5; k++){
+                gsl_matrix_set(inertia_df_tensor_tmp,j,k,inertia_df_tensor[j][k][i]);
+            }
+        }
+        gsl_blas_dgemm (CblasNoTrans, CblasNoTrans,
+                        1.0, inertia_inverse, inertia_df_tensor_tmp,
+                        0.0, inertia_df_tensor_tmp);
+        gsl_blas_dgemm (CblasNoTrans, CblasNoTrans,
+                        1.0, inertia_df_tensor_tmp, inertia_inverse,
+                        0.0, inertia_df_tensor_tmp);
+        for(size_t j=0; j<5; j++){
+            for (size_t k=0; k<5; k++){
+                inertia_df_tensor[j][k][i] = gsl_matrix_get(inertia_df_tensor_tmp,j,k);
+            }
+        }
+    }
+    gsl_matrix_free(inertia_df_tensor_tmp);
+
     hyperU = hypercubic_interp(param->para_shape, starting, step_length, storation);
     double temperature = sqrt(hyperU);
 
@@ -118,6 +143,8 @@ void qp(const state_type y, state_type &dydt, double t){
     param->inertia_df[5][5][5] = inertia_df_tensor[5][5][5];
     param->hyper_interpo_df = hyperU_df;
 
+    gauss_rand(param->gauss_random, param->rng_seed);
+
     double tmp1, tmp2;
     for(size_t i=0; i<5; i++){
         tmp1 = 0.;
@@ -128,7 +155,7 @@ void qp(const state_type y, state_type &dydt, double t){
                 tmp2 += -gsl_vector_get(param->hyper_interpo_df,i)
                         -1./2.*(param->inertia_df[j][k][i])*y[j+5]*y[k+5]
                         -gsl_matrix_get(param->dissiption,i,j)*gsl_matrix_get(param->inertia_inverse,j,k)*y[k+5]
-                        +gsl_matrix_get(param->gamma,i,j)*random(10.);
+                        +gsl_matrix_get(param->gamma,i,j)*param->gauss_random;
             }
         }
         dydt[i] = tmp1;
