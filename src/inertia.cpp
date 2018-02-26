@@ -2,6 +2,7 @@
 #include <gsl/gsl_integration.h>
 #include <gsl/gsl_math.h>
 #include <cmath>
+#include <iostream>
 
 double inertia(shape shape, const char label_i, const char label_j){
     // density means nuclear density, a constant

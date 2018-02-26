@@ -12,13 +12,11 @@ void shape::set_steps(int *steps) {
         _steps[i] = steps[i];
     }
 }
-int* shape::grid(double * starting_point, double * step_length){
+void shape::grid(double *starting_point, double *step_length, int* lower_limit){
     double shape_para[5]={_para_l,_para_r,_para_z,_para_c,_para_s};
-    int lower_limit[5];
     for(int i=0;i<5;i++){
         lower_limit[i] = floor((shape_para[i]-starting_point[i])/step_length[i]);
     }
-    return lower_limit;
 }
 void shape::efficiency() {
     // shape_para unit: Rcn, not fm
@@ -7658,7 +7656,7 @@ double ADerivativeZ(shape shape, double z_high, double z_low, char label_i){
     return result;
 }
 double ADerivativeQ(shape shape, double z_high, double z_low, char label_i, char label_l){
-    char* lrzcs="lrzcs";
+    char lrzcs[6]="lrzcs";
     int i,l;
     i = distance(lrzcs, find(lrzcs, lrzcs + 5, label_i));
     l = distance(lrzcs, find(lrzcs, lrzcs + 5, label_l));
@@ -7671,7 +7669,7 @@ double ADerivativeQ(shape shape, double z_high, double z_low, char label_i, char
     return result;
 }
 double ADDerivativeZQ(shape shape, double z_high, double z_low, char label_i, char label_l){
-    char* lrzcs="lrzcs";
+    char lrzcs[6]="lrzcs";
     int i,l;
     i = distance(lrzcs, find(lrzcs, lrzcs + 5, label_i));
     l = distance(lrzcs, find(lrzcs, lrzcs + 5, label_l));

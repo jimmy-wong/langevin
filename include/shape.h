@@ -17,7 +17,7 @@ public:
     void set_c(double c){ _para_c = c;}
     void set_s(double s){ _para_s = s;}
     void set_steps(int steps[5]);
-    int* grid(double * starting_point, double * step_length);
+    void grid(double * starting_point, double * step_length, int* grid);
     void efficiency();
     double grid_energy(double* storation, int* step, int* steps);
     double Rho(double zeta);
@@ -30,9 +30,9 @@ public:
     double get_average_v(){return _average_v;}
 private:
     double _para_l, _para_r, _para_z, _para_c, _para_s;
-    double _a0 = 0, _a1 = 0, _a2 = 0, _a3 = 0, _a4 = 0;
-    double _density = 0;
-    double _average_v = 0;
+    double _a0 = 0., _a1 = 0., _a2 = 0., _a3 = 0., _a4 = 0.;
+    double _density = 1.;
+    double _average_v = 1.;
     int _steps[5];
 };
 double RhoShape(double zeta, void* params);

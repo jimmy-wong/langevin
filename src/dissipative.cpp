@@ -5,8 +5,33 @@
 #include <gsl/gsl_min.h>
 #include <gsl/gsl_math.h>
 #include <cmath>
+#include <iostream>
 
 double dissipative_wall(shape shape, char label_i, char label_j){
+    double l = shape.get_l();
+    double z = shape.get_z();
+    double s = shape.get_s();
+    double x, w;
+    size_t n = 28;
+    double result = 0;
+    gsl_integration_glfixed_table *table = nullptr;
+    table = gsl_integration_glfixed_table_alloc(n);
+    for(size_t i=0; i<n; i++)
+    {
+        gsl_integration_glfixed_point(-1., 1., i, &x, &w, table);
+        x = (l + z)/2. + s + (-l + z)/2.;
+        result += (shape.RhoDerivative(x,label_i)*shape.RhoDerivative(x,label_j)*
+                sqrt(4.*shape.Rho(x)+pow(shape.RhoDerivative(x,'x'),2)))*w;
+        x = (l - z)/2. - s + (l + z)/2.;
+        result += (shape.RhoDerivative(x,label_i)*shape.RhoDerivative(x,label_j)*
+                   sqrt(4*shape.Rho(x)+pow(shape.RhoDerivative(x,'x'),2)))*w;
+    }
+    gsl_integration_glfixed_table_free(table);
+    result = result*M_PI*shape.get_density()*shape.get_average_v()*3./4.;
+    return result;
+
+}
+double dissipative_wall2(shape shape, char label_i, char label_j){
     double l = shape.get_l();
     double z = shape.get_z();
     double s = shape.get_s();
@@ -23,8 +48,8 @@ double dissipative_wall(shape shape, char label_i, char label_j){
                    (shape.RhoDerivative(x,label_j)+shape.RhoDerivative(x,'x')*shape.CenterOfMassDerivative('L',label_j))*
                    sqrt(4.*shape.Rho(x)+pow(shape.RhoDerivative(x,'x'),2)))*w;
         x = (l - z)/2. - s + (l + z)/2.;
-        result += ((shape.RhoDerivative(x,label_i)+shape.RhoDerivative(x,'x')*shape.CenterOfMassDerivative('L',label_i))*
-                   (shape.RhoDerivative(x,label_j)+shape.RhoDerivative(x,'x')*shape.CenterOfMassDerivative('L',label_j))*
+        result += ((shape.RhoDerivative(x,label_i)+shape.RhoDerivative(x,'x')*shape.CenterOfMassDerivative('R',label_i))*
+                   (shape.RhoDerivative(x,label_j)+shape.RhoDerivative(x,'x')*shape.CenterOfMassDerivative('R',label_j))*
                    sqrt(4*shape.Rho(x)+pow(shape.RhoDerivative(x,'x'),2)))*w;
     }
     gsl_integration_glfixed_table_free(table);
@@ -44,7 +69,7 @@ double dissipative_window(shape shape, const char label_i, const char label_j){
     return result;
 }
 
-double gsl_mini(double fn1(double, void*), double xguess, double x_low, double x_high)
+double gsl_mini(shape shape, double fn1(double, void*), double xguess, double x_low, double x_high)
 {
     int status;
     int iter = 0, max_iter = 100;
@@ -52,6 +77,9 @@ double gsl_mini(double fn1(double, void*), double xguess, double x_low, double x
     gsl_min_fminimizer *s;
     gsl_function F;
     F.function = fn1;
+    F.params = &shape;
+    std::cout<<"gsl_mini"<<std::endl;
+    std::cout<<&shape<<std::endl;
     T = gsl_min_fminimizer_quad_golden;
     s = gsl_min_fminimizer_alloc (T);
     gsl_min_fminimizer_set (s, &F, xguess, x_low, x_high);
@@ -72,11 +100,21 @@ double dissipative(shape shape, const char label_i, const char label_j){
     double z = shape.get_z();
     double s = shape.get_s();
     double r = shape.get_r();
+    double c = shape.get_c();
+    double gamma_wall, gamma_ww;
     double result;
     double Rmin;
     double ks=0.27;
-    Rmin = min(gsl_mini(RhoShape,(-l+z-2*s)/2., -l-s, z-s),gsl_mini(RhoShape, (l+z-2*s)/2., z-s, l-s));
-    result = pow(sin(M_PI*pow(r/Rmin,2)/2.),2)*dissipative_wall(shape,label_i,label_j)+
-            ks*pow(cos(M_PI*pow(r/Rmin,2)/2.),2)*dissipative_window(shape,label_i,label_j);
+    gamma_wall = dissipative_wall(shape, label_i, label_j);
+    gamma_ww = dissipative_wall2(shape, label_i, label_j)+dissipative_window(shape, label_i, label_j);
+    if (c>0.) {
+        Rmin = min(gsl_mini(shape, RhoShape, (-l + z - 2 * s) / 2., -l - s, z - s),
+                   gsl_mini(shape, RhoShape, (l + z - 2 * s) / 2., z - s, l - s));
+        result = pow(sin(M_PI * pow(r / Rmin, 2) / 2.), 2) * gamma_wall +
+                 ks * pow(cos(M_PI * pow(r / Rmin, 2) / 2.), 2) * gamma_ww;
+    }
+    else{
+        result = gamma_wall;
+    }
     return result;
 }
