@@ -76,7 +76,7 @@ void qp(const state_type y, state_type &dydt, double t){
     for(size_t i=0;i<5;i++){
         gsl_vector_set(hyperU_df,i,hypercubic_interp_df(param.para_shape, starting, step_length, storation, label[i]));
         for(size_t j=0;j<5;j++){
-            cout<<label[i]<<label[j]<<' '<<inertia(param.para_shape,label[i],label[j])<<endl;
+//            cout<<label[i]<<label[j]<<' '<<inertia(param.para_shape,label[i],label[j])<<endl;
             gsl_matrix_set(inertia_tensor,i,j,inertia(param.para_shape,label[i],label[j]));
             gsl_matrix_set(dissipative_tensor,i,j,dissipative(param.para_shape,label[i],label[j]));
             for(size_t k=0; k<5; k++){
