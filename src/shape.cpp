@@ -51,12 +51,12 @@ void shape::efficiency() {
 	       105*l2*pow(z,8) + 35*c*l5*r*pow(z,8) + 175*s*pow(z,9)))/
 	(l5*pow((l2 - z2),3)*(9*l6 - 63*l4*z2 - 21*l2*z4 - 245*z6));
 }
-double shape::grid_energy(double* storation, int* step, int* steps) {
+double shape::grid_energy(double* storation, int* step) {
     int index;
-    index = step[0]*steps[1]*steps[2]*steps[3]*steps[4]+
-	step[1]*steps[2]*steps[3]*steps[4]+
-	step[2]*steps[3]*steps[4]+
-	step[3]*steps[4]+
+    index = step[0]*_steps[1]*_steps[2]*_steps[3]*_steps[4]+
+	step[1]*_steps[2]*_steps[3]*_steps[4]+
+	step[2]*_steps[3]*_steps[4]+
+	step[3]*_steps[4]+
 	step[4];
     return storation[index];
 }

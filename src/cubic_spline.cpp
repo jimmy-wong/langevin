@@ -13,29 +13,28 @@ double hypercubic_interp(shape shape, double* starting, double* step_length, dou
         d_grid[i][0] = starting[i]+grid[i]*step_length[i];
         d_grid[i][1] = starting[i]+(grid[i]+1)*step_length[i];
     }
-    double tmp_res = 1, result;
+    double tmp_res, result = 0;
     int step[5];
     for(int i=0;i<2;i++){
-        step[0] = 1-i;
+        step[0] = 1-i+grid[0];
         for(int j=0;j<2;j++){
-            step[1] = 1-j;
+            step[1] = 1-j+grid[1];
             for(int k=0;k<2;k++){
-                step[2] = 1-k;
+                step[2] = 1-k+grid[2];
                 for(int l=0;l<2;l++){
-                    step[3] = 1-l;
+                    step[3] = 1-l+grid[3];
                     for(int m=0;m<2;m++) {
-                        step[4] = 1-m;
-                        tmp_res *= (1-2*m)*(shape.get_s()-d_grid[4][m])/(d_grid[4][1]-d_grid[4][0]);
+                        step[4] = 1-m+grid[4];
+                        tmp_res = (1-2*m)*(shape.get_s()-d_grid[4][m])/(d_grid[4][1]-d_grid[4][0])*
+                                (1-2*l)*(shape.get_c()-d_grid[3][l])/(d_grid[3][1]-d_grid[3][0])*
+                                (1-2*k)*(shape.get_z()-d_grid[2][k])/(d_grid[2][1]-d_grid[2][0])*
+                                (1-2*j)*(shape.get_r()-d_grid[1][j])/(d_grid[1][1]-d_grid[1][0])*
+                                (1-2*i)*(shape.get_l()-d_grid[0][i])/(d_grid[0][1]-d_grid[0][0]);
+                        result += tmp_res*shape.grid_energy(storation,step);
                     }
-                    tmp_res *= (1-2*l)*(shape.get_c()-d_grid[3][l])/(d_grid[3][1]-d_grid[3][0]);
                 }
-                tmp_res *= (1-2*k)*(shape.get_z()-d_grid[2][k])/(d_grid[2][1]-d_grid[2][0]);
             }
-            tmp_res *= (1-2*j)*(shape.get_r()-d_grid[1][j])/(d_grid[1][1]-d_grid[1][0]);
         }
-        tmp_res *= (1-2*i)*(shape.get_l()-d_grid[0][i])/(d_grid[0][1]-d_grid[0][0]);
-        result += tmp_res*shape.grid_energy(storation,step,shape.get_steps());
-        tmp_res = 1;
     }
     return result;
 }
@@ -73,54 +72,54 @@ double hypercubic_interp_df(shape shape, double* starting, double* step_length, 
     if(label=='z'){
         cycle[4] = true;
     }
-    double tmp_res = 1, result = 0;
+    double tmp_res_l, tmp_res_r, tmp_res_z, tmp_res_c, tmp_res_s, result = 0;
     int step[5];
     for(int i=0;i<2;i++){
-        step[0] = 1-i;
-        for(int j=0;j<2;j++){
-            step[1] = 1-j;
-            for(int k=0;k<2;k++){
-                step[2] = 1-k;
-                for(int l=0;l<2;l++){
-                    step[3] = 1-l;
-                    for(int m=0;m<2;m++) {
-                        step[4] = 1-m;
-                        if (cycle[4]) {
-                            tmp_res *= (1 - 2 * m) / (d_grid[4][1] - d_grid[4][0]);
-                        }
-                        else{
-                            tmp_res *= (1 - 2 * m) * (shape.get_s() - d_grid[4][m]) / (d_grid[4][1] - d_grid[4][0]);
-                        }
-                    }
-                    if (cycle[3]) {
-                        tmp_res *= (1-2*l)/(d_grid[3][1]-d_grid[3][0]);
-                    }
-                    else{
-                        tmp_res *= (1-2*l)*(shape.get_c()-d_grid[3][l])/(d_grid[3][1]-d_grid[3][0]);
-                    }
-                }
-                if(cycle[2]){
-                    tmp_res *= (1-2*k)/(d_grid[2][1]-d_grid[2][0]);
-                }
-                else{
-                    tmp_res *= (1-2*k)*(shape.get_z()-d_grid[2][k])/(d_grid[2][1]-d_grid[2][0]);
-                }
-            }
-            if (cycle[1]){
-                tmp_res *= (1-2*j)/(d_grid[1][1]-d_grid[1][0]);
-            }
-            else{
-                tmp_res *= (1-2*j)*(shape.get_r()-d_grid[1][j])/(d_grid[1][1]-d_grid[1][0]);
-            }
-        }
+        step[0] = 1-i+grid[0];
         if (cycle[0]){
-            tmp_res *= (1-2*i)/(d_grid[0][1]-d_grid[0][0]);
+            tmp_res_l = (1-2*i)/(d_grid[0][1]-d_grid[0][0]);
         }
         else{
-            tmp_res *= (1-2*i)*(shape.get_l()-d_grid[0][i])/(d_grid[0][1]-d_grid[0][0]);
+            tmp_res_l = (1-2*i)*(shape.get_l()-d_grid[0][i])/(d_grid[0][1]-d_grid[0][0]);
         }
-        result += tmp_res*shape.grid_energy(storation,step,shape.get_steps());
-        tmp_res = 1;
+        for(int j=0;j<2;j++){
+            step[1] = 1-j+grid[1];
+            if (cycle[1]){
+                tmp_res_r = (1-2*j)/(d_grid[1][1]-d_grid[1][0]);
+            }
+            else{
+                tmp_res_r = (1-2*j)*(shape.get_r()-d_grid[1][j])/(d_grid[1][1]-d_grid[1][0]);
+            }
+            for(int k=0;k<2;k++){
+                step[2] = 1-k+grid[2];
+                if(cycle[2]){
+                    tmp_res_z = (1-2*k)/(d_grid[2][1]-d_grid[2][0]);
+                }
+                else{
+                    tmp_res_z = (1-2*k)*(shape.get_z()-d_grid[2][k])/(d_grid[2][1]-d_grid[2][0]);
+                }
+                for(int l=0;l<2;l++){
+                    step[3] = 1-l+grid[3];
+                    if (cycle[3]) {
+                        tmp_res_c = (1-2*l)/(d_grid[3][1]-d_grid[3][0]);
+                    }
+                    else{
+                        tmp_res_c = (1-2*l)*(shape.get_c()-d_grid[3][l])/(d_grid[3][1]-d_grid[3][0]);
+                    }
+                    for(int m=0;m<2;m++) {
+                        step[4] = 1-m+grid[4];
+                        if (cycle[4]) {
+                            tmp_res_s = (1 - 2 * m) / (d_grid[4][1] - d_grid[4][0]);
+                        }
+                        else{
+                            tmp_res_s = (1 - 2 * m) * (shape.get_s() - d_grid[4][m]) / (d_grid[4][1] - d_grid[4][0]);
+                        }
+                        result += tmp_res_l*tmp_res_r*tmp_res_z*tmp_res_c*tmp_res_s*
+                                shape.grid_energy(storation,step);
+                    }
+                }
+            }
+        }
     }
     return result;
 }

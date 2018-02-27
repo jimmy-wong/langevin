@@ -1,6 +1,7 @@
 #include <iostream>
 #include "../include/shape.h"
 #include <gsl/gsl_matrix.h>
+#include <cmath>
 #include <gsl/gsl_vector.h>
 
 using namespace std;
@@ -19,6 +20,8 @@ int main()
     int steps[5],gs[5];
     double starting[5],step_length[5];
     input("fort.112",steps,starting,step_length,gs);
+    starting[1] = 1 / sqrt(starting[0]) + 0.05;
+    starting[3] = -pow(starting[0], -2.5) - 0.5;
     double* storation = new double[steps[0]*steps[1]*steps[2]*steps[3]*steps[4]];
     shape.set_steps(steps);
     // 初始化storation为20.

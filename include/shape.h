@@ -19,7 +19,7 @@ public:
     void set_steps(int steps[5]);
     void grid(double * starting_point, double * step_length, int* grid);
     void efficiency();
-    double grid_energy(double* storation, int* step, int* steps);
+    double grid_energy(double* storation, int* step);
     double Rho(double zeta);
     double RhoDerivative(double zeta, char label);
     double RhoDDerivative(double zeta, char label_i, char label_j);
