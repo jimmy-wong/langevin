@@ -78,8 +78,8 @@ double gsl_mini(shape shape, double fn1(double, void*), double xguess, double x_
     gsl_function F;
     F.function = fn1;
     F.params = &shape;
-    std::cout<<"gsl_mini"<<std::endl;
-    std::cout<<&shape<<std::endl;
+//    std::cout<<"gsl_mini"<<std::endl;
+//    std::cout<<&shape<<std::endl;
     T = gsl_min_fminimizer_quad_golden;
     s = gsl_min_fminimizer_alloc (T);
     gsl_min_fminimizer_set (s, &F, xguess, x_low, x_high);

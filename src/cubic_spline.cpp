@@ -43,26 +43,35 @@ double hypercubic_interp(shape shape, double* starting, double* step_length, dou
 //useful for the calculation of Langevin equation
 double hypercubic_interp_df(shape shape, double* starting, double* step_length, double* storation, const char label){
     cout<<"hypercubic_interp"<<endl;
-    cout<<starting[0]<<' '<<starting[1]<<' '<<starting[2]<<' '<<starting[3]<<' '<<starting[4]<<' '<<endl;
-    cout<<step_length[0]<<' '<<step_length[1]<<' '<<step_length[2]<<' '<<step_length[3]<<' '<<step_length[4]<<' '<<endl;
+//    cout<<starting[0]<<' '<<starting[1]<<' '<<starting[2]<<' '<<starting[3]<<' '<<starting[4]<<' '<<endl;
+//    cout<<step_length[0]<<' '<<step_length[1]<<' '<<step_length[2]<<' '<<step_length[3]<<' '<<step_length[4]<<' '<<endl;
     starting[1] = 1 / sqrt(starting[0]) + 0.05;
     starting[3] = -pow(starting[0], -2.5) - 0.5;
     int grid[5];
     shape.grid(starting, step_length,grid);
-    std::cout<<storation[0]<<' '<<storation[1]<<std::endl;
-    std::cout<<grid[0]<<' '<<grid[1]<<' '<<grid[2]<<' '<<grid[3]<<' '<<grid[4]<<' '<<endl;
+//    std::cout<<storation[0]<<' '<<storation[1]<<std::endl;
+    cout<<"grid: "<<grid[0]<<' '<<grid[1]<<' '<<grid[2]<<' '<<grid[3]<<' '<<grid[4]<<' '<<endl;
+    cout<<"end hypercubic_interp"<<endl;
     double d_grid[5][2];
     for(int i=0;i<5;i++){
         d_grid[i][0] = starting[i]+grid[i]*step_length[i];
         d_grid[i][1] = starting[i]+(grid[i]+1)*step_length[i];
     }
     bool cycle[5] = {false,false,false,false,false};
-    switch (label){
-        case 'l': cycle[0] = true;
-        case 'r': cycle[1] = true;
-        case 'z': cycle[2] = true;
-        case 'c': cycle[3] = true;
-        case 's': cycle[4] = true;
+    if(label=='l'){
+        cycle[0] = true;
+    }
+    if(label=='r'){
+        cycle[1] = true;
+    }
+    if(label=='z'){
+        cycle[2] = true;
+    }
+    if(label=='c'){
+        cycle[3] = true;
+    }
+    if(label=='z'){
+        cycle[4] = true;
     }
     double tmp_res = 1, result = 0;
     int step[5];

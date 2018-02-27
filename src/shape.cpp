@@ -2027,7 +2027,7 @@ double shape::RhoDDerivative(double x, char label_i, char label_j) {
 }
 double shape::IntegrateRhoDerivative(double x, char label){
     double l,r,z,c,s;
-    double result =0 ;
+    double result;
     l = _para_l;
     r = _para_r;
     z = _para_z;
@@ -2420,7 +2420,7 @@ double shape::IntegrateRhoDerivative(double x, char label){
 																			     9*s*(7*pow(x,5) - 75*pow(x,3)*pow(z,2) + 200*pow(x,2)*pow(z,3) - 255*x*pow(z,4) + 168*pow(z,5))))))/
 	    (12.*pow(l,6)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) -
 						      245*pow(z,6)));
-	cout<<label<<' '<<result<<endl;
+//	cout<<x<<' '<<label<<' '<<result<<endl;
     }
     if (label=='r'){
 	result = (x*(108*pow(l,17)*r - 1080*pow(l,15)*r*pow(z,2) +
@@ -2499,7 +2499,7 @@ double shape::IntegrateRhoDerivative(double x, char label){
 												    9*s*(7*pow(x,5) - 75*pow(x,3)*pow(z,2) + 200*pow(x,2)*pow(z,3) - 255*x*pow(z,4) + 168*pow(z,5))))))/
 	    (12.*pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) -
 						      245*pow(z,6)));
-	cout<<label<<' '<<result<<endl;
+//        cout<<x<<' '<<label<<' '<<result<<endl;
     }
     if(label=='z') {
 	result = (x*(36*c*pow(l,17)*r*(-6*s - 3*x + 6*z) + 105*s*pow(z,9)*
@@ -2861,7 +2861,7 @@ double shape::IntegrateRhoDerivative(double x, char label){
 																				   27*pow(s,2)*(7*pow(x,4) - 50*pow(x,2)*pow(z,2) + 100*x*pow(z,3) - 85*pow(z,4)) +
 																				   9*s*(7*pow(x,5) - 75*pow(x,3)*pow(z,2) + 200*pow(x,2)*pow(z,3) - 255*x*pow(z,4) + 168*pow(z,5))))))/
 	    (2.*pow(l,5)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6)));
-	cout<<label<<' '<<result<<endl;
+//        cout<<x<<' '<<label<<' '<<result<<endl;
     }
     if(label=='c') {
         result = (x * (36 * pow(l, 17) * r *
@@ -2937,7 +2937,7 @@ double shape::IntegrateRhoDerivative(double x, char label){
                  (12. * pow(l, 5) * pow(pow(l, 2) - pow(z, 2), 3) *
                   (9 * pow(l, 6) - 63 * pow(l, 4) * pow(z, 2) - 21 * pow(l, 2) * pow(z, 4) -
                    245 * pow(z, 6)));
-        cout << label << ' ' << result << endl;
+//        cout<<x<<' '<<label<<' '<<result<<endl;
     }
     if(label=='s'){
             result = (x*(36*c*pow(l,17)*r*(6*s + 3*x - 6*z) - 36*c*pow(l,15)*r*
@@ -3022,7 +3022,7 @@ double shape::IntegrateRhoDerivative(double x, char label){
                                                                                                                                          9*(7*pow(x,5) - 75*pow(x,3)*pow(z,2) + 200*pow(x,2)*pow(z,3) - 255*x*pow(z,4) + 168*pow(z,5))))))/
                      (12.*pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) -
                                                                        245*pow(z,6)));
-		cout<<label<<' '<<result<<endl;
+//        cout<<x<<' '<<label<<' '<<result<<endl;
     }
     return result;
 }

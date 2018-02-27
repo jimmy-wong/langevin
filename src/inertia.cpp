@@ -19,15 +19,15 @@ double inertia(shape shape, const char label_i, const char label_j){
     {
         gsl_integration_glfixed_point(-1., 1., i, &x, &w, table);
         x = l*x - s;
-//        result += w*(pow(shape.Rho(x),2)/8.*ADerivativeZ(shape, x, -l-s,label_i)*ADerivativeZ(shape, x, -l-s, label_j)
-//                     +shape.Rho(x)*A(shape, x, -l-s, label_i)*A(shape, x, -l-s, label_j));
-        std::cout<<"inertia"<<std::endl;
-        std::cout<<i
-                 <<" ADerivativeZ "<<ADerivativeZ(shape, x, -l-s, label_i)
-                 <<' '<<label_i<<std::endl;
-        std::cout<<i
-                 <<" ADerivativeZ "<<ADerivativeZ(shape, x, -l-s, label_j)
-                 <<' '<<label_j<<std::endl;
+        result += w*(pow(shape.Rho(x),2)/8.*ADerivativeZ(shape, x, -l-s,label_i)*ADerivativeZ(shape, x, -l-s, label_j)
+                     +shape.Rho(x)*A(shape, x, -l-s, label_i)*A(shape, x, -l-s, label_j));
+//        std::cout<<"inertia"<<std::endl;
+//        std::cout<<i
+//                 <<" ADerivativeZ "<<ADerivativeZ(shape, x, -l-s, label_i)
+//                 <<' '<<label_i<<std::endl;
+//        std::cout<<i
+//                 <<" ADerivativeZ "<<ADerivativeZ(shape, x, -l-s, label_j)
+//                 <<' '<<label_j<<std::endl;
     }
     gsl_integration_glfixed_table_free(table);
     result = result*M_PI*density;
