@@ -1,4 +1,7 @@
 #include <string>
+#include <gsl/gsl_vector.h>
+#include <cmath>
+
 using namespace std;
 class shape{
 public:
@@ -10,16 +13,22 @@ public:
     double get_z(){ return _para_z;}
     double get_c(){ return _para_c;}
     double get_s(){ return _para_s;}
+    double get_excited_energy() { return _excited_energy;}
+    double get_level_density() { return _para_a;}
     int* get_steps(){ return _steps;}
     void set_l(double l){ _para_l = l;}
     void set_r(double r){ _para_r = r;}
     void set_z(double z){ _para_z = z;}
     void set_c(double c){ _para_c = c;}
     void set_s(double s){ _para_s = s;}
+    void set_excited_energy(double excited_energy){_excited_energy = excited_energy+_ground_state_energy;}
+    void set_ground_energy(double ground_energy){_ground_state_energy = ground_energy;}
+    void set_level_density() { _para_a = _Acn*(1.0+3.114*pow(_Acn,-1/3) + 5.626 * pow(_Acn,-2./3.))/14.61;}
     void set_steps(int steps[5]);
     void grid(double * starting_point, double * step_length, int* grid);
     void efficiency();
     double grid_energy(double* storation, int* step);
+    double AH(gsl_vector* generalized_coordinates);
     double Rho(double zeta);
     double RhoDerivative(double zeta, char label);
     double RhoDDerivative(double zeta, char label_i, char label_j);
@@ -29,10 +38,13 @@ public:
     double get_density(){return _density;}
     double get_average_v(){return _average_v;}
 private:
+    double _Acn = 236.;
     double _para_l, _para_r, _para_z, _para_c, _para_s;
     double _a0 = 0., _a1 = 0., _a2 = 0., _a3 = 0., _a4 = 0.;
     double _density = 1.;
     double _average_v = 1.;
+    double _excited_energy = 0, _ground_state_energy = 0.;
+    double _para_a;// level density parameter: a
     int _steps[5];
 };
 double RhoShape(double zeta, void* params);

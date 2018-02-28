@@ -4,6 +4,7 @@
 #include <iostream>
 #include <cmath>
 #include <algorithm>
+#include <gsl/gsl_vector.h>
 
 using namespace std;
 
@@ -59,6 +60,22 @@ double shape::grid_energy(double* storation, int* step) {
 	step[3]*_steps[4]+
 	step[4];
     return storation[index];
+}
+double shape::AH(gsl_vector* generalized_coordinates){
+    _para_l = gsl_vector_get(generalized_coordinates,0);
+    _para_r = gsl_vector_get(generalized_coordinates,1);
+    _para_z = gsl_vector_get(generalized_coordinates,2);
+    _para_c = gsl_vector_get(generalized_coordinates,3);
+    _para_s = gsl_vector_get(generalized_coordinates,4);
+    efficiency();
+
+    double term12,term22;
+    double l = _para_l, z = _para_z;
+    term12 = (pow(l + z,2)*(140*_a0*(2*l - z) + (l + z)*(35*_a1*(-3*l + z) +
+            (l + z)*(14*_a2*(4*l - z) + (l + z)*(7*_a3*(-5*l + z) + 4*_a4*(6*l - z)*(l + z))))))/420.;
+    term22 = (pow(l - z,2)*(140*_a0*(2*l + z) + (l - z)*(35*_a1*(3*l + z) +
+            (l - z)*(14*_a2*(4*l + z) + (l - z)*(7*_a3*(5*l + z) + 4*_a4*(l - z)*(6*l + z))))))/420.;
+    return _Acn*(term12/(term12+term22));
 }
 double shape::Rho(double x){
     double result;
