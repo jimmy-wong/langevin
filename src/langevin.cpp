@@ -1,8 +1,5 @@
 #include <iostream>
 #include "../include/shape.h"
-#include <gsl/gsl_matrix.h>
-#include <cmath>
-#include <gsl/gsl_vector.h>
 
 using namespace std;
 
@@ -46,9 +43,6 @@ int main(int argc, char* argv[])
 
     //这里gamma_tensor的结果就是dissipative_tensor的平方根
     for(int i=0; i<10000; i++) {
-//        cout<<i<<' '<<storation[0]<<' '<<storation[1]<<endl;
-//        cout<<starting[0]<<' '<<starting[1]<<' '<<starting[2]<<' '<<endl;
-//        cout<<step_length[0]<<' '<<step_length[1]<<' '<<step_length[2]<<' '<<endl;
         runge_kutta(generalized_coordinates, generalized_momenta,
                     starting, step_length, storation,
                     shape);

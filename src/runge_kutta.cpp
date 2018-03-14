@@ -1,14 +1,9 @@
 #include <gsl/gsl_matrix.h>
-#include <gsl/gsl_errno.h>
-#include <gsl/gsl_vector.h>
 #include <gsl/gsl_blas.h>
 #include "../include/shape.h"
 #include <gsl/gsl_linalg.h>
-#include <gsl/gsl_permutation.h>
 #include <gsl/gsl_eigen.h>
 #include <boost/numeric/odeint.hpp>
-#include <boost/array.hpp>
-#include <cmath>
 
 using namespace std;
 using namespace boost::numeric::odeint;
@@ -39,9 +34,10 @@ void qp(const state_type y, state_type &dydt, double t){
     inertia_tensor = gsl_matrix_alloc(5,5);
     dissipative_tensor = gsl_matrix_alloc(5,5);
 
-    gsl_matrix *inertia_inverse, *gamma_tensor;
+    gsl_matrix *inertia_inverse, *gamma_tensor, *gamma_tensor_tmp;
     inertia_inverse = gsl_matrix_alloc(5,5);
     gamma_tensor = gsl_matrix_alloc(5,5);
+    gamma_tensor_tmp = gsl_matrix_alloc(5,5);
 
     char label[6]="lrzcs";
 
@@ -59,7 +55,8 @@ void qp(const state_type y, state_type &dydt, double t){
     param.para_shape.set_s(y[4]);
     param.para_shape.efficiency();
 
-    cout<<param.para_shape.get_l()<<' '
+    cout<<"current position: "
+        <<param.para_shape.get_l()<<' '
         <<param.para_shape.get_r()<<' '
         <<param.para_shape.get_z()<<' '
         <<param.para_shape.get_c()<<' '
@@ -70,19 +67,26 @@ void qp(const state_type y, state_type &dydt, double t){
     step_length = param.step_length;
     double *storation;
     storation = param.storation;
-//    cout<<"qp"<<endl;
-//    cout<<param.starting[0]<<' '<<param.starting[1]<<' '<<param.starting[2]<<' '<<param.starting[3]<<' '<<param.starting[4]<<' '<<endl;
+    gsl_matrix* inertia_tensor_tmp = gsl_matrix_alloc(5,5);
+    gsl_matrix* dissipative_tensor_tmp = gsl_matrix_alloc(5,5);
 
     for(size_t i=0;i<5;i++){
         gsl_vector_set(hyperU_df,i,hypercubic_interp_df(param.para_shape, starting, step_length, storation, label[i]));
         for(size_t j=0;j<=i;j++){
-//            cout<<label[i]<<label[j]<<' '<<inertia(param.para_shape,label[i],label[j])<<endl;
             double tmp = inertia(param.para_shape,label[i],label[j]);
             gsl_matrix_set(inertia_tensor,i,j,tmp);
             gsl_matrix_set(inertia_tensor,j,i,tmp);
+
+            gsl_matrix_set(inertia_tensor_tmp,i,j,tmp);
+            gsl_matrix_set(inertia_tensor_tmp,j,i,tmp);
+
             tmp = dissipative(param.para_shape,label[i],label[j]);
             gsl_matrix_set(dissipative_tensor,i,j,tmp);
             gsl_matrix_set(dissipative_tensor,j,i,tmp);
+
+            gsl_matrix_set(dissipative_tensor_tmp,i,j,tmp);
+            gsl_matrix_set(dissipative_tensor_tmp,j,i,tmp);
+
             for(size_t k=0; k<5; k++){
                 tmp = inertia_df(param.para_shape, label[i], label[j], label[k]);
                 inertia_df_tensor[i][j][k] = tmp;
@@ -91,41 +95,22 @@ void qp(const state_type y, state_type &dydt, double t){
         }
     }
 
+//    cout << "dissipative tensor" << endl;
+//    for(size_t i=0; i<5; i++) {
+//        cout << gsl_matrix_get(dissipative_tensor, i, 0) << ' '
+//             << gsl_matrix_get(dissipative_tensor, i, 1) << ' '
+//             << gsl_matrix_get(dissipative_tensor, i, 2) << ' '
+//             << gsl_matrix_get(dissipative_tensor, i, 3) << ' '
+//             << gsl_matrix_get(dissipative_tensor, i, 4) << ' ' << endl;
+//    }
+
     gsl_permutation * permu = gsl_permutation_alloc (5);
     int signum;
-//    cout<<"inertia_tensor"<<endl;
-//    for(size_t i=0; i<5; i++){
-//        cout<<i<<' '
-//            <<gsl_matrix_get(inertia_tensor,i,0)<<' '
-//            <<gsl_matrix_get(inertia_tensor,i,1)<<' '
-//            <<gsl_matrix_get(inertia_tensor,i,2)<<' '
-//            <<gsl_matrix_get(inertia_tensor,i,3)<<' '
-//            <<gsl_matrix_get(inertia_tensor,i,4)<<' '<<endl;
-//    }
-//    cout<<"inertia_tensor_df"<<endl;
-//    for (int i=0; i<5; i++){
-//        for(int j=0; j<5; j++) {
-//            cout << i << ' ' << j << ' '
-//                 << inertia_df_tensor[i][j][0] << ' '
-//                 << inertia_df_tensor[i][j][1] << ' '
-//                 << inertia_df_tensor[i][j][2] << ' '
-//                 << inertia_df_tensor[i][j][3] << ' '
-//                 << inertia_df_tensor[i][j][4] << ' ' << endl;
-//        }
-//    }
 
-    gsl_linalg_LU_decomp (inertia_tensor, permu, &signum);
-    gsl_linalg_LU_invert (inertia_tensor, permu, inertia_inverse);
+    gsl_linalg_LU_decomp (inertia_tensor_tmp, permu, &signum);
+    gsl_linalg_LU_invert (inertia_tensor_tmp, permu, inertia_inverse);
+    gsl_matrix_free(inertia_tensor_tmp);
 
-//    cout<<"inertia_inverse"<<endl;
-//    for(size_t i=0; i<5; i++){
-//        cout<<i<<' '
-//            <<gsl_matrix_get(inertia_inverse,i,0)<<' '
-//            <<gsl_matrix_get(inertia_inverse,i,1)<<' '
-//            <<gsl_matrix_get(inertia_inverse,i,2)<<' '
-//            <<gsl_matrix_get(inertia_inverse,i,3)<<' '
-//            <<gsl_matrix_get(inertia_inverse,i,4)<<' '<<endl;
-//    }
     //\frac{\partial M^-1}{\partial q_l} = -M^-1*\frac{\partial M}{\partial q_l}M^-1
     gsl_matrix* inertia_df_tensor_tmp1, *inertia_df_tensor_tmp2;
     inertia_df_tensor_tmp1 = gsl_matrix_alloc(5, 5);
@@ -136,43 +121,15 @@ void qp(const state_type y, state_type &dydt, double t){
                 gsl_matrix_set(inertia_df_tensor_tmp1,j,k,-inertia_df_tensor[j][k][i]);
             }
         }
-//        cout<<"inertia_df_tensor_tmp1"<<endl;
-//        for(size_t i=0; i<5; i++){
-//            cout<<i<<' '
-//                <<gsl_matrix_get(inertia_df_tensor_tmp1,i,0)<<' '
-//                <<gsl_matrix_get(inertia_df_tensor_tmp1,i,1)<<' '
-//                <<gsl_matrix_get(inertia_df_tensor_tmp1,i,2)<<' '
-//                <<gsl_matrix_get(inertia_df_tensor_tmp1,i,3)<<' '
-//                <<gsl_matrix_get(inertia_df_tensor_tmp1,i,4)<<' '<<endl;
-//        }
         gsl_blas_dgemm (CblasNoTrans, CblasNoTrans,
                         1.0, inertia_inverse, inertia_df_tensor_tmp1,
                         0.0, inertia_df_tensor_tmp2);
-//        cout<<"inertia_df_tensor_tmp2"<<endl;
-//        for(size_t i=0; i<5; i++){
-//            cout<<i<<' '
-//                <<gsl_matrix_get(inertia_df_tensor_tmp2,i,0)<<' '
-//                <<gsl_matrix_get(inertia_df_tensor_tmp2,i,1)<<' '
-//                <<gsl_matrix_get(inertia_df_tensor_tmp2,i,2)<<' '
-//                <<gsl_matrix_get(inertia_df_tensor_tmp2,i,3)<<' '
-//                <<gsl_matrix_get(inertia_df_tensor_tmp2,i,4)<<' '<<endl;
-//        }
         gsl_blas_dgemm (CblasNoTrans, CblasNoTrans,
                         1.0, inertia_df_tensor_tmp2, inertia_inverse,
                         0.0, inertia_df_tensor_tmp1);
-//        cout<<"inertia_df_tensor_tmp1"<<endl;
-//        for(size_t i=0; i<5; i++){
-//            cout<<i<<' '
-//                <<gsl_matrix_get(inertia_df_tensor_tmp1,i,0)<<' '
-//                <<gsl_matrix_get(inertia_df_tensor_tmp1,i,1)<<' '
-//                <<gsl_matrix_get(inertia_df_tensor_tmp1,i,2)<<' '
-//                <<gsl_matrix_get(inertia_df_tensor_tmp1,i,3)<<' '
-//                <<gsl_matrix_get(inertia_df_tensor_tmp1,i,4)<<' '<<endl;
-//        }
         for(size_t j=0; j<5; j++){
             for (size_t k=0; k<5; k++){
                 inertia_df_tensor[j][k][i] = gsl_matrix_get(inertia_df_tensor_tmp1,j,k);
-//                cout<<i<<' '<<j<<' '<<k<<' '<<inertia_df_tensor[j][k][i]<<endl;
             }
         }
     }
@@ -184,12 +141,21 @@ void qp(const state_type y, state_type &dydt, double t){
     gsl_vector* momenta_tmp = gsl_vector_alloc(5);
     for(size_t i=0; i<5; i++){
         gsl_vector_set(momenta, i, y[i+5]);
+//        cout<<gsl_vector_get(momenta,i)<<endl;
     }
     gsl_blas_dgemv (CblasNoTrans,
-                    1.0, inertia_inverse, momenta ,
+                    1.0, inertia_inverse, momenta,
                     0.0, momenta_tmp);
     gsl_blas_ddot(momenta, momenta_tmp, &kinetic_energy);
     kinetic_energy = kinetic_energy/2.;
+//    cout<<"momenta="
+//        <<gsl_vector_get(momenta,0)<<' '
+//        <<gsl_vector_get(momenta,1)<<' '
+//        <<gsl_vector_get(momenta,2)<<' '
+//        <<gsl_vector_get(momenta,3)<<' '
+//        <<gsl_vector_get(momenta,4)<<' '<<endl;
+//    cout<<"momenta="<<y[5]<<' '<<y[6]<<' '<<y[7]<<' '<<y[8]<<' '<<y[9]<<' '<<endl;
+
     gsl_vector_free(momenta);
     gsl_vector_free(momenta_tmp);
 
@@ -198,50 +164,139 @@ void qp(const state_type y, state_type &dydt, double t){
     double temperature = sqrt((param.para_shape.get_excited_energy()-hyperU-kinetic_energy)/
                                       param.para_shape.get_level_density());
 
+    //gamma tensor: gamma_ij*gamma_jk = T^* D_ik, D_ik is dissipative tensor
+    //here we use approximation that T^* = T
     gsl_vector *eval = gsl_vector_alloc (5);
     gsl_matrix *evec = gsl_matrix_alloc (5, 5);
     gsl_matrix *eigen = gsl_matrix_alloc (5, 5);
     gsl_eigen_symmv_workspace * w = gsl_eigen_symmv_alloc (5);
-    gsl_eigen_symmv (dissipative_tensor, eval, evec, w);
+    gsl_eigen_symmv (dissipative_tensor_tmp, eval, evec, w);
     gsl_eigen_symmv_free (w);
+    gsl_matrix_free(dissipative_tensor_tmp);
+
+//    cout << "dissipative tensor" << endl;
+//    for(size_t i=0; i<5; i++) {
+//        cout << gsl_matrix_get(dissipative_tensor, i, 0) << ' '
+//             << gsl_matrix_get(dissipative_tensor, i, 1) << ' '
+//             << gsl_matrix_get(dissipative_tensor, i, 2) << ' '
+//             << gsl_matrix_get(dissipative_tensor, i, 3) << ' '
+//             << gsl_matrix_get(dissipative_tensor, i, 4) << ' ' << endl;
+//    }
+
+    gsl_matrix* evec_tmp = gsl_matrix_alloc(5,5);
+    for(size_t i=0; i<5; i++){
+        for(size_t j=0; j<5; j++){
+            gsl_matrix_set(evec_tmp,i,j,gsl_matrix_get(evec,i,j));
+        }
+    }
+
+//    cout<<"eigen value"<<endl;
+    cout<<"temperature="<<temperature<<", "
+        <<"U="<<hyperU<<", "
+        <<"kinetic energy="<<kinetic_energy<< endl;
+//    cout << gsl_vector_get(eval, 0) << ' '
+//         << gsl_vector_get(eval, 1) << ' '
+//         << gsl_vector_get(eval, 2) << ' '
+//         << gsl_vector_get(eval, 3) << ' '
+//         << gsl_vector_get(eval, 4) << ' ' << endl;
 
     gsl_matrix *evec_invert = gsl_matrix_alloc (5, 5);
     for(size_t i=0; i<5; i++){
-        gsl_matrix_set(eigen, i, i, sqrt(gsl_vector_get(eval, i)/temperature));
+        if (abs(gsl_vector_get(eval, i))<1e-8){
+            gsl_matrix_set(eigen, i, i, 0.);
+        }
+        else{
+            gsl_matrix_set(eigen, i, i, sqrt(abs(gsl_vector_get(eval, i))/temperature));
+        }
     }
-    gsl_linalg_LU_decomp (evec, permu, &signum);
-    gsl_linalg_LU_invert (evec, permu, evec_invert);
+    gsl_linalg_LU_decomp (evec_tmp, permu, &signum);
+    gsl_linalg_LU_invert (evec_tmp, permu, evec_invert);
+    gsl_matrix_free(evec_tmp);
+//    gsl_matrix* matrix_tmp = gsl_matrix_alloc(5,5);
+//    gsl_blas_dgemm (CblasNoTrans, CblasNoTrans,
+//                    1.0, evec, evec_invert,
+//                    0.0, matrix_tmp);
+
+//    cout<<"evec invert"<<endl;
+//    for(size_t i=0; i<5; i++) {
+//        cout << gsl_matrix_get(evec_invert, i, 0) << ' '
+//             << gsl_matrix_get(evec_invert, i, 1) << ' '
+//             << gsl_matrix_get(evec_invert, i, 2) << ' '
+//             << gsl_matrix_get(evec_invert, i, 3) << ' '
+//             << gsl_matrix_get(evec_invert, i, 4) << ' ' << endl;
+//    }
+//    gsl_matrix_free(matrix_tmp);
+
     gsl_blas_dgemm (CblasNoTrans, CblasNoTrans,
                     1.0, evec_invert, eigen,
-                    0.0, gamma_tensor);
+                    0.0, gamma_tensor_tmp);
+//    cout<<"evec invert"<<endl;
+//    for(size_t i=0; i<5; i++) {
+//        cout << gsl_matrix_get(evec_invert, i, 0) << ' '
+//             << gsl_matrix_get(evec_invert, i, 1) << ' '
+//             << gsl_matrix_get(evec_invert, i, 2) << ' '
+//             << gsl_matrix_get(evec_invert, i, 3) << ' '
+//             << gsl_matrix_get(evec_invert, i, 4) << ' ' << endl;
+//    }
     gsl_blas_dgemm (CblasNoTrans, CblasNoTrans,
-                    1.0, gamma_tensor, evec,
+                    1.0, gamma_tensor_tmp, evec,
                     0.0, gamma_tensor);
+    gsl_matrix_free(gamma_tensor_tmp);
     gsl_vector_free(eval);
     gsl_matrix_free(evec);
     gsl_matrix_free(eigen);
     gsl_matrix_free(evec_invert);
     gsl_permutation_free(permu);
 
-    gauss_rand(&(param.gauss_random), &(param.rng_seed));
+    gsl_vector* random_vector = gsl_vector_alloc(5);
+    for(size_t i=0; i<5; i++){
+        gauss_rand(&(param.gauss_random), &(param.rng_seed));
+        gsl_vector_set(random_vector,i,param.gauss_random);
+    }
 
     double tmp1, tmp2;
+//    cout<<"dydt ";
     for(size_t i=0; i<5; i++){
         tmp1 = 0.;
         tmp2 = 0.;
         for(size_t j=0; j<5; j++){
             tmp1 += gsl_matrix_get(inertia_inverse,i,j)*y[j+5];
             for(size_t k=0; k<5; k++){
-                tmp2 += -gsl_vector_get(hyperU_df,i)
-                        -1./2.*(inertia_df_tensor[j][k][i])*y[j+5]*y[k+5]
-                        -gsl_matrix_get(dissipative_tensor,i,j)*gsl_matrix_get(inertia_inverse,j,k)*y[k+5]
-                        +gsl_matrix_get(gamma_tensor,i,j)*param.gauss_random;
+                tmp2 += -1./2.*(inertia_df_tensor[j][k][i])*y[j+5]*y[k+5]
+                        -gsl_matrix_get(dissipative_tensor,i,j)*gsl_matrix_get(inertia_inverse,j,k)*y[k+5];
             }
+            tmp2 += gsl_matrix_get(gamma_tensor,i,j)*gsl_vector_get(random_vector,j);
         }
+        tmp2 += -gsl_vector_get(hyperU_df,i);
         dydt[i] = tmp1;
         dydt[i+5] = tmp2;
+//        cout<<dydt[i]<<' '<<dydt[i+5]<<' ';
     }
-
+//    cout<<endl;
+//    cout<<"inertia inverse tensor"<<endl;
+//    for(size_t i=0; i<5; i++) {
+//        cout << gsl_matrix_get(inertia_inverse, i, 0) << ' '
+//             << gsl_matrix_get(inertia_inverse, i, 1) << ' '
+//             << gsl_matrix_get(inertia_inverse, i, 2) << ' '
+//             << gsl_matrix_get(inertia_inverse, i, 3) << ' '
+//             << gsl_matrix_get(inertia_inverse, i, 4) << ' ' << endl;
+//    }
+//    cout << "dissipative tensor" << endl;
+//    for(size_t i=0; i<5; i++) {
+//        cout << gsl_matrix_get(dissipative_tensor, i, 0) << ' '
+//             << gsl_matrix_get(dissipative_tensor, i, 1) << ' '
+//             << gsl_matrix_get(dissipative_tensor, i, 2) << ' '
+//             << gsl_matrix_get(dissipative_tensor, i, 3) << ' '
+//             << gsl_matrix_get(dissipative_tensor, i, 4) << ' ' << endl;
+//    }
+//    cout<<"gamma tensor"<<endl;
+//    for(size_t i=0; i<5; i++) {
+//        cout<<gsl_matrix_get(gamma_tensor,i,0)<<' '
+//            <<gsl_matrix_get(gamma_tensor,i,1)<<' '
+//            <<gsl_matrix_get(gamma_tensor,i,2)<<' '
+//            <<gsl_matrix_get(gamma_tensor,i,3)<<' '
+//            <<gsl_matrix_get(gamma_tensor,i,4)<<' '<<endl;
+//    }
     gsl_matrix_free(inertia_tensor);
     gsl_matrix_free(dissipative_tensor);
     gsl_matrix_free(inertia_inverse);
@@ -257,16 +312,9 @@ void runge_kutta(gsl_vector *generalized_coordinates, gsl_vector *generalized_mo
     param.storation = storation;
     param.para_shape = shape;
 
-//    cout<<"rugge kutta"<<endl;
-//    cout<<starting[0]<<' '<<starting[1]<<' '<<starting[2]<<' '<<endl;
-//    cout<<param.starting[0]<<' '<<param.starting[1]<<' '<<param.starting[2]<<' '<<endl;
-//    cout<<step_length[0]<<' '<<step_length[1]<<' '<<step_length[2]<<' '<<endl;
-//    cout<<param.step_length[0]<<' '<<param.step_length[1]<<' '<<param.step_length[2]<<' '<<endl;
-//    cout<<param.storation[0]<<' '<<param.storation[1]<<' '<<endl;
-
     state_type x;
     runge_kutta4< state_type > stepper;
-    const double dt=1.e-4;
+    const double dt=2.5e-4;
     // initialize the position and velocity
     for(size_t i=0; i<5; i++){
         x[i] = gsl_vector_get(generalized_coordinates,i);

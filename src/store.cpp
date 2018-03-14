@@ -1,9 +1,6 @@
+#include <boost/algorithm/string.hpp>
 #include <iostream>
 #include <fstream>
-#include <string>
-#include <new>
-#include <boost/algorithm/string.hpp>
-#include <sstream>
 
 using namespace std;
 using namespace boost;
@@ -46,7 +43,6 @@ void input(const string& Input_file_path, int* steps, double* starting, double* 
 void store(const string& PES_file_path, int* steps, double storation[]){
     vector <string> fields;
     ifstream PES_file(PES_file_path);
-    //cout<<steps[0]<<steps[1]<<steps[2]<<steps[3]<<steps[4]<<endl;
     double cm12, Edef, Esh, Eld, AH, rlrzcs[5];
     int Ilrzcs[5];
     while(!PES_file.eof()){
@@ -60,13 +56,3 @@ void store(const string& PES_file_path, int* steps, double storation[]){
     }
     PES_file.close();
 }
-
-//int main()
-//{
-//    int steps[5];
-//    input("fort.112",steps);
-//    double* storation = new double[steps[0]*steps[1]*steps[2]*steps[3]*steps[4]];
-//    store("/home/dell/U236.txt",steps,storation);
-//    return 0;
-//}
-

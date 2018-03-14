@@ -15,6 +15,8 @@ public:
     double get_s(){ return _para_s;}
     double get_excited_energy() { return _excited_energy;}
     double get_level_density() { return _para_a;}
+    double get_density(){return _density;}
+    double get_average_v(){return _average_v;}
     int* get_steps(){ return _steps;}
     void set_l(double l){ _para_l = l;}
     void set_r(double r){ _para_r = r;}
@@ -35,10 +37,9 @@ public:
     double IntegrateRhoDerivative(double zeta, char label);
     double IntegrateRhoDDerivative(double zeta, char label_i, char label_j);
     double CenterOfMassDerivative(char side, char label);
-    double get_density(){return _density;}
-    double get_average_v(){return _average_v;}
 private:
     double _Acn = 236.;
+    double _Rcn = 1.27808*pow(_Acn,1./3.);
     double _para_l, _para_r, _para_z, _para_c, _para_s;
     double _a0 = 0., _a1 = 0., _a2 = 0., _a3 = 0., _a4 = 0.;
     double _density = 1.;

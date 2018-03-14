@@ -1,10 +1,7 @@
 #include <string>
 #include <gsl/gsl_integration.h>
 #include "../include/shape.h"
-#include <gsl/gsl_errno.h>
 #include <gsl/gsl_min.h>
-#include <gsl/gsl_math.h>
-#include <cmath>
 #include <iostream>
 
 double dissipative_wall(shape shape, char label_i, char label_j){
@@ -21,10 +18,10 @@ double dissipative_wall(shape shape, char label_i, char label_j){
         gsl_integration_glfixed_point(-1., 1., i, &x, &w, table);
         x = (l + z)/2. + s + (-l + z)/2.;
         result += (shape.RhoDerivative(x,label_i)*shape.RhoDerivative(x,label_j)*
-                sqrt(4.*shape.Rho(x)+pow(shape.RhoDerivative(x,'x'),2)))*w;
+                sqrt(4.*shape.Rho(x)+pow(shape.RhoDerivative(x,'x'),-1./2.)))*w;
         x = (l - z)/2. - s + (l + z)/2.;
         result += (shape.RhoDerivative(x,label_i)*shape.RhoDerivative(x,label_j)*
-                   sqrt(4*shape.Rho(x)+pow(shape.RhoDerivative(x,'x'),2)))*w;
+                   sqrt(4*shape.Rho(x)+pow(shape.RhoDerivative(x,'x'),-1./2.)))*w;
     }
     gsl_integration_glfixed_table_free(table);
     result = result*M_PI*shape.get_density()*shape.get_average_v()*3./4.;
@@ -46,11 +43,11 @@ double dissipative_wall2(shape shape, char label_i, char label_j){
         x = (l + z)/2. + s + (-l + z)/2.;
         result += ((shape.RhoDerivative(x,label_i)+shape.RhoDerivative(x,'x')*shape.CenterOfMassDerivative('L',label_i))*
                    (shape.RhoDerivative(x,label_j)+shape.RhoDerivative(x,'x')*shape.CenterOfMassDerivative('L',label_j))*
-                   sqrt(4.*shape.Rho(x)+pow(shape.RhoDerivative(x,'x'),2)))*w;
+                   sqrt(4.*shape.Rho(x)+pow(shape.RhoDerivative(x,'x'),1./2.)))*w;
         x = (l - z)/2. - s + (l + z)/2.;
         result += ((shape.RhoDerivative(x,label_i)+shape.RhoDerivative(x,'x')*shape.CenterOfMassDerivative('R',label_i))*
                    (shape.RhoDerivative(x,label_j)+shape.RhoDerivative(x,'x')*shape.CenterOfMassDerivative('R',label_j))*
-                   sqrt(4*shape.Rho(x)+pow(shape.RhoDerivative(x,'x'),2)))*w;
+                   sqrt(4*shape.Rho(x)+pow(shape.RhoDerivative(x,'x'),1./2.)))*w;
     }
     gsl_integration_glfixed_table_free(table);
     result = result*M_PI*shape.get_average_v()/2.;
@@ -62,9 +59,9 @@ double dissipative_window(shape shape, const char label_i, const char label_j){
     double s = shape.get_s();
     double sigma = M_PI*pow(shape.get_r(),2);
     double result;
-    result = sigma*((shape.CenterOfMassDerivative('R',label_i)-shape.CenterOfMassDerivative('R',label_i))*
+    result = sigma*((shape.CenterOfMassDerivative('R',label_i)-shape.CenterOfMassDerivative('L',label_i))*
             (shape.CenterOfMassDerivative('R',label_j)-shape.CenterOfMassDerivative('L',label_j)))+
-            32./(9.*sigma)*(M_PI*A(shape,z-s,-l-s,label_i)*shape.Rho(-l-s))*(M_PI*A(shape,z-s,-l-s,label_j)*shape.Rho(-l-s));
+            32./9.*(M_PI*A(shape,z-s,-l-s,label_i)*shape.Rho(-l-s))*(M_PI*A(shape,z-s,-l-s,label_j)*shape.Rho(-l-s));
     result = result*shape.get_density()*shape.get_average_v()/2.;
     return result;
 }
@@ -78,8 +75,6 @@ double gsl_mini(shape shape, double fn1(double, void*), double xguess, double x_
     gsl_function F;
     F.function = fn1;
     F.params = &shape;
-//    std::cout<<"gsl_mini"<<std::endl;
-//    std::cout<<&shape<<std::endl;
     T = gsl_min_fminimizer_quad_golden;
     s = gsl_min_fminimizer_alloc (T);
     gsl_min_fminimizer_set (s, &F, xguess, x_low, x_high);
