@@ -248,11 +248,14 @@ void qp(const state_type y, state_type &dydt, double t){
     gsl_matrix_free(evec_invert);
     gsl_permutation_free(permu);
 
+//    std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
     gsl_vector* random_vector = gsl_vector_alloc(5);
     for(size_t i=0; i<5; i++){
         gauss_rand(&(param.gauss_random), &(param.rng_seed));
         gsl_vector_set(random_vector,i,param.gauss_random);
     }
+//    std::chrono::steady_clock::time_point end= std::chrono::steady_clock::now();
+//    std::cout << "Time difference = " << std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count() <<std::endl;
 
     double tmp1, tmp2;
 //    cout<<"dydt ";

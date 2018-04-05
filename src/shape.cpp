@@ -1,10 +1,5 @@
 #include "../include/shape.h"
-#include <string>
-#include <stdexcept>
-#include <iostream>
-#include <cmath>
 #include <algorithm>
-#include <gsl/gsl_vector.h>
 
 using namespace std;
 
@@ -82,10 +77,11 @@ double shape::Rho(double x){
     double l = _para_l;
     double z = _para_z;
     double s = _para_s;
-    result = (pow(l,2) - pow(s + x,2))*(_a0 + _a1*(s + x - z) + _a2*pow(s + x - z,2) + _a3*pow(s + x - z,3) + _a4*pow(s + x - z,4));
+    result = pow(_Rcn,2)*(pow(l,2) - pow(s + x,2))*(_a0 + _a1*(s + x - z) + _a2*pow(s + x - z,2) + _a3*pow(s + x - z,3) + _a4*pow(s + x - z,4));
     return result;
 }
 double shape::RhoDerivative(double x, const char label) {
+//    std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
     double result;
     double l = _para_l;
     double r = _para_r;
@@ -514,11 +510,14 @@ double shape::RhoDerivative(double x, const char label) {
 							     245*pow(z,6))) + (pow(s + x - z,2)*(c*r + (4*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),2) +
 												 pow(r,2)/(pow(l,2) - pow(z,2))))/(pow(l,2) - pow(z,2)));
     }
-	
+//    std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+//    std::cout << label << "Time difference = " << std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count() << std::endl;
+    result = result*_Rcn;
     return result;
 }
 double shape::RhoDDerivative(double x, char label_i, char label_j) {
-    double result;
+//	std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
+	double result;
     double l = _para_l;
     double r = _para_r;
     double z = _para_z;
@@ -2040,7 +2039,10 @@ double shape::RhoDDerivative(double x, char label_i, char label_j) {
 		 (pow(s + x - z,2)*(c*r + (4*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),2) + pow(r,2)/(pow(l,2) - pow(z,2))))/
 		 (pow(l,2) - pow(z,2)));
     }
-    return result;
+//	std::chrono::steady_clock::time_point end= std::chrono::steady_clock::now();
+//	std::cout << "Time difference = " << std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count() <<std::endl;
+
+	return result;
 }
 double shape::IntegrateRhoDerivative(double x, char label){
     double l,r,z,c,s;
@@ -3041,6 +3043,7 @@ double shape::IntegrateRhoDerivative(double x, char label){
                                                                        245*pow(z,6)));
 //        cout<<x<<' '<<label<<' '<<result<<endl;
     }
+    result = result*pow(_Rcn,2);
     return result;
 }
 double shape::IntegrateRhoDDerivative(double x, char label_i, char label_j) {
@@ -7571,6 +7574,7 @@ double shape::IntegrateRhoDDerivative(double x, char label_i, char label_j) {
 						12*(63*pow(x,4) - 175*pow(x,3)*z + 400*pow(x,2)*pow(z,2) - 495*x*pow(z,3) + 270*pow(z,4))))))/
 	    (12.*pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6)));
     }
+    result = result*_Rcn;
     return result;
 }
 double shape::CenterOfMassDerivative(const char side, const char label) {
@@ -7916,7 +7920,6 @@ double shape::CenterOfMassDerivative(const char side, const char label) {
 	}
 	    
     }
-	
     return result;
 }
 double RhoShape(double zeta, void *params) {
@@ -7925,10 +7928,11 @@ double RhoShape(double zeta, void *params) {
     result = tmp_shape->Rho(zeta);
     return result;
 }
+//  A_i=-\frac{1}{\rho(z;q)^2} \frac{\partial}{\partial q_i} \int_{z_{min}}^z \rho(z';q)^2 dz'
 double A(shape shape, double z_high, double z_low, char label_i){
     double result;
 //	cout<<"IntegrateRhoDerivative "<<shape.IntegrateRhoDerivative(z_high, label_i)<<endl;
-    result = 1/shape.Rho(z_high)*(shape.IntegrateRhoDerivative(z_high, label_i)-shape.IntegrateRhoDerivative(z_low, label_i));
+    result = -1/shape.Rho(z_high)*(shape.IntegrateRhoDerivative(z_high, label_i)-shape.IntegrateRhoDerivative(z_low, label_i));
     return result;
 }
 double ADerivativeZ(shape shape, double z_high, double z_low, char label_i){
@@ -7942,12 +7946,13 @@ double ADerivativeQ(shape shape, double z_high, double z_low, char label_i, char
     int i,l;
     i = distance(lrzcs, find(lrzcs, lrzcs + 5, label_i));
     l = distance(lrzcs, find(lrzcs, lrzcs + 5, label_l));
-    if (i<l){
+    double unswap_result, swap_result, result;
+    unswap_result = 1/pow(shape.Rho(z_high),2)*shape.RhoDerivative(z_high, label_l)*(shape.IntegrateRhoDerivative(z_high, label_i)-shape.IntegrateRhoDerivative(z_low, label_i));
+    if (i>l){
         swap(label_i,label_l);
     }
-    double result;
-    result = 1/pow(shape.Rho(z_high),2)*shape.RhoDerivative(z_high, label_l)*(shape.IntegrateRhoDerivative(z_high, label_i)-shape.IntegrateRhoDerivative(z_low, label_i))-
-	1/shape.Rho(z_high)*(shape.IntegrateRhoDDerivative(z_high, label_i, label_l)-shape.IntegrateRhoDDerivative(z_low, label_i, label_l));
+	swap_result = -1/shape.Rho(z_high)*(shape.IntegrateRhoDDerivative(z_high, label_i, label_l)-shape.IntegrateRhoDDerivative(z_low, label_i, label_l));
+    result = unswap_result+swap_result;
     return result;
 }
 double ADDerivativeZQ(shape shape, double z_high, double z_low, char label_i, char label_l){
@@ -7955,14 +7960,15 @@ double ADDerivativeZQ(shape shape, double z_high, double z_low, char label_i, ch
     int i,l;
     i = distance(lrzcs, find(lrzcs, lrzcs + 5, label_i));
     l = distance(lrzcs, find(lrzcs, lrzcs + 5, label_l));
-    if (i<l){
+    double unswap_result, swap_result, result;
+    unswap_result = -2./pow(shape.Rho(z_high),3)*shape.RhoDerivative(z_high, label_l)*shape.RhoDerivative(z_high,'x')*(shape.IntegrateRhoDerivative(z_high, label_i)-shape.IntegrateRhoDerivative(z_low, label_i))+
+            1/pow(shape.Rho(z_high),2)*shape.RhoDDerivative(z_high, 'x', label_l)*(shape.IntegrateRhoDerivative(z_high,label_i)-shape.IntegrateRhoDerivative(z_low, label_i))+
+            1/pow(shape.Rho(z_high),2)*shape.RhoDerivative(z_high, label_l)*shape.RhoDerivative(z_high, label_i);
+    if (i>l){
         swap(label_i,label_l);
     }
-    double result;
-    result = -2./pow(shape.Rho(z_high),3)*shape.RhoDerivative(z_high, label_l)*shape.RhoDerivative(z_high,'x')*(shape.IntegrateRhoDerivative(z_high, label_i)-shape.IntegrateRhoDerivative(z_low, label_i))+
-	1/pow(shape.Rho(z_high),2)*shape.RhoDDerivative(z_high, 'x', label_l)*(shape.RhoDerivative(z_high, label_i)-shape.RhoDerivative(z_low, label_i))+
-	1/pow(shape.Rho(z_high),2)*shape.RhoDerivative(z_high, 'x')*(shape.IntegrateRhoDDerivative(z_high, label_i, label_l)-shape.IntegrateRhoDDerivative(z_low, label_i, label_l))+
-	1/pow(shape.Rho(z_high),2)*shape.RhoDerivative(z_high, label_l)*shape.RhoDerivative(z_high, label_i)-
-	1/shape.Rho(z_high)*shape.RhoDDerivative(z_high, label_i, label_l);
+	swap_result = 1/pow(shape.Rho(z_high),2)*shape.RhoDerivative(z_high, 'x')*(shape.IntegrateRhoDDerivative(z_high, label_i, label_l)-shape.IntegrateRhoDDerivative(z_low, label_i, label_l))-
+            1/shape.Rho(z_high)*shape.RhoDDerivative(z_high, label_i, label_l);
+    result = unswap_result+swap_result;
     return result;
 }

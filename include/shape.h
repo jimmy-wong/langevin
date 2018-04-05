@@ -1,6 +1,7 @@
 #include <string>
 #include <gsl/gsl_vector.h>
 #include <cmath>
+#include <chrono>
 
 using namespace std;
 class shape{
@@ -13,6 +14,7 @@ public:
     double get_z(){ return _para_z;}
     double get_c(){ return _para_c;}
     double get_s(){ return _para_s;}
+    double get_Rcn() { return _Rcn; }
     double get_excited_energy() { return _excited_energy;}
     double get_level_density() { return _para_a;}
     double get_density(){return _density;}
@@ -49,11 +51,11 @@ private:
     int _steps[5];
 };
 double RhoShape(double zeta, void* params);
-//A_i
+//  A_i
 double A(shape shape, double z_high, double z_low, char label_i);
-//\frac{\partial A_i}{\partial z}==A_i'
+//  \frac{\partial A_i}{\partial z}==A_i'
 double ADerivativeZ(shape shape, double z_high, double z_low, char label_i);
-//\frac{\partial A_i}{\partial q_l}
+//  \frac{\partial A_i}{\partial q_l}
 double ADerivativeQ(shape shape, double z_high, double z_low, char label_i, char label_l);
-//\frac{\partial A_i'}{\partial q_l}
+//  \frac{\partial A_i'}{\partial q_l}
 double ADDerivativeZQ(shape shape, double z_high, double z_low, char label_i, char label_l);
