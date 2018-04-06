@@ -38,14 +38,19 @@ public:
     double RhoDDerivative(double zeta, char label_i, char label_j);
     double IntegrateRhoDerivative(double zeta, char label);
     double IntegrateRhoDDerivative(double zeta, char label_i, char label_j);
+    double IntegrateRhoDerivativeLowHigh(double z_high, double z_low, char label_i);
+    double IntegrateRhoDDerivativeLowHigh(double z_high, double z_low, char label_i, char label_j);
     double CenterOfMassDerivative(char side, char label);
 private:
+    // 1u = 931.5MeV, U236 mass = 236.045566201u=279876.444916MeV
+    // \rho_m = U236 mass/(4\pi/3*_Rcn^3)=106.5378621MeV fm^-3
+    // v_F = \sqrt[3]{9\pi Acn/4}/R_cn*\hbar/(U236 mass/236)
     double _Acn = 236.;
     double _Rcn = 1.27808*pow(_Acn,1./3.);
     double _para_l, _para_r, _para_z, _para_c, _para_s;
     double _a0 = 0., _a1 = 0., _a2 = 0., _a3 = 0., _a4 = 0.;
-    double _density = 1.;
-    double _average_v = 1.;
+    double _density = 106.5378621; // unit MeV fm^-3
+    double _average_v = 0.3161252227942924*4./3.; // unit 1
     double _excited_energy = 0, _ground_state_energy = 0.;
     double _para_a;// level density parameter: a
     int _steps[5];
