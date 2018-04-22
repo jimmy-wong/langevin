@@ -30,7 +30,7 @@ public:
     void set_level_density() { _para_a = _Acn*(1.0+3.114*pow(_Acn,-1/3) + 5.626 * pow(_Acn,-2./3.))/14.61;}
     void set_steps(int steps[5]);
     void grid(double * starting_point, double * step_length, int* grid);
-    void efficiency();
+    void coefficiency();
     double grid_energy(double* storation, int* step);
     double AH(gsl_vector* generalized_coordinates);
     double Rho(double zeta);

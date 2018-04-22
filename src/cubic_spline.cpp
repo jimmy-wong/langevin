@@ -15,8 +15,8 @@ double hypercubic_interp(shape shape, double* starting, double* step_length, dou
     }
     double tmp_res, result = 0;
     double l1 = d_grid[0][1], l0= d_grid[0][0];
-    double c1 = -pow(d_grid[0][1], -2.5) - 0.5, c0 = -pow(d_grid[0][0], -2.5) - 0.5;
-    double r1 = 1 / sqrt(d_grid[0][1]) + 0.05, r0 = 1 / sqrt(d_grid[0][0]) + 0.05;
+    double c1 = -pow(l1, -2.5) - 0.5, c0 = -pow(l0, -2.5) - 0.5;
+    double r1 = 1 / sqrt(l1) + 0.05, r0 = 1 / sqrt(l0) + 0.05;
     double slope_c = (c0-c1)/(l0-l1), slope_r = (r0-r1)/(l0-l1);
     int step[5];
     for(int i=0;i<2;i++){
@@ -69,7 +69,7 @@ double hypercubic_interp_df(shape shape, double* starting, double* step_length, 
     if(label=='c'){
         cycle[3] = true;
     }
-    if(label=='z'){
+    if(label=='s'){
         cycle[4] = true;
     }
     double tmp_res_lrc, tmp_res_l, tmp_res_r, tmp_res_z, tmp_res_c, tmp_res_s, result = 0;
@@ -157,5 +157,5 @@ double hypercubic_interp_df(shape shape, double* starting, double* step_length, 
             }
         }
     }
-    return result;
+    return result/shape.get_Rcn();
 }

@@ -1,5 +1,6 @@
 #include "../include/shape.h"
 #include <algorithm>
+#include <iostream>
 
 using namespace std;
 
@@ -14,7 +15,7 @@ void shape::grid(double *starting_point, double *step_length, int* lower_limit){
         lower_limit[i] = floor((shape_para[i]-starting_point[i])/step_length[i]);
     }
 }
-void shape::efficiency() {
+void shape::coefficiency() {
     // shape_para unit: Rcn, not fm
     double l = _para_l;
     double r = _para_r;
@@ -62,7 +63,7 @@ double shape::AH(gsl_vector* generalized_coordinates){
     _para_z = gsl_vector_get(generalized_coordinates,2);
     _para_c = gsl_vector_get(generalized_coordinates,3);
     _para_s = gsl_vector_get(generalized_coordinates,4);
-    efficiency();
+    coefficiency();
 
     double term12,term22;
     double l = _para_l, z = _para_z;
@@ -82,7 +83,7 @@ double shape::Rho(double x){
 }
 double shape::RhoDerivative(double x, const char label) {
 //    std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
-    double result;
+    double result = 0;
     double l = _para_l;
     double r = _para_r;
     double z = _para_z;
@@ -2046,7 +2047,7 @@ double shape::RhoDDerivative(double x, char label_i, char label_j) {
 }
 double shape::IntegrateRhoDerivative(double x, char label){
     double l,r,z,c,s;
-    double result;
+    double result = 0;
     l = _para_l;
     r = _para_r;
     z = _para_z;
@@ -7589,13 +7590,16 @@ double shape::IntegrateRhoDerivativeLowHigh(double z_high, double z_low, char la
 }
 double shape::IntegrateRhoDDerivativeLowHigh(double z_high, double z_low, char label_i, char label_j){
     double result;
-    if (label_i == 'l' || label_i == 's') {
-        result = (IntegrateRhoDDerivative(z_high, label_i, label_j) - RhoDerivative(z_low, label_j) * (-1) -
-                  IntegrateRhoDDerivative(z_low, label_i, label_j));
+    if ((label_i == 'l' || label_i == 's')&&(label_j=='l'||label_j=='s')) {
+        result = (IntegrateRhoDDerivative(z_high, label_i, label_j) -
+				(RhoDerivative(z_low, 'x')+(-1)*RhoDerivative(z_low,label_i)+(-1)*RhoDerivative(z_low,label_j)+IntegrateRhoDDerivative(z_low,label_i,label_j)));
     } else if (label_j == 'l' || label_j == 's') {
         result = (IntegrateRhoDDerivative(z_high, label_j, label_i) - RhoDerivative(z_low, label_i) * (-1) -
                   IntegrateRhoDDerivative(z_low, label_j, label_i));
-    } else{
+    } else if (label_i == 'l' || label_i == 's') {
+		result = (IntegrateRhoDDerivative(z_high, label_i, label_j) - RhoDerivative(z_low, label_j) * (-1) -
+				  IntegrateRhoDDerivative(z_low, label_i, label_j));
+	} else{
         result = (IntegrateRhoDDerivative(z_high, label_i, label_j) - IntegrateRhoDDerivative(z_low, label_i, label_j));
     }
     return result;
@@ -7941,21 +7945,24 @@ double shape::CenterOfMassDerivative(const char side, const char label) {
 			12*pow(l,9)*pow(z,2)*(-42 + 3*pow(r,2)*z + 4*c*r*pow(z,3)) -
 			12*pow(l,7)*pow(z,4)*(14 + 99*pow(r,2)*z + 6*c*r*pow(z,3)) + pow(l,11)*(72 - 108*pow(r,2)*z + 8*c*r*pow(z,3)),2));
 	}
-	    
     }
-    return result;
+    return result*_Rcn;
 }
 double RhoShape(double zeta, void *params) {
     shape* tmp_shape = (shape*) params;
-    double result;
-    result = tmp_shape->Rho(zeta);
+	double result;
+    result = -tmp_shape->Rho(zeta);
+//    for(int i=0;i<201;i++){
+//        double x=tmp_shape->get_l()*(i-100)/100-tmp_shape->get_s();
+//        cout<<x<<' '<<tmp_shape->Rho(x)<<endl;
+//    }
+//	cout<<zeta<<' '<<result<<endl;
     return result;
 }
 //  A_i=-\frac{1}{\rho(z;q)^2} \frac{\partial}{\partial q_i} \int_{z_{min}}^z \rho(z';q)^2 dz'
 double A(shape shape, double z_high, double z_low, char label_i){
     double result;
-//	cout<<"IntegrateRhoDerivative "<<shape.IntegrateRhoDerivative(z_high, label_i)<<endl;
-        result = -1/shape.Rho(z_high)*shape.IntegrateRhoDerivativeLowHigh(z_high, z_low, label_i);
+    result = -1/shape.Rho(z_high)*shape.IntegrateRhoDerivativeLowHigh(z_high, z_low, label_i);
     return result;
 }
 double ADerivativeZ(shape shape, double z_high, double z_low, char label_i){

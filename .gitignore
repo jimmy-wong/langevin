@@ -13,3 +13,4 @@ bin/
 cmake_install.cmake
 gsl-ref.pdf
 LANGEVIN*
+backup

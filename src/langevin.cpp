@@ -15,7 +15,7 @@ void runge_kutta(gsl_vector *generalized_coordinates, gsl_vector *generalized_mo
 int main(int argc, char* argv[])
 {
     shape shape;
-    int steps[5],gs[5];
+    int steps[5],gs[5],sp[5];
     double starting[5],step_length[5];
     input("fort.112",steps,starting,step_length,gs);
     gs[0]=1;gs[1]=1;gs[2]=0;gs[3]=0;gs[4]=0;
@@ -36,13 +36,17 @@ int main(int argc, char* argv[])
     generalized_coordinates = gsl_vector_alloc(5);
     generalized_momenta = gsl_vector_alloc(5);
 
-    for (size_t i=0; i<5; i++){
-        gsl_vector_set(generalized_momenta, i, 0);
-        gsl_vector_set(generalized_coordinates, i, gs[i]*step_length[i]+starting[i]);
-    }
-
     //这里gamma_tensor的结果就是dissipative_tensor的平方根
     for(int i=0; i<10000; i++) {
+        sp[0]=12;sp[1]=10;sp[2]=22;sp[3]=12;sp[4]=6;
+        starting[1] = 1 / sqrt(starting[0]+sp[0]*step_length[0]) + 0.05;
+        starting[3] = -pow(starting[0]+sp[0]*step_length[0], -2.5) - 0.5;
+
+        for (size_t i=0; i<5; i++){
+            gsl_vector_set(generalized_momenta, i, 0);
+            gsl_vector_set(generalized_coordinates, i, sp[i]*step_length[i]+starting[i]);
+        }
+
         runge_kutta(generalized_coordinates, generalized_momenta,
                     starting, step_length, storation,
                     shape);
