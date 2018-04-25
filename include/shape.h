@@ -27,7 +27,7 @@ public:
     void set_s(double s){ _para_s = s;}
     void set_excited_energy(double excited_energy){_excited_energy = excited_energy+_ground_state_energy;}
     void set_ground_energy(double ground_energy){_ground_state_energy = ground_energy;}
-    void set_level_density() { _para_a = _Acn*(1.0+3.114*pow(_Acn,-1/3) + 5.626 * pow(_Acn,-2./3.))/14.61;}
+    void set_level_density() { _para_a = _Acn*(1.0+3.114*pow(_Acn,-1./3.) + 5.626*pow(_Acn,-2./3.))/14.61;}
     void set_steps(int steps[5]);
     void grid(double * starting_point, double * step_length, int* grid);
     void coefficiency();

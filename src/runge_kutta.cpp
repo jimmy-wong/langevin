@@ -4,8 +4,11 @@
 #include <gsl/gsl_linalg.h>
 #include <gsl/gsl_eigen.h>
 #include <boost/numeric/odeint.hpp>
+#include <boost/format.hpp>
 
 using namespace std;
+using boost::format;
+//using boost::io::group;
 using namespace boost::numeric::odeint;
 
 typedef boost::array<double, 10> state_type;
@@ -20,7 +23,7 @@ struct para{
     };
 
 para param;
-int counter=0;
+int counter;
 
 double dissipative(shape shape, const char label_i, const char label_j);
 double inertia(shape shape, const char label_i, const char label_j);
@@ -59,12 +62,12 @@ void qp(const state_type y, state_type &dydt, double t){
 
     cout<<"counter: "<<counter<<endl;
     counter += 1;
-    cout<<"current position: "
-        <<param.para_shape.get_l()<<' '
-        <<param.para_shape.get_r()<<' '
-        <<param.para_shape.get_z()<<' '
-        <<param.para_shape.get_c()<<' '
-        <<param.para_shape.get_s()<<' '<<endl;
+    cout<<format("current position: %1$+7.3f %2$+7.3f %3$+7.3f %4$+7.3f %5$+7.3f\n")
+          %param.para_shape.get_l()
+          %param.para_shape.get_r()
+          %param.para_shape.get_z()
+          %param.para_shape.get_c()
+          %param.para_shape.get_s();
 
     double *starting, *step_length;
     starting = param.starting;
@@ -142,20 +145,28 @@ void qp(const state_type y, state_type &dydt, double t){
                     0.0, momenta_tmp);
     gsl_blas_ddot(momenta, momenta_tmp, &kinetic_energy);
     kinetic_energy = kinetic_energy/2.;
-    cout<<"momenta="
-        <<gsl_vector_get(momenta,0)<<' '
-        <<gsl_vector_get(momenta,1)<<' '
-        <<gsl_vector_get(momenta,2)<<' '
-        <<gsl_vector_get(momenta,3)<<' '
-        <<gsl_vector_get(momenta,4)<<' '<<endl;
+//    gsl_blas_dgemv(CblasNoTrans, 1.0, inertia_inverse, momenta,  0.0, momenta_tmp);
+//    cout<<format("current dp/dt: %1$+7.3f %2$+7.3f %3$+7.3f %4$+7.3f %5$+7.3f\n")
+//          %gsl_vector_get(momenta_tmp,0)
+//          %gsl_vector_get(momenta_tmp,1)
+//          %gsl_vector_get(momenta_tmp,2)
+//          %gsl_vector_get(momenta_tmp,3)
+//          %gsl_vector_get(momenta_tmp,4);
+//
+//    cout<<format(" current momenta: %1$+7.3f %2$+7.3f %3$+7.3f %4$+7.3f %5$+7.3f\n")
+//          %gsl_vector_get(momenta,0)
+//          %gsl_vector_get(momenta,1)
+//          %gsl_vector_get(momenta,2)
+//          %gsl_vector_get(momenta,3)
+//          %gsl_vector_get(momenta,4);
 
     gsl_vector_free(momenta);
     gsl_vector_free(momenta_tmp);
 
     //E_int = E_x - 1/2 M^-1*p*p - U
     hyperU = hypercubic_interp(param.para_shape, starting, step_length, storation);
-    double temperature = param.para_shape.get_excited_energy()-hyperU-kinetic_energy>=0?sqrt((param.para_shape.get_excited_energy()-hyperU-kinetic_energy)/
-                                      param.para_shape.get_level_density()):0.002;
+    double temperature = param.para_shape.get_excited_energy()-hyperU-kinetic_energy>=0?
+                         sqrt((param.para_shape.get_excited_energy()-hyperU-kinetic_energy)/param.para_shape.get_level_density()) :0.002;
 
     //gamma tensor: gamma_ij*gamma_jk = T^* D_ik, D_ik is dissipative tensor
     //here we use approximation that T^* = T
@@ -173,10 +184,10 @@ void qp(const state_type y, state_type &dydt, double t){
             gsl_matrix_set(evec_tmp,i,j,gsl_matrix_get(evec,i,j));
         }
     }
-
-    cout<<"temperature="<<temperature<<", "
-        <<"U="<<hyperU<<", "
-        <<"kinetic energy="<<kinetic_energy<< endl;
+    cout<<format("temperature: %1$7.3f, U: %2$7.3f, kinetic energy: %3$7.3f\n")
+          %temperature
+          %hyperU
+          %kinetic_energy;
 
     gsl_matrix *evec_invert = gsl_matrix_alloc (5, 5);
     gsl_matrix_set_zero(eigen);
@@ -193,12 +204,27 @@ void qp(const state_type y, state_type &dydt, double t){
     gsl_matrix_free(evec_tmp);
 
     gsl_blas_dgemm (CblasNoTrans, CblasNoTrans,
-                    1.0, evec, eigen,
+                    1.0, evec_invert, eigen,
                     0.0, gamma_tensor_tmp);
 
     gsl_blas_dgemm (CblasNoTrans, CblasNoTrans,
-                    1.0, gamma_tensor_tmp, evec_invert,
+                    1.0, gamma_tensor_tmp, evec,
                     0.0, gamma_tensor);
+//    cout << format("eigen: %1$+7.3f %2$+7.3f %3$+7.3f %4$+7.3f %5$+7.3f\n")
+//            % gsl_vector_get(eval, 0)
+//            % gsl_vector_get(eval, 1)
+//            % gsl_vector_get(eval, 2)
+//            % gsl_vector_get(eval, 3)
+//            % gsl_vector_get(eval, 4);
+//
+//    for(size_t i=0; i<5; i++) {
+//        cout << format("gamma tensor: %1$+7.3f %2$+7.3f %3$+7.3f %4$+7.3f %5$+7.3f\n")
+//                % gsl_matrix_get(gamma_tensor, i, 0)
+//                % gsl_matrix_get(gamma_tensor, i, 1)
+//                % gsl_matrix_get(gamma_tensor, i, 2)
+//                % gsl_matrix_get(gamma_tensor, i, 3)
+//                % gsl_matrix_get(gamma_tensor, i, 4);
+//    }
     gsl_matrix_free(gamma_tensor_tmp);
     gsl_vector_free(eval);
     gsl_matrix_free(evec);
@@ -225,13 +251,20 @@ void qp(const state_type y, state_type &dydt, double t){
                 tmp2 += -1./2.*(inertia_df_tensor[j][k][i])*y[j+5]*y[k+5]
                         -gsl_matrix_get(dissipative_tensor,i,j)*gsl_matrix_get(inertia_inverse,j,k)*y[k+5];
             }
-//            tmp2 += gsl_matrix_get(gamma_tensor,i,j)*sqrt(2*temperature/1.e-2)*gsl_vector_get(random_vector,j);
+            tmp2 += gsl_matrix_get(gamma_tensor,i,j)*sqrt(2*temperature/1.e-0)*gsl_vector_get(random_vector,j);
         }
         tmp2 += -gsl_vector_get(hyperU_df,i);
         dydt[i] = tmp1;
         dydt[i+5] = tmp2;
     }
-
+//    double Utmp1, Utmp2;
+//    param.para_shape.set_c(param.para_shape.get_c()-0.00001);
+//    Utmp1 = hypercubic_interp(param.para_shape, starting, step_length, storation);
+//    param.para_shape.set_c(param.para_shape.get_c()+0.00002);
+//    Utmp2 = hypercubic_interp(param.para_shape, starting, step_length, storation);
+//    cout<<(Utmp1-Utmp2)/(-0.00002*param.para_shape.get_Rcn())<<endl;
+//    param.para_shape.set_c(param.para_shape.get_c()-0.00001);
+//    cout<<format("dqdt: %1$+7.3f %2$+7.3f %3$+7.3f %4$+7.3f %5$+7.3f\n") %dydt[5] %dydt[6] %dydt[7] %dydt[8] %dydt[9];
     gsl_matrix_free(inertia_tensor);
     gsl_matrix_free(dissipative_tensor);
     gsl_matrix_free(inertia_inverse);
@@ -255,7 +288,7 @@ void runge_kutta(gsl_vector *generalized_coordinates, gsl_vector *generalized_mo
         x[i+5] = gsl_vector_get(generalized_momenta,i);
     }
 
-    for( double t=0.0 ; t<1.e4 ; t+= dt ) {
+    for(double t=0.0; t<1.e4; t+= dt) {
         stepper.do_step(qp, x, t, dt);
         if (2*x[0]>11*x[1]){
             counter = 0;

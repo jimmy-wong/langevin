@@ -1,4 +1,5 @@
 #include "../include/shape.h"
+#include <boost/assert.hpp>
 #include <algorithm>
 #include <iostream>
 
@@ -55,7 +56,9 @@ double shape::grid_energy(double* storation, int* step) {
 	step[2]*_steps[3]*_steps[4]+
 	step[3]*_steps[4]+
 	step[4];
-    return storation[index];
+    return storation[index]+
+		   50*(exp(1/(pow(step[0]-_steps[0],2)+pow(step[1]-_steps[1],2)+pow(step[2]-_steps[2],2)+pow(step[3]-_steps[3],2)+pow(step[4]-_steps[4],2)
+					  +pow(step[0],2)+pow(step[1],2)+pow(step[2],2)+pow(step[3],2)+pow(step[4],2)))-1);
 }
 double shape::AH(gsl_vector* generalized_coordinates){
     _para_l = gsl_vector_get(generalized_coordinates,0);
@@ -66,11 +69,29 @@ double shape::AH(gsl_vector* generalized_coordinates){
     coefficiency();
 
     double term12,term22;
-    double l = _para_l, z = _para_z;
-    term12 = (pow(l + z,2)*(140*_a0*(2*l - z) + (l + z)*(35*_a1*(-3*l + z) +
-            (l + z)*(14*_a2*(4*l - z) + (l + z)*(7*_a3*(-5*l + z) + 4*_a4*(6*l - z)*(l + z))))))/420.;
-    term22 = (pow(l - z,2)*(140*_a0*(2*l + z) + (l - z)*(35*_a1*(3*l + z) +
-            (l - z)*(14*_a2*(4*l + z) + (l - z)*(7*_a3*(5*l + z) + 4*_a4*(l - z)*(6*l + z))))))/420.;
+    double l = _para_l, z = _para_z, s=_para_s;
+    term12 = (2*_a0*pow(l,3))/3. - (_a1*pow(l,4))/4. + (2*_a2*pow(l,5))/15. - (_a3*pow(l,6))/12. + (2*_a4*pow(l,7))/35. + _a0*pow(l,2)*s +
+             (_a1*pow(l,2)*pow(s,2))/2. - (_a0*pow(s,3))/3. + (_a2*pow(l,2)*pow(s,3))/3. - (_a1*pow(s,4))/4. +
+             (_a3*pow(l,2)*pow(s,4))/4. - (_a2*pow(s,5))/5. + (_a4*pow(l,2)*pow(s,5))/5. - (_a3*pow(s,6))/6. - (_a4*pow(s,7))/7. -
+             (2*_a1*pow(l,3)*z)/3. + (_a2*pow(l,4)*z)/2. - (2*_a3*pow(l,5)*z)/5. + (_a4*pow(l,6)*z)/3. - _a1*pow(l,2)*s*z -
+             _a2*pow(l,2)*pow(s,2)*z + (_a1*pow(s,3)*z)/3. - _a3*pow(l,2)*pow(s,3)*z + (_a2*pow(s,4)*z)/2. - _a4*pow(l,2)*pow(s,4)*z +
+             (3*_a3*pow(s,5)*z)/5. + (2*_a4*pow(s,6)*z)/3. + (2*_a2*pow(l,3)*pow(z,2))/3. - (3*_a3*pow(l,4)*pow(z,2))/4. +
+             (4*_a4*pow(l,5)*pow(z,2))/5. + _a2*pow(l,2)*s*pow(z,2) + (3*_a3*pow(l,2)*pow(s,2)*pow(z,2))/2. -
+             (_a2*pow(s,3)*pow(z,2))/3. + 2*_a4*pow(l,2)*pow(s,3)*pow(z,2) - (3*_a3*pow(s,4)*pow(z,2))/4. -
+             (6*_a4*pow(s,5)*pow(z,2))/5. - (2*_a3*pow(l,3)*pow(z,3))/3. + _a4*pow(l,4)*pow(z,3) - _a3*pow(l,2)*s*pow(z,3) -
+             2*_a4*pow(l,2)*pow(s,2)*pow(z,3) + (_a3*pow(s,3)*pow(z,3))/3. + _a4*pow(s,4)*pow(z,3) + (2*_a4*pow(l,3)*pow(z,4))/3. +
+             _a4*pow(l,2)*s*pow(z,4) - (_a4*pow(s,3)*pow(z,4))/3.;
+    term22 = (2*_a0*pow(l,3))/3. + (_a1*pow(l,4))/4. + (2*_a2*pow(l,5))/15. + (_a3*pow(l,6))/12. + (2*_a4*pow(l,7))/35. - _a0*pow(l,2)*s -
+             (_a1*pow(l,2)*pow(s,2))/2. + (_a0*pow(s,3))/3. - (_a2*pow(l,2)*pow(s,3))/3. + (_a1*pow(s,4))/4. -
+             (_a3*pow(l,2)*pow(s,4))/4. + (_a2*pow(s,5))/5. - (_a4*pow(l,2)*pow(s,5))/5. + (_a3*pow(s,6))/6. + (_a4*pow(s,7))/7. -
+             (2*_a1*pow(l,3)*z)/3. - (_a2*pow(l,4)*z)/2. - (2*_a3*pow(l,5)*z)/5. - (_a4*pow(l,6)*z)/3. + _a1*pow(l,2)*s*z +
+             _a2*pow(l,2)*pow(s,2)*z - (_a1*pow(s,3)*z)/3. + _a3*pow(l,2)*pow(s,3)*z - (_a2*pow(s,4)*z)/2. + _a4*pow(l,2)*pow(s,4)*z -
+             (3*_a3*pow(s,5)*z)/5. - (2*_a4*pow(s,6)*z)/3. + (2*_a2*pow(l,3)*pow(z,2))/3. + (3*_a3*pow(l,4)*pow(z,2))/4. +
+             (4*_a4*pow(l,5)*pow(z,2))/5. - _a2*pow(l,2)*s*pow(z,2) - (3*_a3*pow(l,2)*pow(s,2)*pow(z,2))/2. +
+             (_a2*pow(s,3)*pow(z,2))/3. - 2*_a4*pow(l,2)*pow(s,3)*pow(z,2) + (3*_a3*pow(s,4)*pow(z,2))/4. +
+             (6*_a4*pow(s,5)*pow(z,2))/5. - (2*_a3*pow(l,3)*pow(z,3))/3. - _a4*pow(l,4)*pow(z,3) + _a3*pow(l,2)*s*pow(z,3) +
+             2*_a4*pow(l,2)*pow(s,2)*pow(z,3) - (_a3*pow(s,3)*pow(z,3))/3. - _a4*pow(s,4)*pow(z,3) + (2*_a4*pow(l,3)*pow(z,4))/3. -
+             _a4*pow(l,2)*s*pow(z,4) + (_a4*pow(s,3)*pow(z,4))/3.;
     return _Acn*(term12/(term12+term22));
 }
 double shape::Rho(double x){
@@ -95,7 +116,7 @@ double shape::RhoDerivative(double x, const char label) {
 	    2 * (s + x) * (_a0 + _a1 * (s + x - z) + _a2 * pow(s + x - z, 2) + _a3 * pow(s + x - z, 3) +
 			   _a4 * pow(s + x - z, 4));
     }
-    if (label=='l') {
+    else if (label=='l') {
 	result = (pow(l, 2) - pow(s + x, 2)) * ((-8 * l * pow(r, 2) * (s + x - z) * z) / pow(pow(l, 2) - pow(z, 2), 3) -
 						(2 * l * pow(r, 2)) / pow(pow(l, 2) - pow(z, 2), 2) -
 						(7 * pow(s + x - z, 4) * (-150 * pow(l, 9) + 39 * c * pow(l, 12) * r +
@@ -384,7 +405,7 @@ double shape::RhoDerivative(double x, const char label) {
 		     (pow(s + x - z, 2) * (c * r + (4 * pow(r, 2) * pow(z, 2)) / pow(pow(l, 2) - pow(z, 2), 2) +
 					   pow(r, 2) / (pow(l, 2) - pow(z, 2)))) / (pow(l, 2) - pow(z, 2)));
     }
-    if(label=='r'){
+    else if(label=='r'){
 	result = (pow(l,2) - pow(s + x,2))*((4*r*(s + x - z)*z)/pow(pow(l,2) - pow(z,2),2) + (2*r)/(pow(l,2) - pow(z,2)) -
 					    (7*pow(s + x - z,4)*(3*c*pow(l,13) + 36*pow(l,11)*r - 12*c*pow(l,11)*pow(z,2) + 180*pow(l,9)*r*pow(z,2) +
 								 50*c*pow(l,9)*pow(z,4) - 660*pow(l,7)*r*pow(z,4) - 76*c*pow(l,7)*pow(z,6) + 700*pow(l,5)*r*pow(z,6) +
@@ -396,7 +417,7 @@ double shape::RhoDerivative(double x, const char label) {
 					    + (pow(s + x - z,2)*(c + (8*r*pow(z,2))/pow(pow(l,2) - pow(z,2),2) + (2*r)/(pow(l,2) - pow(z,2))))/
 					    (pow(l,2) - pow(z,2)));
     }
-    if(label=='z'){
+    else if(label=='z'){
 	result = (pow(l,2) - pow(s + x,2))*((8*pow(r,2)*(s + x - z)*pow(z,2))/pow(pow(l,2) - pow(z,2),3) +
 					    (2*pow(r,2)*(s + x - z))/pow(pow(l,2) - pow(z,2),2) -
 					    (7*pow(s + x - z,4)*(-105*pow(l,8)*s - 120*pow(l,8)*z - 24*c*pow(l,11)*r*z + 180*pow(l,9)*pow(r,2)*z +
@@ -461,7 +482,7 @@ double shape::RhoDerivative(double x, const char label) {
 									  (c*r + (4*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),2) + pow(r,2)/(pow(l,2) - pow(z,2))))/
 					    (pow(l,2) - pow(z,2)));
     }
-    if (label=='c'){
+    else if (label=='c'){
 	result = (pow(l,2) - pow(s + x,2))*((r*pow(s + x - z,2))/(pow(l,2) - pow(z,2)) -
 					    (7*pow(s + x - z,4)*(3*pow(l,13)*r - 12*pow(l,11)*r*pow(z,2) + 50*pow(l,9)*r*pow(z,4) - 76*pow(l,7)*r*pow(z,6) +
 								 35*pow(l,5)*r*pow(z,8)))/
@@ -470,7 +491,7 @@ double shape::RhoDerivative(double x, const char label) {
 								   136*pow(l,7)*r*pow(z,7) + 70*pow(l,5)*r*pow(z,9)))/
 					    (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))));
     }
-    if(label=='s'){
+    else if(label=='s'){
 	result = (pow(l,2) - pow(s + x,2))*((2*pow(r,2)*z)/pow(pow(l,2) - pow(z,2),2) -
 					    (7*pow(s + x - z,4)*(-105*pow(l,8)*z + 140*pow(l,6)*pow(z,3) +
 								 210*pow(l,4)*pow(z,5) - 420*pow(l,2)*pow(z,7) + 175*pow(z,9)))/
@@ -510,6 +531,9 @@ double shape::RhoDerivative(double x, const char label) {
 		       (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) -
 							     245*pow(z,6))) + (pow(s + x - z,2)*(c*r + (4*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),2) +
 												 pow(r,2)/(pow(l,2) - pow(z,2))))/(pow(l,2) - pow(z,2)));
+    }
+    else{
+        BOOST_ASSERT_MSG(false, "RhoDerivative!");
     }
 //    std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
 //    std::cout << label << "Time difference = " << std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count() << std::endl;
@@ -1985,7 +2009,7 @@ double shape::RhoDDerivative(double x, char label_i, char label_j) {
 					    70*pow(l,5)*r*pow(z,9)))/
 		       (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))));
     }
-    else{
+    else if(label_i=='s'&&label_j=='s'){
 	result = (pow(l,2) - pow(s + x,2))*((-56*pow(s + x - z,3)*(-105*pow(l,8)*z + 140*pow(l,6)*pow(z,3) + 210*pow(l,4)*pow(z,5) -
 								   420*pow(l,2)*pow(z,7) + 175*pow(z,9)))/
 					    (pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6))) -
@@ -2040,9 +2064,11 @@ double shape::RhoDDerivative(double x, char label_i, char label_j) {
 		 (pow(s + x - z,2)*(c*r + (4*pow(r,2)*pow(z,2))/pow(pow(l,2) - pow(z,2),2) + pow(r,2)/(pow(l,2) - pow(z,2))))/
 		 (pow(l,2) - pow(z,2)));
     }
+    else{
+        BOOST_ASSERT_MSG(false,"RhoDDerivative!");
+    }
 //	std::chrono::steady_clock::time_point end= std::chrono::steady_clock::now();
 //	std::cout << "Time difference = " << std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count() <<std::endl;
-
 	return result;
 }
 double shape::IntegrateRhoDerivative(double x, char label){
@@ -2442,7 +2468,7 @@ double shape::IntegrateRhoDerivative(double x, char label){
 						      245*pow(z,6)));
 //	cout<<x<<' '<<label<<' '<<result<<endl;
     }
-    if (label=='r'){
+    else if (label=='r'){
 	result = (x*(108*pow(l,17)*r - 1080*pow(l,15)*r*pow(z,2) +
 		     36*pow(l,17)*(3*r + c*(3*pow(s,2) + 3*s*x + pow(x,2) - 6*s*z - 3*x*z + 3*pow(z,2))) +
 		     420*pow(l,5)*r*pow(z,6)*(70*pow(s,6) + 42*pow(s,5)*(5*x - 4*z) + 210*pow(s,2)*pow(x,2)*pow(x - z,2) +
@@ -2521,7 +2547,7 @@ double shape::IntegrateRhoDerivative(double x, char label){
 						      245*pow(z,6)));
 //        cout<<x<<' '<<label<<' '<<result<<endl;
     }
-    if(label=='z') {
+    else if(label=='z') {
 	result = (x*(36*c*pow(l,17)*r*(-6*s - 3*x + 6*z) + 105*s*pow(z,9)*
 		     (-420*pow(s,5) - 210*pow(s,2)*x*pow(x - z,2) - 420*s*pow(x,2)*pow(x - z,2) - 420*pow(s,2)*x*(x - z)*(2*x - z) +
 		      70*pow(s,4)*(-15*x + 12*z) + pow(x,3)*(-70*pow(x,2) + 168*x*z - 105*pow(z,2)) +
@@ -2883,7 +2909,7 @@ double shape::IntegrateRhoDerivative(double x, char label){
 	    (2.*pow(l,5)*pow(pow(l,2) - pow(z,2),4)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6)));
 //        cout<<x<<' '<<label<<' '<<result<<endl;
     }
-    if(label=='c') {
+    else if(label=='c') {
         result = (x * (36 * pow(l, 17) * r *
                        (3 * pow(s, 2) + 3 * s * x + pow(x, 2) - 6 * s * z - 3 * x * z + 3 * pow(z, 2)) +
                        28 * pow(l, 5) * r * pow(z, 8) *
@@ -2959,7 +2985,7 @@ double shape::IntegrateRhoDerivative(double x, char label){
                    245 * pow(z, 6)));
 //        cout<<x<<' '<<label<<' '<<result<<endl;
     }
-    if(label=='s'){
+    else if(label=='s'){
             result = (x*(36*c*pow(l,17)*r*(6*s + 3*x - 6*z) - 36*c*pow(l,15)*r*
                                                                 (40*pow(s,3) + 60*pow(s,2)*(x - z) + 20*s*(2*pow(x,2) - 3*x*z + 3*pow(z,2)) +
                                                                  10*(pow(x,3) - 2*pow(x,2)*z + 3*x*pow(z,2) - 4*pow(z,3))) +
@@ -3043,6 +3069,9 @@ double shape::IntegrateRhoDerivative(double x, char label){
                      (12.*pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) -
                                                                        245*pow(z,6)));
 //        cout<<x<<' '<<label<<' '<<result<<endl;
+    }
+    else{
+        BOOST_ASSERT_MSG(false, "IntegrateRhoDerivative!");
     }
     result = result*pow(_Rcn,2);
     return result;
@@ -7524,7 +7553,7 @@ double shape::IntegrateRhoDDerivative(double x, char label_i, char label_j) {
 					     7*(50*pow(x,5) - 132*pow(x,4)*z + 210*pow(x,3)*pow(z,2) - 240*pow(x,2)*pow(z,3) + 135*x*pow(z,4) - 30*pow(z,5)))))/
 	    (12.*pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6)));
     }
-    else{
+    else if (label_i=='s'&&label_j=='s'){
 	result = (x*(216*c*pow(l,17)*r + 63*pow(l,12)*(480*pow(s,2) + 60*s*(7*x - 6*z) + 120*(pow(x,2) - x*z - pow(z,2))) -
 		     36*c*pow(l,15)*r*(120*pow(s,2) + 120*s*(x - z) + 20*(2*pow(x,2) - 3*x*z + 3*pow(z,2))) +
 		     105*s*pow(z,9)*(4200*pow(s,4) + 8400*pow(s,3)*(x - z) + 420*x*pow(x - z,2)*(2*x - z) + 840*pow(s,2)*(10*pow(x,2) - 15*x*z + 6*pow(z,2)) +
@@ -7575,6 +7604,9 @@ double shape::IntegrateRhoDDerivative(double x, char label_i, char label_j) {
 						12*(63*pow(x,4) - 175*pow(x,3)*z + 400*pow(x,2)*pow(z,2) - 495*x*pow(z,3) + 270*pow(z,4))))))/
 	    (12.*pow(l,5)*pow(pow(l,2) - pow(z,2),3)*(9*pow(l,6) - 63*pow(l,4)*pow(z,2) - 21*pow(l,2)*pow(z,4) - 245*pow(z,6)));
     }
+    else {
+        BOOST_ASSERT_MSG(false, "IntegrateRhoDDerivative!");
+    }
     result = result*_Rcn;
     return result;
 }
@@ -7594,8 +7626,8 @@ double shape::IntegrateRhoDDerivativeLowHigh(double z_high, double z_low, char l
         result = (IntegrateRhoDDerivative(z_high, label_i, label_j) -
 				(RhoDerivative(z_low, 'x')+(-1)*RhoDerivative(z_low,label_i)+(-1)*RhoDerivative(z_low,label_j)+IntegrateRhoDDerivative(z_low,label_i,label_j)));
     } else if (label_j == 'l' || label_j == 's') {
-        result = (IntegrateRhoDDerivative(z_high, label_j, label_i) - RhoDerivative(z_low, label_i) * (-1) -
-                  IntegrateRhoDDerivative(z_low, label_j, label_i));
+        result = (IntegrateRhoDDerivative(z_high, label_i, label_j) - RhoDerivative(z_low, label_i) * (-1) -
+                  IntegrateRhoDDerivative(z_low, label_i, label_j));
     } else if (label_i == 'l' || label_i == 's') {
 		result = (IntegrateRhoDDerivative(z_high, label_i, label_j) - RhoDerivative(z_low, label_j) * (-1) -
 				  IntegrateRhoDDerivative(z_low, label_i, label_j));
@@ -7655,7 +7687,7 @@ double shape::CenterOfMassDerivative(const char side, const char label) {
 		 12*pow(l,9)*pow(z,2)*(42 + 3*pow(r,2)*z + 4*c*r*pow(z,3)) +
 		 12*pow(l,7)*pow(z,4)*(-14 + 99*pow(r,2)*z + 6*c*r*pow(z,3)));
 	}
-	if(label=='r'){
+	else if(label=='r'){
 	    result = ((pow(l,2) - pow(z,2))*(3*c*pow(l,13) + 54*pow(l,11)*r - 54*pow(l,9)*r*(4*s - z)*z - 18*pow(l,7)*r*(8*s - 49*z)*pow(z,3) -
 					     630*pow(l,5)*r*(4*s - 3*z)*pow(z,5) + 2*pow(l,7)*pow(z,3)*(-9*r*(8*s - 49*z) + 2*c*(22*s - 7*z)*pow(z,2)) -
 					     7*pow(l,5)*pow(z,5)*(90*r*(4*s - 3*z) + c*(8*s - 5*z)*pow(z,2)) + 6*pow(l,11)*(9*r + 2*c*z*(-2*s + 3*z)) -
@@ -7682,7 +7714,7 @@ double shape::CenterOfMassDerivative(const char side, const char label) {
 			12*pow(l,9)*pow(z,2)*(42 + 3*pow(r,2)*z + 4*c*r*pow(z,3)) +
 			12*pow(l,7)*pow(z,4)*(-14 + 99*pow(r,2)*z + 6*c*r*pow(z,3)),2));
 	}
-	if(label=='z'){
+	else if(label=='z'){
 	    result = ((pow(l,2) - pow(z,2))*(840*s*(2*s - z)*pow(z,7) - 105*s*pow(z,8) - 105*pow(l,2)*pow(z,6)*(-4*s + 2*z) +
 					     210*pow(l,4)*pow(z,4)*(-3*s + 4*z) - 210*pow(l,6)*pow(z,2)*(-2*s + 6*z) + 105*pow(l,8)*(-s + 8*z) -
 					     630*pow(l,2)*pow(z,5)*(8*pow(s,2) - 4*s*z + pow(z,2)) +
@@ -7731,7 +7763,7 @@ double shape::CenterOfMassDerivative(const char side, const char label) {
 		 12*pow(l,9)*pow(z,2)*(42 + 3*pow(r,2)*z + 4*c*r*pow(z,3)) +
 		 12*pow(l,7)*pow(z,4)*(-14 + 99*pow(r,2)*z + 6*c*r*pow(z,3)));
 	}
-	if(label=='c'){
+	else if(label=='c'){
 	    result = ((pow(l,2) - pow(z,2))*(3*pow(l,13)*r + 4*pow(l,7)*r*(22*s - 7*z)*pow(z,5) - 7*pow(l,5)*r*(8*s - 5*z)*pow(z,7) +
 					     12*pow(l,11)*r*z*(-2*s + 3*z) - 2*pow(l,9)*r*pow(z,3)*(4*s + 23*z)))/
 		(2.*(-105*pow(l,10)*s + 12*c*pow(l,13)*r*z + 35*pow(l,8)*(15*s - 16*z)*pow(z,2) + 6*pow(l,4)*(175*s - 184*z)*pow(z,6) -
@@ -7755,7 +7787,7 @@ double shape::CenterOfMassDerivative(const char side, const char label) {
 			12*pow(l,9)*pow(z,2)*(42 + 3*pow(r,2)*z + 4*c*r*pow(z,3)) +
 			12*pow(l,7)*pow(z,4)*(-14 + 99*pow(r,2)*z + 6*c*r*pow(z,3)),2));
 	}
-	if(label=='s'){
+	else if(label=='s'){
 	    result = ((pow(l,2) - pow(z,2))*(105*pow(l,8)*(4*s - z) - 24*c*pow(l,11)*r*z - 210*pow(l,6)*(8*s - 2*z)*pow(z,2) +
 					     210*pow(l,4)*(12*s - 3*z)*pow(z,4) - 105*pow(l,2)*(16*s - 4*z)*pow(z,6) + 210*s*pow(z,8) + 105*(2*s - z)*pow(z,8) -
 					     2*pow(l,9)*r*z*(108*r + 4*c*pow(z,2)) - 7*pow(l,5)*r*pow(z,5)*(360*r + 8*c*pow(z,2)) +
@@ -7780,9 +7812,12 @@ double shape::CenterOfMassDerivative(const char side, const char label) {
 			12*pow(l,9)*pow(z,2)*(42 + 3*pow(r,2)*z + 4*c*r*pow(z,3)) +
 			12*pow(l,7)*pow(z,4)*(-14 + 99*pow(r,2)*z + 6*c*r*pow(z,3)),2));
 	}
+	else{
+	    BOOST_ASSERT_MSG(false,"CenterOfMassDerivative!");
+	}
     }
     
-    if(side=='R'){
+    else if(side=='R'){
 	if(label=='l'){
 	    result = -((pow(l,2) - pow(z,2))*(-1050*pow(l,9) + 39*c*pow(l,12)*r - 210*l*pow(z,6)*(8*pow(s,2) - 4*s*z + pow(z,2)) +
 					      840*pow(l,3)*pow(z,4)*(6*pow(s,2) - 3*s*z + 2*pow(z,2)) -
@@ -7825,7 +7860,7 @@ double shape::CenterOfMassDerivative(const char side, const char label) {
 		 12*pow(l,9)*pow(z,2)*(-42 + 3*pow(r,2)*z + 4*c*r*pow(z,3)) -
 		 12*pow(l,7)*pow(z,4)*(14 + 99*pow(r,2)*z + 6*c*r*pow(z,3)) + pow(l,11)*(72 - 108*pow(r,2)*z + 8*c*r*pow(z,3)));
 	}
-	if(label=='r'){ 
+	else if(label=='r'){
 	    result = -((pow(l,2) - pow(z,2))*(3*c*pow(l,13) + 54*pow(l,11)*r - 54*pow(l,9)*r*(4*s - z)*z -
 					      18*pow(l,7)*r*(8*s - 49*z)*pow(z,3) - 630*pow(l,5)*r*(4*s - 3*z)*pow(z,5) +
 					      2*pow(l,7)*pow(z,3)*(-9*r*(8*s - 49*z) + 2*c*(22*s - 7*z)*pow(z,2)) -
@@ -7851,7 +7886,7 @@ double shape::CenterOfMassDerivative(const char side, const char label) {
 			12*pow(l,9)*pow(z,2)*(-42 + 3*pow(r,2)*z + 4*c*r*pow(z,3)) -
 			12*pow(l,7)*pow(z,4)*(14 + 99*pow(r,2)*z + 6*c*r*pow(z,3)) + pow(l,11)*(72 - 108*pow(r,2)*z + 8*c*r*pow(z,3)),2));
 	}
-	if(label=='z'){
+	else if(label=='z'){
 	    result = -((pow(l,2) - pow(z,2))*(840*s*(2*s - z)*pow(z,7) - 105*s*pow(z,8) - 105*pow(l,2)*pow(z,6)*(-4*s + 2*z) +
 					      210*pow(l,4)*pow(z,4)*(-3*s + 4*z) - 210*pow(l,6)*pow(z,2)*(-2*s + 6*z) + 105*pow(l,8)*(-s + 8*z) -
 					      630*pow(l,2)*pow(z,5)*(8*pow(s,2) - 4*s*z + pow(z,2)) +
@@ -7898,7 +7933,7 @@ double shape::CenterOfMassDerivative(const char side, const char label) {
 		 12*pow(l,9)*pow(z,2)*(-42 + 3*pow(r,2)*z + 4*c*r*pow(z,3)) -
 		 12*pow(l,7)*pow(z,4)*(14 + 99*pow(r,2)*z + 6*c*r*pow(z,3)) + pow(l,11)*(72 - 108*pow(r,2)*z + 8*c*r*pow(z,3)));
 	}
-	if(label=='c'){
+	else if(label=='c'){
 	    result = -((pow(l,2) - pow(z,2))*(3*pow(l,13)*r + 4*pow(l,7)*r*(22*s - 7*z)*pow(z,5) - 7*pow(l,5)*r*(8*s - 5*z)*pow(z,7) +
 					      12*pow(l,11)*r*z*(-2*s + 3*z) - 2*pow(l,9)*r*pow(z,3)*(4*s + 23*z)))/
 		(2.*(105*pow(l,10)*s - 12*c*pow(l,13)*r*z - 6*pow(l,4)*(175*s - 184*z)*pow(z,6) + 7*pow(l,2)*(75*s - 16*z)*pow(z,8) -
@@ -7921,7 +7956,7 @@ double shape::CenterOfMassDerivative(const char side, const char label) {
 			12*pow(l,9)*pow(z,2)*(-42 + 3*pow(r,2)*z + 4*c*r*pow(z,3)) -
 			12*pow(l,7)*pow(z,4)*(14 + 99*pow(r,2)*z + 6*c*r*pow(z,3)) + pow(l,11)*(72 - 108*pow(r,2)*z + 8*c*r*pow(z,3)),2));
 	}
-	if(label=='s'){
+	else if(label=='s'){
 	    result = -((pow(l,2) - pow(z,2))*(105*pow(l,8)*(4*s - z) - 24*c*pow(l,11)*r*z - 210*pow(l,6)*(8*s - 2*z)*pow(z,2) +
 					      210*pow(l,4)*(12*s - 3*z)*pow(z,4) - 105*pow(l,2)*(16*s - 4*z)*pow(z,6) + 210*s*pow(z,8) + 105*(2*s - z)*pow(z,8) -
 					      2*pow(l,9)*r*z*(108*r + 4*c*pow(z,2)) - 7*pow(l,5)*r*pow(z,5)*(360*r + 8*c*pow(z,2)) +
@@ -7945,8 +7980,14 @@ double shape::CenterOfMassDerivative(const char side, const char label) {
 			12*pow(l,9)*pow(z,2)*(-42 + 3*pow(r,2)*z + 4*c*r*pow(z,3)) -
 			12*pow(l,7)*pow(z,4)*(14 + 99*pow(r,2)*z + 6*c*r*pow(z,3)) + pow(l,11)*(72 - 108*pow(r,2)*z + 8*c*r*pow(z,3)),2));
 	}
+	else{
+	    BOOST_ASSERT_MSG(false, "CenterOfMassDerivative!");
+	}
     }
-    return result*_Rcn;
+    else{
+        BOOST_ASSERT_MSG(false, "CenterOfMassDerivative!");
+    }
+    return result;
 }
 double RhoShape(double zeta, void *params) {
     shape* tmp_shape = (shape*) params;

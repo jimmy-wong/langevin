@@ -22,7 +22,7 @@ double inertia(shape shape, const char label_i, const char label_j){
                      +shape.Rho(x)*A(shape, x, -l-s, label_i)*A(shape, x, -l-s, label_j));
     }
     gsl_integration_glfixed_table_free(table);
-    result = result*M_PI*density;
+    result = result*(l*shape.get_Rcn())*M_PI*density;
     return result;
 }
 double inertia_df(shape shape, const char label_i, const char label_j, const char label_l){
@@ -45,6 +45,6 @@ double inertia_df(shape shape, const char label_i, const char label_j, const cha
                      shape.Rho(x)*A(shape, x, -l-s, label_i)*ADerivativeQ(shape, x, -l-s, label_j, label_l));
     }
     gsl_integration_glfixed_table_free(table);
-    result = result*M_PI*density;
+    result = result*(l*shape.get_Rcn())*M_PI*density;
     return result;
 }
