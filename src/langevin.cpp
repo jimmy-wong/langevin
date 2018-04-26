@@ -25,7 +25,7 @@ int main(int argc, char* argv[])
     shape.set_steps(steps);
     shape.set_level_density();
     // 初始化storation为20.
-    fill(storation,storation+steps[0]*steps[1]*steps[2]*steps[3]*steps[4],50.);
+    fill(storation,storation+steps[0]*steps[1]*steps[2]*steps[3]*steps[4],100.);
     store("U236.txt",steps,storation);
     double ground_energy = shape.grid_energy(storation, gs);
     shape.set_ground_energy(ground_energy);
