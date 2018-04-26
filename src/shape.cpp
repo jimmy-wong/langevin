@@ -1,7 +1,6 @@
 #include "../include/shape.h"
 #include <boost/assert.hpp>
 #include <algorithm>
-#include <iostream>
 
 using namespace std;
 

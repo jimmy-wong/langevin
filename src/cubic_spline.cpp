@@ -1,5 +1,5 @@
 #include "../include/shape.h"
-#include <iostream>
+
 // useful for the calculation of Temperature
 double hypercubic_interp(shape shape, double* starting, double* step_length, double* storation) {
 
@@ -8,7 +8,6 @@ double hypercubic_interp(shape shape, double* starting, double* step_length, dou
     starting[1] = 1/sqrt(starting[0]+grid[0]*step_length[0])+0.05;
     starting[3] = -pow(starting[0]+grid[0]*step_length[0],-2.5)-0.5;
     shape.grid(starting, step_length, grid);
-//    cout<<grid[0]<<' '<<grid[1]<<' '<<grid[2]<<' '<<grid[3]<<' '<<grid[4]<<endl;
     double d_grid[5][2];
     for(int i=0;i<5;i++){
         d_grid[i][0] = starting[i]+grid[i]*step_length[i];
@@ -44,12 +43,6 @@ double hypercubic_interp(shape shape, double* starting, double* step_length, dou
                                 (1-2*j)*(shape.get_r()+slope_r*l0-slope_r*shape.get_l()-d_grid[1][j])/(step_length[1])*
                                 (1-2*i)*(shape.get_l()-d_grid[0][i])/(step_length[0]);
                         result += tmp_res*shape.grid_energy(storation,step);
-//                        cout<<(1-2*i)*(shape.get_l()-d_grid[0][i])/(step_length[0])<<' '
-//                            <<(1-2*j)*(shape.get_r()+slope_r*l0-slope_r*shape.get_l()-d_grid[1][j])/(step_length[1])<<' '
-//                            <<(1-2*k)*(shape.get_z()-d_grid[2][k])/(step_length[2])<<' '
-//                            <<(1-2*l)*(shape.get_c()+slope_c*l0-slope_c*shape.get_l()-d_grid[3][l])/(step_length[3])<<' '
-//                            <<(1-2*m)*(shape.get_s()-d_grid[4][m])/(step_length[4])<<' '
-//                            <<shape.grid_energy(storation,step)<<endl;
                     }
                 }
             }

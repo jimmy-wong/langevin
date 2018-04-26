@@ -2,7 +2,6 @@
 #include <gsl/gsl_integration.h>
 #include "../include/shape.h"
 #include <gsl/gsl_min.h>
-#include <iostream>
 
 double dissipative_wall(shape shape, char label_i, char label_j){
     double l = shape.get_l();
@@ -14,7 +13,6 @@ double dissipative_wall(shape shape, char label_i, char label_j){
     gsl_integration_glfixed_table *table = nullptr;
     table = gsl_integration_glfixed_table_alloc(n);
     for(size_t i=0; i<n; i++) {
-//        cout<<"Rho Derivative x x "<<shape.RhoDerivative(x,'x')<<endl;
         gsl_integration_glfixed_point(-l - s, z - s, i, &x, &w, table);
         tmp_result1 += (shape.RhoDerivative(x, label_i) * shape.RhoDerivative(x, label_j) /
                    sqrt(4.*shape.Rho(x)+pow(shape.RhoDerivative(x,'x'),2.))) * w;
@@ -24,12 +22,10 @@ double dissipative_wall(shape shape, char label_i, char label_j){
         gsl_integration_glfixed_point(z - s, l - s, i, &x, &w, table);
         tmp_result2 += (shape.RhoDerivative(x,label_i)*shape.RhoDerivative(x,label_j)/
                    sqrt(4*shape.Rho(x)+pow(shape.RhoDerivative(x,'x'),2.)))*w;
-//        cout<<"x "<<x<<" Rho "<<shape.Rho(x)<<" RhoDerivative "<<pow(shape.RhoDerivative(x,'x'),2.)<<endl;
     }
     tmp_result2 = tmp_result2*((l-z)/2*shape.get_Rcn());
     gsl_integration_glfixed_table_free(table);
     result = (tmp_result2+tmp_result1)*M_PI*shape.get_density()*shape.get_average_v()*3./4.;
-//    cout<<"wall tmp1 "<<tmp_result1<<" tmp2 "<<tmp_result2<<endl;
     return result;
 }
 double dissipative_wall2(shape shape, char label_i, char label_j){
@@ -50,21 +46,15 @@ double dissipative_wall2(shape shape, char label_i, char label_j){
                         sqrt(4. * shape.Rho(x) + pow(shape.RhoDerivative(x, 'x'), 2.))) * w;
     }
     tmp_result1 = tmp_result1*(l+z)/2*shape.get_Rcn();
-//        cout<<i<<' '<<"result "<<result<<endl;
-//        cout<<"x "<<x<<" Rho "<<shape.Rho(x)<<endl;
     for(size_t i=0; i<n; i++) {
         gsl_integration_glfixed_point(z-s, l-s, i, &x, &w, table);
         tmp_result2 += ((shape.RhoDerivative(x,label_i)+shape.RhoDerivative(x,'x')*shape.CenterOfMassDerivative('R',label_i))*
                    (shape.RhoDerivative(x,label_j)+shape.RhoDerivative(x,'x')*shape.CenterOfMassDerivative('R',label_j))/
                    sqrt(4.*shape.Rho(x)+pow(shape.RhoDerivative(x,'x'),2.)))*w;
-//        cout<<"x "<<x<<" Rho "<<shape.Rho(x)<<" RhoDerivative "<<pow(shape.RhoDerivative(x,'x'),2.)<<endl;
-//        cout<<i<<' '<<"result "<<result<<endl;
-//        cout<<"gsdgs"<<sqrt(4.*shape.Rho(x)+pow(shape.RhoDerivative(x,'x'),2.))<<endl;
     }
     tmp_result2 = tmp_result2*(l-z)/2*shape.get_Rcn();
     gsl_integration_glfixed_table_free(table);
     result = (tmp_result1+tmp_result2)*M_PI*shape.get_average_v()/2.;
-//    cout<<"wall2 tmp1 "<<tmp_result1<<" tmp2 "<<tmp_result2<<endl;
     return result;
 }
 double dissipative_window(shape shape, const char label_i, const char label_j){
@@ -77,7 +67,6 @@ double dissipative_window(shape shape, const char label_i, const char label_j){
             (shape.CenterOfMassDerivative('R',label_j)-shape.CenterOfMassDerivative('L',label_j)))+
             32./9./sigma*(M_PI*(-1)*A(shape,z-s,-l-s,label_i)*shape.Rho(z-s))*(M_PI*(-1)*A(shape,z-s,-l-s,label_j)*shape.Rho(z-s));
     result = result*shape.get_density()*shape.get_average_v()/2.;
-//    cout<<"window "<<result<<endl;
     return result;
 }
 double gsl_mini(shape shape, double fn1(double, void*), double xguess, double x_low, double x_high)
@@ -117,17 +106,11 @@ double dissipative(shape shape, const char label_i, const char label_j){
     double ks=0.27;
     gamma_wall = dissipative_wall(shape, label_i, label_j);
     gamma_ww = dissipative_wall2(shape, label_i, label_j)+dissipative_window(shape, label_i, label_j);
-//    cout<<&shape<<" dissipation "<<-l-s<<' '<<z-s<<endl;
-//    cout<<"gamma wall"<<gamma_wall<<" gamma wall2 "<<dissipative_wall2(shape, label_i, label_j)<<" gamma window "<<dissipative_window(shape, label_i, label_j)<<endl;
     if (c>0.) {
-//        cout<<"1 "<<shape.Rho(gsl_mini(shape, RhoShape, (-l+z-2*s)/2., -l-s, z-s))<<endl;
-//        cout<<"2 "<<shape.Rho(gsl_mini(shape, RhoShape, (z-s+1.06)/2., z-s, 1.06))<<endl;
-
         Rmin = max(shape.Rho(gsl_mini(shape, RhoShape, z-s+1e-6, z-s, l-s)),
                    shape.Rho(gsl_mini(shape, RhoShape, z-s-1e-6, -l-s, z-s)))/pow(shape.get_Rcn(),2);
         result = ks*(pow(sin(M_PI*pow(r,2)/Rmin/2.),2)*gamma_wall +
                  pow(cos(M_PI*pow(r,2)/Rmin/2.),2)*gamma_ww);
-//        cout<<"Rmin "<<Rmin<<"gamma_wall "<<gamma_wall<<"gamma_ww "<<gamma_ww<<endl;
     }
     else{
         result = ks*gamma_wall;
