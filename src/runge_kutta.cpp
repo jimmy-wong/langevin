@@ -125,8 +125,7 @@ void qp(const state_type y, state_type &dydt, double t){
         inertia_df_tensor[i]=*inertia_df_tensor_tmp2[i];
         gsl_matrix_free(inertia_df_tensor_tmp1);
     }
-    //gamma tensor: gamma_ij*gamma_jk = T^* D_ik, D_ik is dissipative tensor
-    //here we use approximation that T^* = T
+    //gamma tensor: gamma_ij*gamma_jk = D_ik, D_ik is dissipative tensor
     gsl_vector *eval = gsl_vector_alloc (5);
     gsl_matrix *evec = gsl_matrix_alloc (5, 5);
     gsl_matrix *eigen = gsl_matrix_alloc (5, 5);
@@ -222,7 +221,7 @@ void qp(const state_type y, state_type &dydt, double t){
     }
     gsl_blas_dgemm(CblasNoTrans,CblasNoTrans,1.0,dissipative_tensor,inertia_inverse,0.0,diss_inv);
     gsl_blas_dgemv(CblasNoTrans,-1.0,diss_inv,momenta,1.0,tmp2);
-    gsl_blas_dgemv(CblasNoTrans,sqrt(2*temperature/1.e-0), gamma_tensor, random_vector,1.0, tmp2);
+    gsl_blas_dgemv(CblasNoTrans, sqrt(2*temperature/5.e-1), gamma_tensor, random_vector, 1.0, tmp2);
     gsl_vector_sub(tmp2, hyperU_df);
     for(size_t i=0; i<5; i++){
         dydt[i] = gsl_vector_get(tmp1,i);
@@ -254,14 +253,14 @@ void runge_kutta(gsl_vector *generalized_coordinates, gsl_vector *generalized_mo
     param.para_shape = shape;
     state_type x;
     euler< state_type > stepper;
-    const double dt=1.e-0;
+    const double dt=5.e-1;
     // initialize the position and velocity
     for(size_t i=0; i<5; i++){
         x[i] = gsl_vector_get(generalized_coordinates,i)*shape.get_Rcn();
         x[i+5] = gsl_vector_get(generalized_momenta,i);
     }
 
-    for(double t=0.0; t<1.e4; t+= dt) {
+    for(double t=dt; t<1.e4; t+= dt) {
         stepper.do_step(qp, x, t, dt);
         if (2*x[0]>11*x[1]){
             counter = 0;
@@ -270,6 +269,6 @@ void runge_kutta(gsl_vector *generalized_coordinates, gsl_vector *generalized_mo
     }
     counter = 0;
     for(size_t i=0; i<5; i++){
-        gsl_vector_set(generalized_coordinates,i,x[i]);
+        gsl_vector_set(generalized_coordinates,i,x[i]/shape.get_Rcn());
     }
 }

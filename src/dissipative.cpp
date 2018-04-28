@@ -94,6 +94,7 @@ double gsl_mini(shape shape, double fn1(double, void*), double xguess, double x_
     gsl_min_fminimizer_free (s);
     return xguess;
 }
+// dissipative tensor use surface + window model, surface=ks*wall, ks=0.27, a shape independent reduction factor
 double dissipative(shape shape, const char label_i, const char label_j){
     double l = shape.get_l();
     double z = shape.get_z();
@@ -105,11 +106,11 @@ double dissipative(shape shape, const char label_i, const char label_j){
     double Rmin;
     double ks=0.27;
     gamma_wall = dissipative_wall(shape, label_i, label_j);
-    gamma_ww = dissipative_wall2(shape, label_i, label_j)+dissipative_window(shape, label_i, label_j);
+    gamma_ww = ks*dissipative_wall2(shape, label_i, label_j)+dissipative_window(shape, label_i, label_j);
     if (c>0.) {
         Rmin = max(shape.Rho(gsl_mini(shape, RhoShape, z-s+1e-6, z-s, l-s)),
                    shape.Rho(gsl_mini(shape, RhoShape, z-s-1e-6, -l-s, z-s)))/pow(shape.get_Rcn(),2);
-        result = ks*(pow(sin(M_PI*pow(r,2)/Rmin/2.),2)*gamma_wall +
+        result = (pow(sin(M_PI*pow(r,2)/Rmin/2.),2)*ks*gamma_wall +
                  pow(cos(M_PI*pow(r,2)/Rmin/2.),2)*gamma_ww);
     }
     else{

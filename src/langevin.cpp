@@ -1,7 +1,9 @@
 #include <iostream>
 #include "../include/shape.h"
+#include <boost/format.hpp>
 
 using namespace std;
+using namespace boost;
 
 void input(const string&, int*, double*, double*, int*);
 void store(const string&, int*, double*);
@@ -22,10 +24,11 @@ int main(int argc, char* argv[])
     starting[1] = 1 / sqrt(starting[0]+gs[0]*step_length[0]) + 0.05;
     starting[3] = -pow(starting[0]+gs[0]*step_length[0], -2.5) - 0.5;
     double* storation = new double[steps[0]*steps[1]*steps[2]*steps[3]*steps[4]];
+    shape.set_gs(gs);
     shape.set_steps(steps);
     shape.set_level_density();
     // 初始化storation为20.
-    fill(storation,storation+steps[0]*steps[1]*steps[2]*steps[3]*steps[4],100.);
+    fill(storation,storation+steps[0]*steps[1]*steps[2]*steps[3]*steps[4],10.);
     store("U236.txt",steps,storation);
     double ground_energy = shape.grid_energy(storation, gs);
     shape.set_ground_energy(ground_energy);
@@ -38,7 +41,7 @@ int main(int argc, char* argv[])
 
     //这里gamma_tensor的结果就是dissipative_tensor的平方根
     for(int i=0; i<10000; i++) {
-        sp[0]=15;sp[1]=13;sp[2]=8;sp[3]=18;sp[4]=11;
+        sp[0]=10;sp[1]=9;sp[2]=16;sp[3]=11;sp[4]=7;
         starting[1] = 1 / sqrt(starting[0]+sp[0]*step_length[0]) + 0.05;
         starting[3] = -pow(starting[0]+sp[0]*step_length[0], -2.5) - 0.5;
 
@@ -50,6 +53,13 @@ int main(int argc, char* argv[])
         runge_kutta(generalized_coordinates, generalized_momenta,
                     starting, step_length, storation,
                     shape);
+        cout<<format("generalized coordinates: %1$+7.3f %2$+7.3f %3$+7.3f %4$+7.3f %5$+7.3f\n")
+              %gsl_vector_get(generalized_coordinates,0)
+              %gsl_vector_get(generalized_coordinates,1)
+              %gsl_vector_get(generalized_coordinates,2)
+              %gsl_vector_get(generalized_coordinates,3)
+              %gsl_vector_get(generalized_coordinates,4);
+
         cout<<shape.AH(generalized_coordinates)<<endl;
     }
     delete(storation);

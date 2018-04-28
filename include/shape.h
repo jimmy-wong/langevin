@@ -28,6 +28,7 @@ public:
     void set_excited_energy(double excited_energy){_excited_energy = excited_energy+_ground_state_energy;}
     void set_ground_energy(double ground_energy){_ground_state_energy = ground_energy;}
     void set_level_density() { _para_a = _Acn*(1.0+3.114*pow(_Acn,-1./3.) + 5.626*pow(_Acn,-2./3.))/14.61;}
+    void set_gs(int gs[5]);
     void set_steps(int steps[5]);
     void grid(double * starting_point, double * step_length, int* grid);
     void coefficiency();
@@ -53,7 +54,7 @@ private:
     double _average_v = 0.3161252227942924*4./3.; // unit 1
     double _excited_energy = 0, _ground_state_energy = 0.;
     double _para_a;// level density parameter: a
-    int _steps[5];
+    int _steps[5], _gs[5];
 };
 double RhoShape(double zeta, void* params);
 //  A_i

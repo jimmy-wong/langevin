@@ -17,8 +17,8 @@ void input(const string& Input_file_path, int* steps, double* starting, double* 
         split(fields, para_name, is_any_of(", ="), token_compress_on );
 
         if (fields.at(0)=="n_lrzcs") {
-            for(i = 0; i < 5; i++) {
-                steps[i] = stoi(fields.at(i + 1)) + 1;
+            for(i=0; i<5; i++) {
+                steps[i] = stoi(fields.at(i + 1))+1;
             }
         }
         if (fields.at(0)=="lrzcs_0"){
@@ -33,7 +33,7 @@ void input(const string& Input_file_path, int* steps, double* starting, double* 
         }
         if (fields.at(0)=="gs"){
             for(i=0; i<5; i++){
-                gs[i] = stof(fields.at(i+1));
+                gs[i] = stoi(fields.at(i+1));
             }
         }
     }

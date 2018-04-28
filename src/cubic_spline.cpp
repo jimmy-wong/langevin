@@ -1,4 +1,5 @@
 #include "../include/shape.h"
+#include <iostream>
 
 // useful for the calculation of Temperature
 double hypercubic_interp(shape shape, double* starting, double* step_length, double* storation) {
@@ -21,10 +22,12 @@ double hypercubic_interp(shape shape, double* starting, double* step_length, dou
     while (shape.get_c()+slope_c*l0-slope_c*shape.get_l()-d_grid[3][0]<0){
         d_grid[3][0] = d_grid[3][0]-step_length[3];
         d_grid[3][1] = d_grid[3][1]-step_length[3];
+        grid[3]=grid[3]-1;
     }
     while ((shape.get_r()+slope_r*l0-slope_r*shape.get_l()-d_grid[1][0])/step_length[1]<0){
         d_grid[1][0] = d_grid[1][0]-step_length[1];
         d_grid[1][1] = d_grid[1][1]-step_length[1];
+        grid[1]=grid[1]-1;
     }
     int step[5];
     for(int i=0;i<2;i++){
@@ -43,6 +46,7 @@ double hypercubic_interp(shape shape, double* starting, double* step_length, dou
                                 (1-2*j)*(shape.get_r()+slope_r*l0-slope_r*shape.get_l()-d_grid[1][j])/(step_length[1])*
                                 (1-2*i)*(shape.get_l()-d_grid[0][i])/(step_length[0]);
                         result += tmp_res*shape.grid_energy(storation,step);
+//                        cout<<step[0]<<' '<<step[1]<<' '<<step[2]<<' '<<step[3]<<' '<<step[4]<<' '<<tmp_res<<' '<<shape.grid_energy(storation,step)<<endl;
                     }
                 }
             }
