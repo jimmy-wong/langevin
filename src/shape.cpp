@@ -4,6 +4,11 @@
 
 using namespace std;
 
+void shape::set_gs(int *gs){
+    for(int i=0; i<5; i++){
+        _gs[i] = gs[i];
+    }
+}
 void shape::set_steps(int *steps) {
     for(int i=0; i<5; i++){
         _steps[i] = steps[i];
@@ -51,13 +56,24 @@ void shape::coefficiency() {
 double shape::grid_energy(double* storation, int* step) {
     int index;
     index = step[0]*_steps[1]*_steps[2]*_steps[3]*_steps[4]+
-	step[1]*_steps[2]*_steps[3]*_steps[4]+
-	step[2]*_steps[3]*_steps[4]+
-	step[3]*_steps[4]+
-	step[4];
-    return storation[index]+
-		   50*(exp(1/(pow(step[0]-_steps[0],2)+pow(step[1]-_steps[1],2)+pow(step[2]-_steps[2],2)+pow(step[3]-_steps[3],2)+pow(step[4]-_steps[4],2)
-					  +pow(step[0],2)+pow(step[1],2)+pow(step[2],2)+pow(step[3],2)+pow(step[4],2)))-1);
+            step[1]*_steps[2]*_steps[3]*_steps[4]+
+            step[2]*_steps[3]*_steps[4]+
+            step[3]*_steps[4]+
+            step[4];
+    if (equal(step,step+5,_gs)) {
+        return storation[index];
+    }
+    else{return storation[index]+
+                50*(exp(1/pow(step[0]-_steps[0],4))+
+                    exp(1/pow(step[1]-_steps[1],4))+
+                    exp(1/pow(step[2]-_steps[2],4))+
+                    exp(1/pow(step[3]-_steps[3],4))+
+                    exp(1/pow(step[4]-_steps[4],4))+
+                    exp(1/pow(step[0],4))+
+                    exp(1/pow(step[1],4))+
+                    exp(1/pow(step[2],4))+
+                    exp(1/pow(step[3],4))+
+                    exp(1/pow(step[4],4))-10);}
 }
 double shape::AH(gsl_vector* generalized_coordinates){
     _para_l = gsl_vector_get(generalized_coordinates,0);

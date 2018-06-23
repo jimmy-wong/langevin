@@ -5,10 +5,10 @@
 #include <gsl/gsl_eigen.h>
 #include <boost/numeric/odeint.hpp>
 #include <boost/format.hpp>
+#include <omp.h>
 
 using namespace std;
 using boost::format;
-//using boost::io::group;
 using namespace boost::numeric::odeint;
 
 typedef boost::array<double, 10> state_type;
@@ -22,8 +22,9 @@ struct para{
     unsigned long rng_seed = 0;
     };
 
+extern para param;
+#pragma omp threadprivate(param)
 para param;
-int counter;
 
 double dissipative(shape shape, const char label_i, const char label_j);
 double inertia(shape shape, const char label_i, const char label_j);
@@ -54,14 +55,15 @@ void qp(const state_type y, state_type &dydt, double t){
     param.para_shape.set_s(y[4]/param.para_shape.get_Rcn());
     param.para_shape.coefficiency();
 
-    cout<<"counter: "<<counter<<endl;
-    counter += 1;
-    cout<<format("current position: %1$+7.3f %2$+7.3f %3$+7.3f %4$+7.3f %5$+7.3f\n")
-          %param.para_shape.get_l()
-          %param.para_shape.get_r()
-          %param.para_shape.get_z()
-          %param.para_shape.get_c()
-          %param.para_shape.get_s();
+    if (omp_get_thread_num()==1) {
+        cout<<"random seed: "<<param.rng_seed<<endl;
+        cout<<format("current position: %1$+7.3f %2$+7.3f %3$+7.3f %4$+7.3f %5$+7.3f\n")
+            %param.para_shape.get_l()
+            %param.para_shape.get_r()
+            %param.para_shape.get_z()
+            %param.para_shape.get_c()
+            %param.para_shape.get_s();
+    }
 
     double *starting, *step_length;
     starting = param.starting;
@@ -95,8 +97,7 @@ void qp(const state_type y, state_type &dydt, double t){
         inertia_tensor_df_tmp[k] = gsl_matrix_alloc(5, 5);
         for (size_t i = 0; i < 5; i++) {
             for (size_t j = 0; j <= i; j++) {
-                double tmp;
-                tmp = inertia_df(param.para_shape, label[i], label[j], label[k]);
+                double tmp = inertia_df(param.para_shape, label[i], label[j], label[k]);
                 gsl_matrix_set(inertia_tensor_df_tmp[k], i, j, tmp);
                 gsl_matrix_set(inertia_tensor_df_tmp[k], j, i, tmp);
             }
@@ -152,7 +153,6 @@ void qp(const state_type y, state_type &dydt, double t){
         }
     }
 
-
     gsl_linalg_LU_decomp (evec_tmp, permu, &signum);
     gsl_linalg_LU_invert (evec_tmp, permu, evec_invert);
     gsl_matrix_free(evec_tmp);
@@ -164,7 +164,6 @@ void qp(const state_type y, state_type &dydt, double t){
     gsl_blas_dgemm (CblasNoTrans, CblasNoTrans,
                     1.0, gamma_tensor_tmp, evec_invert,
                     0.0, gamma_tensor);
-
 
     gsl_matrix_free(gamma_tensor_tmp);
     gsl_vector_free(eval);
@@ -190,13 +189,14 @@ void qp(const state_type y, state_type &dydt, double t){
                     0.0, momenta_tmp);
     gsl_blas_ddot(momenta, momenta_tmp, &kinetic_energy);
     kinetic_energy = kinetic_energy/2.;
-
-    cout<<format("current momentum: %1$+7.3f %2$+7.3f %3$+7.3f %4$+7.3f %5$+7.3f\n")
-          %gsl_vector_get(momenta,0)
-          %gsl_vector_get(momenta,1)
-          %gsl_vector_get(momenta,2)
-          %gsl_vector_get(momenta,3)
-          %gsl_vector_get(momenta,4);
+    if (omp_get_thread_num()==1) {
+        cout<<format("current momentum: %1$+7.3f %2$+7.3f %3$+7.3f %4$+7.3f %5$+7.3f\n")
+              %gsl_vector_get(momenta,0)
+              %gsl_vector_get(momenta,1)
+              %gsl_vector_get(momenta,2)
+              %gsl_vector_get(momenta,3)
+              %gsl_vector_get(momenta,4);
+    }
 
     //E_int = E_x - 1/2 M^-1*p*p - U
     double hyperU;
@@ -204,10 +204,12 @@ void qp(const state_type y, state_type &dydt, double t){
     double temperature = param.para_shape.get_excited_energy()-hyperU-kinetic_energy>=0?
                          sqrt((param.para_shape.get_excited_energy()-hyperU-kinetic_energy)/param.para_shape.get_level_density()) :0.002;
 
-    cout<<format("temperature: %1$7.3f, U: %2$7.3f, kinetic energy: %3$7.3f\n")
-          %temperature
-          %hyperU
-          %kinetic_energy;
+    if (omp_get_thread_num()==1) {
+        cout << format("temperature: %1$7.3f, U: %2$7.3f, kinetic energy: %3$7.3f\n")
+                % temperature
+                % hyperU
+                % kinetic_energy;
+    }
 
     gsl_vector *tmp1=gsl_vector_alloc(5), *tmp2=gsl_vector_alloc(5);
     gsl_vector *inerdfmom = gsl_vector_alloc(5);
@@ -221,7 +223,7 @@ void qp(const state_type y, state_type &dydt, double t){
     }
     gsl_blas_dgemm(CblasNoTrans,CblasNoTrans,1.0,dissipative_tensor,inertia_inverse,0.0,diss_inv);
     gsl_blas_dgemv(CblasNoTrans,-1.0,diss_inv,momenta,1.0,tmp2);
-    gsl_blas_dgemv(CblasNoTrans, sqrt(2*temperature/5.e-1), gamma_tensor, random_vector, 1.0, tmp2);
+    gsl_blas_dgemv(CblasNoTrans, sqrt(2*temperature/3.e-1), gamma_tensor, random_vector, 1.0, tmp2);
     gsl_vector_sub(tmp2, hyperU_df);
     for(size_t i=0; i<5; i++){
         dydt[i] = gsl_vector_get(tmp1,i);
@@ -245,29 +247,26 @@ void qp(const state_type y, state_type &dydt, double t){
 }
 void runge_kutta(gsl_vector *generalized_coordinates, gsl_vector *generalized_momenta,
                  double starting[5], double step_length[5], double storation[],
-                 shape shape){
+                 shape shape, int rank){
 
     copy(starting,starting+5,param.starting);
     copy(step_length,step_length+5,param.step_length);
+    param.rng_seed  = 1000*(rank*24+omp_get_thread_num());
     param.storation = storation;
     param.para_shape = shape;
     state_type x;
     euler< state_type > stepper;
-    const double dt=5.e-1;
+    const double dt=3.e-1;
     // initialize the position and velocity
     for(size_t i=0; i<5; i++){
         x[i] = gsl_vector_get(generalized_coordinates,i)*shape.get_Rcn();
         x[i+5] = gsl_vector_get(generalized_momenta,i);
     }
 
-    for(double t=dt; t<1.e4; t+= dt) {
+    for(double t=dt; t<1.e6; t+= dt) {
         stepper.do_step(qp, x, t, dt);
-        if (2*x[0]>11*x[1]){
-            counter = 0;
-            break;
-        }
+        if (2*x[0]>11*x[1]) break;
     }
-    counter = 0;
     for(size_t i=0; i<5; i++){
         gsl_vector_set(generalized_coordinates,i,x[i]/shape.get_Rcn());
     }
