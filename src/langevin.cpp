@@ -1,6 +1,7 @@
 #include <iostream>
 #include "../include/shape.h"
 #include <boost/format.hpp>
+#include <fstream>
 #include <omp.h>
 #include <mpi.h>
 
@@ -46,10 +47,16 @@ int main(int argc, char* argv[])
     generalized_coordinates = gsl_vector_alloc(5);
     generalized_momenta = gsl_vector_alloc(5);
 
+    FILE *myfile;
+    string Langevin_Result;
+    Langevin_Result = "Langevin_Result_"+to_string(rank)+".txt";
+    myfile = fopen(Langevin_Result.c_str(),"w");
+//    myfile.close();
+
     //这里gamma_tensor的结果就是dissipative_tensor的平方根
     int i;
-    omp_set_num_threads(24);
-    #pragma omp parallel for default(none) schedule(dynamic) firstprivate(shape, generalized_coordinates, generalized_momenta) private(i) shared(rank, size, cout, sp, starting, step_length, storation)
+    omp_set_num_threads(2);
+    #pragma omp parallel for default(none) schedule(dynamic) firstprivate(myfile, shape, generalized_coordinates, generalized_momenta) private(i) shared(rank, size, cout, sp, starting, step_length, storation)
     for(i=0+rank; i<10000; i=i+size) {
         sp[0]=10;sp[1]=9;sp[2]=16;sp[3]=11;sp[4]=7;
         starting[1] = 1 / sqrt(starting[0]+sp[0]*step_length[0]) + 0.05;
@@ -59,7 +66,13 @@ int main(int argc, char* argv[])
             gsl_vector_set(generalized_momenta, j, 0);
             gsl_vector_set(generalized_coordinates, j, sp[j]*step_length[j]+starting[j]);
         }
-        cout<<i<<endl;
+//        #pragma omp critical
+//        if (rank==0) {
+//            fprintf(myfile,"%d\n",omp_get_thread_num()+100);
+//        }
+//        else{
+//            fprintf(myfile,"%d\n",omp_get_thread_num());
+//        }
         runge_kutta(generalized_coordinates, generalized_momenta,
                     starting, step_length, storation,
                     shape, rank);
@@ -69,9 +82,17 @@ int main(int argc, char* argv[])
         //       %gsl_vector_get(generalized_coordinates,2)
         //       %gsl_vector_get(generalized_coordinates,3)
         //       %gsl_vector_get(generalized_coordinates,4);
-
-        cout<<i<<' '<<shape.AH(generalized_coordinates)<<endl;
+//        #pragma omp critical
+        fprintf(myfile,"%d %7.3f %7.3f %7.3f %7.3f %7.3f %10.3f\n",
+                i,
+                gsl_vector_get(generalized_coordinates,0),
+                gsl_vector_get(generalized_coordinates,1),
+                gsl_vector_get(generalized_coordinates,2),
+                gsl_vector_get(generalized_coordinates,3),
+                gsl_vector_get(generalized_coordinates,4),
+                shape.AH(generalized_coordinates));
     }
+    fclose(myfile);
     delete(storation);
     gsl_vector_free(generalized_coordinates);
     gsl_vector_free(generalized_momenta);

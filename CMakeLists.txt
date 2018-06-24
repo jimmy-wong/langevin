@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 PROJECT(LANGEVIN)
-SET(CMAKE_CXX_COMPILER mpicxx)
+SET(CMAKE_CXX_COMPILER g++)
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -std=c++11 -g -O3 ")
 find_package(MPI REQUIRED)
 if (MPI_FOUND)
